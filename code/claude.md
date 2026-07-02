@@ -15,11 +15,20 @@ is allowlist-style (deny everything by default, explicitly un-ignore only
 specific files) because `Bounds/` has personal contact info (Contacts
 sheet) and large reference material that must never be published.
 Photos, the XLSX/manifest CSVs, generated PDFs, `.venv/`, and IDE cruft
-are all excluded. The shared coordination `.md` files
-(`acton_bounds_context.md`, `Acton Bounds TODO.md`, `Project Notes.md`,
-`CHANGELOG.md`) are deliberately NOT in the repo yet — Jim wants to review
-them for anything sensitive before they go public. claude.ai can read this
-file directly at
+are all excluded. Of the shared coordination `.md` files, only
+`Acton Bounds TODO.md` is in the repo so far (Jim reviewed it and
+confirmed it's clean — added Jul 2 2026). `acton_bounds_context.md`,
+`Project Notes.md`, and `CHANGELOG.md` are still deliberately NOT in the
+repo — Jim wants to review each before it goes public; don't add any of
+them to `.gitignore`'s allowlist without him explicitly saying so.
+
+**`Acton Bounds TODO.md` needs to stay clean as it grows** — it's public
+now, so before adding a new TODO item (or editing an existing one), check
+it doesn't introduce a Drive/Sheet ID, a landowner's name/address/contact
+info, or anything else that wouldn't belong in a public repo. The rest of
+this "Source control" section (secret-scrubbing lessons, grep-before-adding
+habit) applies here too. If in doubt, ask Jim rather than guessing.
+claude.ai can read this file directly at
 raw.githubusercontent.com/jim-snyder-grant/acton-bounds/main/code/claude.md
 without Jim relaying it by hand. Remember to `git add`/`commit`/`push`
 after making changes to any tracked file — this doesn't happen
