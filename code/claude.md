@@ -25,6 +25,18 @@ without Jim relaying it by hand. Remember to `git add`/`commit`/`push`
 after making changes to any tracked file — this doesn't happen
 automatically the way Drive/Insync sync does.
 
+**Before adding any new file to the allowlist, grep it for secrets first**
+(Google Sheet/Doc/Drive IDs, API keys, hardcoded absolute paths with a
+username/email in them, etc.) — this bit us once already (Jul 2 2026):
+the Sheet ID and Drive folder ID were hardcoded in a few tracked files at
+the very first commit, requiring a full repo delete + recreate to get a
+clean history (fix-forward commits don't remove anything from git
+history). The Google Sheet ID now lives in `Photos/sheet_id.txt`, a local
+gitignored file `process_takeout.py` reads at runtime — follow that same
+pattern (a local untracked file, not an environment variable, since the
+scripts here are simple and this matches the existing `credentials.json`/
+`token.json` precedent) for any other secret a script needs.
+
 ---
 
 ## Coordination with claude.ai — INBOX.md protocol
