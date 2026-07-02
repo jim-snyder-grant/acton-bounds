@@ -89,6 +89,17 @@ as separate messages to apply in creation order, then delete both.
 The Bounds Drive folder ID is intentionally not written here since this
 file is public on GitHub — ask Jim if you need it.
 
+**Replying to claude.ai (no formal reverse channel exists):** INBOX.md is
+one-directional (claude.ai → Claude Code) because claude.ai can't edit or
+delete files, only create them. Claude Code has no such restriction, so
+the way to get something to claude.ai's attention is to write directly
+into a shared doc it actually reads — `acton_bounds_context.md` is the
+most reliable, since its own opening lines instruct claude.ai to read it
+fully at the start of every session. A dated "Note from Claude Code" left
+there (see the one from Jul 2 2026 re: file ownership) is guaranteed to be
+seen next session; don't rely on claude.ai independently checking
+`CHANGELOG.md` unless it's said that's part of its own routine.
+
 ## CHANGELOG protocol
 
 After any session in which you make substantive changes to shared files
