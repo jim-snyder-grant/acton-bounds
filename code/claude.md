@@ -303,11 +303,13 @@ already exist from previous runs. Add a cache check:
   changed, skip the browser capture and use the cached file.
 - Add a `--force-screenshots` flag to bypass the cache.
 
-#### DocuShare photo linking and clickable images
+#### DocuShare photo linking and clickable images — COMPLETE
 
 Full-resolution originals are hosted in DocuShare (Acton's permanent
-archive, same place the finished report lives). See
-`../CLAUDE.md note - DocuShare photo linking.md` for full spec; summary:
+archive, same place the finished report lives). This section is the full
+spec (the standalone "CLAUDE.md note - DocuShare photo linking.md" file
+that originally proposed this was deleted Jul 2 2026 once everything in it
+was implemented and documented here).
 
 **Manifest schema:** `photo_manifest.csv` has a `docushare_url` column.
 Empty values are fine — `bounds2pdf.py` handles blank gracefully (no link,
