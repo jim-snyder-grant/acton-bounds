@@ -12,6 +12,9 @@
 !/Photos/
 !/.gitignore
 
+# Reviewed by Jim and confirmed clean of personal/sensitive info (Jul 2 2026).
+!/Acton Bounds TODO.md
+
 # --- code/ ---
 /code/*
 !/code/*.py
