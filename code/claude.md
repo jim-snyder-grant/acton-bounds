@@ -37,6 +37,17 @@ pattern (a local untracked file, not an environment variable, since the
 scripts here are simple and this matches the existing `credentials.json`/
 `token.json` precedent) for any other secret a script needs.
 
+`code/acton_cover.py` needed the same treatment for Jim's local absolute
+path (it was embedded in the path string, revealing his email). Since that
+script is pasted/loaded into Inkscape's Simple Inkscape Scripting console
+rather than run via `python3`, a repo-relative local file wasn't reliable
+(Inkscape's working directory when executing pasted code isn't
+predictable, so relative paths and `__file__` lookups can't be trusted).
+Used `~/.acton_bounds_base_path` instead — a dotfile in the home
+directory, outside the repo entirely, read via `os.path.expanduser` which
+works regardless of CWD. Use this same home-dotfile approach for any
+future Inkscape/GUI-console script that needs a local secret or path.
+
 ---
 
 ## Coordination with claude.ai — INBOX.md protocol
