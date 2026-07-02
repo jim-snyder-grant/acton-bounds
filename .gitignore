@@ -1,0 +1,27 @@
+# Allowlist-style .gitignore: everything is ignored by default, and only
+# specific files/directories are explicitly un-ignored below. This folder
+# has a lot of large reference material and personal data that must never
+# be committed (especially since this repo is public) -- safer to opt files
+# IN one at a time than to try to opt everything else OUT.
+
+# Deny everything at the root by default.
+/*
+
+# Allow looking inside these directories (see per-directory rules below).
+!/code/
+!/Photos/
+!/.gitignore
+
+# --- code/ ---
+/code/*
+!/code/*.py
+!/code/claude.md
+!/code/.python-version
+
+# --- Photos/ ---
+/Photos/*
+!/Photos/process_takeout.py
+!/Photos/CLAUDE.md
+!/Photos/requirements.txt
+!/Photos/.python-version
+!/Photos/Acton Bounds - SiteNames.csv
