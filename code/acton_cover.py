@@ -5,8 +5,10 @@ SimpInkScr script for Inkscape
 Usage:
   1. Install SimpInkScr extension in Inkscape
      (https://github.com/spakin/SimpInkScr)
-  2. Set PHOTO_DIR below to the full path of your
-     "Bounds/Photos/Monument Photos" directory
+  2. Create ~/.acton_bounds_base_path (one line, no trailing slash) with the
+     path to the directory that CONTAINS your "Bounds" folder, e.g.:
+       ~/Insync/you@example.com/GoogleDrive/Board
+     (this file lives outside the repo and is never committed -- see below)
   3. Open Inkscape with a blank letter-size document (8.5 x 11 in)
   4. Extensions > Render > Simple Inkscape Scripting
   5. Paste or load this script and click Apply
@@ -23,16 +25,31 @@ from PIL import Image as PILImage
 
 # ── Configuration ──────────────────────────────────────────────────────────────
 
-# Edit these two paths for your own machine before running -- left as
-# placeholders here since this script is public on GitHub.
-PHOTO_DIR = os.path.expanduser(
-    "~/path/to/Bounds/Photos/Monument Photos"
-)
+# The real base path lives in a local file outside the repo (not
+# ~/path/to-style placeholders committed here) since this script is public
+# on GitHub. Using a fixed home-directory dotfile rather than a path
+# relative to this script's own location, since Inkscape's Simple Inkscape
+# Scripting console may run pasted/loaded code with an unpredictable
+# working directory -- __file__-relative lookups aren't reliable here.
+BASE_PATH_FILE = os.path.expanduser("~/.acton_bounds_base_path")
+
+
+def _load_base_path():
+    if not os.path.exists(BASE_PATH_FILE):
+        raise SystemExit(
+            f"{BASE_PATH_FILE} not found -- create it with the path to the "
+            f"directory that contains your Bounds folder, on a single line, "
+            f"e.g.:\n  ~/Insync/you@example.com/GoogleDrive/Board"
+        )
+    with open(BASE_PATH_FILE, encoding="utf-8") as f:
+        return os.path.expanduser(f.read().strip())
+
+
+_BASE = _load_base_path()
+PHOTO_DIR = os.path.join(_BASE, "Bounds", "Photos", "Monument Photos")
 
 # Acton seal — local copy (download from https://actonma.gov/ImageRepository/Document?documentId=10424)
-SEAL_PATH = os.path.expanduser(
-    "~/path/to/Bounds/acton_seal.png"
-)
+SEAL_PATH = os.path.join(_BASE, "Bounds", "acton_seal.png")
 # SEAL_PATH = "https://actonma.gov/ImageRepository/Document?documentId=10424"
 
 # Random seed — change this to get a different arrangement of tilts
