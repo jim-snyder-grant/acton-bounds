@@ -6,6 +6,12 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-03 [Both] Added CHANGELOG.md and Project Notes.md to the repo (Jim
+  reviewed and approved both, including Project Notes.md's town clerk
+  contact table). acton_bounds_context.md deliberately stays Drive-only —
+  it's claude.ai-owned and claude.ai can't write to the repo anyway, so
+  tracking it in git would only add friction. Updated the tracked/untracked
+  file list in acton_bounds_context.md's "GitHub repo" section to match.
 2026-07-03 [Claude Code] acton_bounds_context.md: added a dedicated
   "GitHub repo" section (right after File Structure) explaining the
   raw.githubusercontent.com fetch pattern, the current list of
