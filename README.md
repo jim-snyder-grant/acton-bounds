@@ -31,6 +31,8 @@ code/
   scrape_docushare.py  # Scrapes Document IDs from DocuShare collection page
   merge_docushare.py   # Merges DocuShare URLs into photo_manifest.csv
   acton_cover.py       # SimpInkScr script for the cover page (Inkscape)
+  add_cover_columns.py # Adds orientation/cover_candidate columns to the manifest
+  requirements.txt     # pip install -r requirements.txt to get started
   claude.md            # Guidance for Claude Code — read this first
 Photos/
   CLAUDE.md            # Guidance for Claude Code on the photos pipeline
