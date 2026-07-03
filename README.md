@@ -1,0 +1,1 @@
+This repo is intended as a reasonable way  for me to cooperate with claude.ai and claude code in creating this report on the public boundary markers of ACton MA USA. In the future, it might help other Massachusetts Towns with similar work. 
