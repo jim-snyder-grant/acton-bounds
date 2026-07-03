@@ -33,6 +33,7 @@
 !/code/*.py
 !/code/claude.md
 !/code/.python-version
+!/code/requirements.txt
 
 # --- Photos/ ---
 /Photos/*

@@ -199,12 +199,19 @@ All scripts are run from the `code/` directory:
 
 ```bash
 cd code/
+pip install -r requirements.txt
+playwright install chromium   # one-time: downloads the browser binary
+                               # pip alone doesn't install this
 python3 build_manifest.py     # step 1: build/update photo manifest
 python3 bounds2pdf.py         # step 2: generate output.pdf
 ```
 
-Dependencies: `pandas`, `reportlab`, `Pillow`, `playwright`. See existing imports in each file.
-The pyenv environment for this project may be `photos` (check with the user).
+Dependencies: `pandas`, `openpyxl` (pandas' `.xlsx` engine, not imported
+directly but required), `Pillow`, `reportlab`, `playwright` — see
+`requirements.txt`. The pyenv environment for `code/` is `bounds` (see
+`.python-version`); `Photos/` has its own separate `photos` environment
+with different dependencies (`gspread`, `google-auth-oauthlib` — see
+`Photos/requirements.txt`) since it talks to the Google Sheets API.
 
 ---
 
