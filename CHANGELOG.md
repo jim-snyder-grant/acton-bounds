@@ -6,6 +6,17 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-03 [Claude Code] Deleted code/borb/ (46MB of unused example files
+  from the abandoned borb PDF library approach; never referenced by any
+  script, never tracked in git). Added code/requirements.txt (pandas,
+  openpyxl, Pillow, reportlab, playwright) so a new user can
+  `pip install -r requirements.txt` instead of guessing dependencies from
+  imports. Fixed a stale claim in code/claude.md that code/'s pyenv
+  environment "may be photos" -- that's actually Photos/'s own separate
+  environment; code/'s is bounds. Documented the `playwright install
+  chromium` step, which `pip install` alone doesn't cover. Updated
+  README.md's repo-structure tree to include requirements.txt and the
+  previously-missing add_cover_columns.py.
 2026-07-03 [Both] acton_bounds_context.md deleted (Jim has it backed up
   separately). Fixed dangling references in README.md, code/claude.md, and
   Project Notes.md: code/claude.md's "replying to claude.ai" channel is
