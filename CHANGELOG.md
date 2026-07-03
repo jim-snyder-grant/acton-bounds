@@ -6,6 +6,14 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-03 [Claude Code] README.md: verified acton_bounds_context.md's
+  content against every other .md file (Jim wants to retire it now that
+  README.md exists). Nearly everything was already duplicated, mostly
+  more accurately, elsewhere (code/claude.md, Photos/CLAUDE.md, TODO.md,
+  Project Notes.md). Folded in the three things that weren't: claude.ai's
+  Drive-access mechanics, the no-DocuShare-API-integration rationale, and
+  an explicit "repo is read-only for claude.ai" statement. Should now be
+  safe to delete acton_bounds_context.md.
 2026-07-03 [claude.ai] README.md: replaced stub with full orientation
   document covering project background, repo structure, AI collaboration
   model, Claude instance orientation guide, security notes, and key
