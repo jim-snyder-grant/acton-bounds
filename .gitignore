@@ -19,6 +19,11 @@
 # verified clean of emails/phone numbers/Drive-Sheet IDs before allowlisting.
 !/Acton Bounds.xlsx
 
+# Reviewed and approved by Jim (Jul 3 2026) -- Project Notes.md's town clerk
+# contact table is public government office info, not personal.
+!/CHANGELOG.md
+!/Project Notes.md
+
 # --- code/ ---
 /code/*
 !/code/*.py
