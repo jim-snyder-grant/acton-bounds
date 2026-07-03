@@ -62,6 +62,12 @@ via an INBOX.md protocol: claude.ai writes proposed changes to
 applies them at the start of each session, then deletes the file.
 Jim relays tasks between them and reviews changes.
 
+**This repo is read-only for claude.ai** — it has no git credentials or
+GitHub API access, so it can fetch files but cannot commit, push, or
+create files here. All changes to repo-tracked files still go through
+Claude Code via the INBOX.md protocol above, even for files claude.ai
+can now read directly.
+
 ## Orientation for a new Claude instance
 
 If you are a Claude instance starting a new session on this project,
@@ -79,7 +85,11 @@ rendered page — works reliably with a `web_fetch`-style tool) via:
 
 The Google Drive Bounds folder contains additional files not in the
 repo (photos, INBOX.md files, `acton_bounds_context.md`). Ask Jim for
-the folder ID or access if needed.
+the folder ID or access if needed. Note for claude.ai specifically:
+Drive folder *browsing* doesn't work via `web_fetch` (it's a
+JavaScript-rendered page) — individual Drive files can be fetched
+directly only if shared with "Anyone with the link"; otherwise ask Jim
+to drag the file into chat or paste its content/terminal output.
 
 ## Security notes for Claude instances
 
@@ -102,6 +112,10 @@ or in Google Drive only. When in doubt, ask Jim before committing.
 - OSM maps: captured via Playwright, cached in `osm_screenshots/`
 - Full-resolution photos: hosted in Acton's DocuShare archive, linked
   from PDF captions (not embedded at full res)
+- No DocuShare API integration for bulk document workflows — the REST
+  API is confirmed non-functional for Jim's account, so archiving is a
+  manual process (organize in Google Drive, move into DocuShare later)
+  except for the individual photo uploads above
 - Cover page: built with SimpInkScr (Inkscape Python scripting extension)
 - Coordinate precision: 5 or 6 decimal places (decision pending)
 - Neighboring towns' perambulation reports: Boxborough (2007), Concord
