@@ -15,6 +15,10 @@
 # Reviewed by Jim and confirmed clean of personal/sensitive info (Jul 2 2026).
 !/Acton Bounds TODO.md
 
+# Jim removed Email/Phone columns from Contacts and re-exported (Jul 2 2026);
+# verified clean of emails/phone numbers/Drive-Sheet IDs before allowlisting.
+!/Acton Bounds.xlsx
+
 # --- code/ ---
 /code/*
 !/code/*.py
