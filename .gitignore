@@ -24,6 +24,10 @@
 !/CHANGELOG.md
 !/Project Notes.md
 
+# Jim committed this directly via GitHub's web UI (Jul 3 2026); added here
+# so it's reflected in the allowlist too.
+!/README.md
+
 # --- code/ ---
 /code/*
 !/code/*.py

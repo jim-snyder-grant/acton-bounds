@@ -6,6 +6,25 @@ which handles overall document planning. Claude Code handles implementation.
 
 ---
 
+## Security — what must NOT go in the repo
+
+This is a public GitHub repo. Never commit any of the following:
+
+- Google Drive folder IDs or file IDs
+- Google Sheet IDs
+- Email addresses or phone numbers
+- Personal information about landowners, witnesses, or other individuals
+- API keys, tokens, or credentials of any kind
+- DocuShare collection or document IDs
+
+These belong in gitignored local files (e.g. ~/.acton_bounds_base_path,
+Photos/sheet_id.txt) or in Google Drive only. When in doubt, ask Jim
+before committing. This rule applies to both Claude Code and claude.ai —
+if claude.ai proposes something via INBOX.md that would put sensitive
+info in the repo, flag it to Jim rather than applying it blindly.
+
+---
+
 ## Source control
 
 This file's directory (and `Photos/`) are tracked in a public GitHub repo:

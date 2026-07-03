@@ -6,6 +6,18 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-03 [claude.ai] README.md: replaced stub with full orientation
+  document covering project background, repo structure, AI collaboration
+  model, Claude instance orientation guide, security notes, and key
+  decisions. Claude Code corrected two things while applying: the "not in
+  repo" list still said Acton Bounds.xlsx wasn't tracked (it was added
+  Jul 2) -- moved it into the repo-structure tree instead; and the
+  suggested fetch pattern (github.com/.../blob/main/) was swapped for
+  raw.githubusercontent.com/.../main/, since blob URLs are JS-rendered
+  pages that don't work reliably with a plain web_fetch tool, matching
+  what's already documented in acton_bounds_context.md.
+2026-07-03 [claude.ai] code/claude.md: added Security section listing
+  what must not go in the public repo
 2026-07-03 [Both] Added CHANGELOG.md and Project Notes.md to the repo (Jim
   reviewed and approved both, including Project Notes.md's town clerk
   contact table). acton_bounds_context.md deliberately stays Drive-only —
