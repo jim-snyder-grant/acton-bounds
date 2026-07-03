@@ -6,6 +6,15 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-03 [Both] acton_bounds_context.md deleted (Jim has it backed up
+  separately). Fixed dangling references in README.md, code/claude.md, and
+  Project Notes.md: code/claude.md's "replying to claude.ai" channel is
+  now CHANGELOG.md (explicitly the first file README.md's orientation
+  guide tells a new Claude instance to read) plus README.md for anything
+  meant to persist; also corrected a stale claim that this file "is
+  updated by claude.ai" (it never had write access) and an outdated file
+  list in the Source control section that predated CHANGELOG.md/Project
+  Notes.md/README.md joining the repo.
 2026-07-03 [Claude Code] README.md: verified acton_bounds_context.md's
   content against every other .md file (Jim wants to retire it now that
   README.md exists). Nearly everything was already duplicated, mostly
