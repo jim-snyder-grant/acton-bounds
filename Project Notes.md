@@ -1,7 +1,7 @@
 # Acton Bounds — Project Notes
 
 Running log of findings, decisions, and context not captured in the original
-project briefing or the TODO list. See also: acton_bounds_context.md (project
+project briefing or the TODO list. See also: README.md (project
 background) and Acton Bounds TODO.md (task list).
 
 ---

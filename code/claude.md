@@ -33,13 +33,15 @@ https://github.com/jim-snyder-grant/acton-bounds — repo root is `Bounds/`
 is allowlist-style (deny everything by default, explicitly un-ignore only
 specific files) because `Bounds/` has personal contact info (Contacts
 sheet) and large reference material that must never be published.
-Photos, the XLSX/manifest CSVs, generated PDFs, `.venv/`, and IDE cruft
-are all excluded. Of the shared coordination `.md` files, only
-`Acton Bounds TODO.md` is in the repo so far (Jim reviewed it and
-confirmed it's clean — added Jul 2 2026). `acton_bounds_context.md`,
-`Project Notes.md`, and `CHANGELOG.md` are still deliberately NOT in the
-repo — Jim wants to review each before it goes public; don't add any of
-them to `.gitignore`'s allowlist without him explicitly saying so.
+Photo binaries, the raw XLSX/manifest working files that predate a
+review pass, generated PDFs, `.venv/`, and IDE cruft are all excluded.
+As of Jul 3 2026, the tracked `.md`/data files are `Acton Bounds TODO.md`,
+`Project Notes.md`, `CHANGELOG.md`, `README.md`, and `Acton Bounds.xlsx`
+— Jim reviewed each individually before it went public (the XLSX had its
+Email/Phone columns removed first). `.gitignore`'s allowlist is the
+authoritative current list; don't add anything new to it without Jim
+explicitly saying so, even if it looks similar to something already
+approved.
 
 **`Acton Bounds TODO.md` needs to stay clean as it grows** — it's public
 now, so before adding a new TODO item (or editing an existing one), check
@@ -112,19 +114,21 @@ file is public on GitHub — ask Jim if you need it.
 one-directional (claude.ai → Claude Code) because claude.ai can't edit or
 delete files, only create them. Claude Code has no such restriction, so
 the way to get something to claude.ai's attention is to write directly
-into a shared doc it actually reads — `acton_bounds_context.md` is the
-most reliable, since its own opening lines instruct claude.ai to read it
-fully at the start of every session. A dated "Note from Claude Code" left
-there (see the one from Jul 2 2026 re: file ownership) is guaranteed to be
-seen next session; don't rely on claude.ai independently checking
-`CHANGELOG.md` unless it's said that's part of its own routine.
+into a shared doc it actually reads. Since `acton_bounds_context.md` was
+retired (Jul 3 2026, its content folded into `README.md`), the reliable
+channel is now `CHANGELOG.md` — `README.md`'s own "Orientation for a new
+Claude instance" section explicitly lists it as the *first* file a new
+Claude instance should read ("start here for a quick catch-up"), so a
+dated note left at the top of `CHANGELOG.md` should reach claude.ai next
+session. For something that needs to persist as ongoing guidance rather
+than a one-off note, edit `README.md` directly instead.
 
 ## CHANGELOG protocol
 
 After any session in which you make substantive changes to shared files
-(acton_bounds_context.md, TODO.md, Project Notes.md, CLAUDE.md, or any
-other file a future Claude instance would need to read), append a brief
-entry to CHANGELOG.md in the Bounds folder.
+(README.md, TODO.md, Project Notes.md, CLAUDE.md, or any other file a
+future Claude instance would need to read), append a brief entry to
+CHANGELOG.md in the Bounds folder.
 
 Format: YYYY-MM-DD [Claude Code] filename: one-line description
 Newest entries go at the TOP of the log (below the header).
@@ -507,7 +511,9 @@ is the current plan.
 ## Communication with claude.ai
 
 The overall document plan, introductory sections, and archiving strategy
-are managed in a claude.ai conversation (not here). If you need to relay
-findings back to that conversation, paste relevant output or questions there.
-The context file for claude.ai is `../acton_bounds_context.md` (in the Bounds folder, one level up).
-This CLAUDE.md is updated by claude.ai when plans change.
+are managed in a claude.ai conversation (not here). See the "Coordination
+with claude.ai — INBOX.md protocol" and "Replying to claude.ai" sections
+near the top of this file for how the two Claude instances actually
+exchange information — this file (`code/claude.md`) is maintained by
+Claude Code only; claude.ai has no write access to it or anything else in
+this repo.

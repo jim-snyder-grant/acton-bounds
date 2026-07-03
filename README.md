@@ -46,8 +46,6 @@ Not in the repo (in Google Drive only):
 - `photo_manifest.csv` — photo curation sheet (may contain personal info)
 - `FrontPage.svg` / `FrontPage.pdf` — finished cover page
 - `INBOX.md` — pending tasks from claude.ai for Claude Code to apply
-- `acton_bounds_context.md` — claude.ai's own project context/orientation
-  doc; stays Drive-only since claude.ai has no write access to this repo
 
 ## AI collaboration model
 
@@ -84,8 +82,8 @@ rendered page — works reliably with a `web_fetch`-style tool) via:
 `https://raw.githubusercontent.com/jim-snyder-grant/acton-bounds/main/{path}`
 
 The Google Drive Bounds folder contains additional files not in the
-repo (photos, INBOX.md files, `acton_bounds_context.md`). Ask Jim for
-the folder ID or access if needed. Note for claude.ai specifically:
+repo (photos, INBOX.md files). Ask Jim for the folder ID or access if
+needed. Note for claude.ai specifically:
 Drive folder *browsing* doesn't work via `web_fetch` (it's a
 JavaScript-rendered page) — individual Drive files can be fetched
 directly only if shared with "Anyone with the link"; otherwise ask Jim
