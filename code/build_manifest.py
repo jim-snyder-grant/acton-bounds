@@ -38,6 +38,23 @@ MANIFEST_COLUMNS = [
     "docushare_url",
 ]
 
+# Recognized values for the `section` column. `monument`/`appendix` are the
+# original values; the `intro*` values were added Jul 5 2026 so claude.ai can
+# mark photos for use in introductory sections instead of per-monument pages.
+# `intro` (bare) means "belongs in an intro section, placement TBD".
+VALID_SECTIONS = {
+    "monument",
+    "appendix",
+    "intro",
+    "intro-visits",
+    "intro-legal",
+    "intro-history",
+    "intro-map",
+    "intro-other-towns",
+    "intro-policy",
+    "intro-cover",
+}
+
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -235,6 +252,21 @@ def main():
             print(f"    {name}")
     else:
         print("\n  All monuments have at least one photo.")
+
+    # Report photo counts by section value, and flag any unrecognized value.
+    section_counts = {}
+    unrecognized_sections = set()
+    for row in rows:
+        section = row.get("section", "")
+        section_counts[section] = section_counts.get(section, 0) + 1
+        if section and section not in VALID_SECTIONS:
+            unrecognized_sections.add(section)
+
+    print(f"\n  Photos by section ({len(rows)} total):")
+    for section, count in sorted(section_counts.items()):
+        print(f"    {section or '(blank)'}: {count}")
+    if unrecognized_sections:
+        print(f"\n  WARNING: unrecognized section value(s): {sorted(unrecognized_sections)}")
 
 
 if __name__ == "__main__":

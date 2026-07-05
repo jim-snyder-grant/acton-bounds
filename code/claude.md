@@ -123,6 +123,56 @@ dated note left at the top of `CHANGELOG.md` should reach claude.ai next
 session. For something that needs to persist as ongoing guidance rather
 than a one-off note, edit `README.md` directly instead.
 
+**claude.ai's MCP access (as of Jul 5 2026):** claude.ai now has read
+access to this repo via a GitHub MCP server (`github:get_file_contents`,
+etc. — set up via Docker) and to the Bounds Drive folder via a filesystem
+MCP server, in addition to its existing Drive MCP. This makes the
+`raw.githubusercontent.com` fetch-URL workaround documented in README.md
+mostly moot *for claude.ai specifically* (GitHub MCP reads files
+directly, no URL tricks needed) — but README.md's guidance is kept as the
+fallback for any Claude instance that only has a web_fetch-style tool and
+no MCP access. claude.ai does **not** yet have write access to the repo
+(see "Claude Code's perspective on claude.ai write access" below) or to
+the GitHub repo's `INBOX.md`-adjacent files — INBOX.md via Drive remains
+the only way it proposes changes.
+
+**Claude Code's perspective on claude.ai write access (INBOX response,
+Jul 5 2026):** claude.ai proposed getting direct write access (via its
+new GitHub MCP tools) to documentation files only — `TODO.md`,
+`Project Notes.md`, `CHANGELOG.md`, `README.md` — while Claude Code keeps
+sole write access to all code files. Asked for Claude Code's view on
+conflict risk and workflow disruption:
+
+- *Security check risk:* the main value INBOX.md currently provides isn't
+  just relaying content — it's that Claude Code greps every new/changed
+  public file for secrets before it goes public (see "Security" section
+  above; this exact class of mistake happened once, Jul 2 2026). If
+  claude.ai commits directly, that check either becomes claude.ai's own
+  responsibility (a habit it hasn't needed before) or falls to Jim
+  reviewing every commit — which could be more friction than the INBOX
+  round-trip it's meant to remove, not less.
+- *Concurrent-writer risk:* today Claude Code is the sole writer, so there's
+  no race condition. With claude.ai writing too, Claude Code would need to
+  `git pull` immediately before editing any of the four shared docs, every
+  time, to avoid clobbering a claude.ai commit — a new discipline that
+  doesn't exist today. `TODO.md` and `Project Notes.md` are also hand-edited
+  by Jim directly in Drive/locally, so it'd be three potential writers, not two.
+- *Stale-assumption risk:* README.md's orientation section and this file's
+  Security section both currently say the repo is "read-only for
+  claude.ai" — that statement would need updating the moment write access
+  actually changes, and it's easy to miss a reference somewhere else.
+- **Recommendation:** don't give claude.ai direct-to-`main` write access.
+  A lighter middle ground: claude.ai commits doc-only changes to a
+  non-main branch via its GitHub MCP tools; Claude Code (or Jim) does a
+  quick grep-for-secrets pass and fast-forwards/merges into `main`. That
+  keeps the one security gate that matters without requiring Claude Code
+  to manually re-type every diff the way INBOX.md does today. Answering
+  the specific open questions: write to a branch, not `main`; INBOX.md
+  doesn't become fully redundant for docs but could shrink from "apply
+  this diff" to "review this diff already sitting on a branch"; and
+  `git pull` before editing becomes mandatory for Claude Code only once
+  this actually ships (not needed yet, since claude.ai has no write access today).
+
 ## CHANGELOG protocol
 
 After any session in which you make substantive changes to shared files
@@ -283,10 +333,42 @@ to curate which photos appear in the report and with what captions.
 | `caption` | Editable — shown under photo in report; blank is fine |
 | `include` | `yes` or `no` — whether to include in report |
 | `exclude_reason` | Free text note explaining why `include=no` |
-| `section` | `monument` (default) — reserved for future use (e.g. `appendix`) |
+| `section` | See "Section column conventions" below |
 | `orientation` | `landscape`/`portrait`/`square`, computed by `add_cover_columns.py` for included photos — used by the cover-collage script |
 | `cover_candidate` | `yes`/blank — defaults `yes` for included photos; lets Jim exclude a photo from the cover collage without touching `include` |
 | `docushare_url` | Populated by `merge_docushare.py`; blank until that photo is uploaded and scraped |
+
+### Section column conventions (added Jul 5 2026)
+
+Jim started marking some photos for use in introductory sections rather
+than per-monument pages. Valid `section` values:
+
+- `monument` — appears on the per-monument page (existing default)
+- `appendix` — appears in an appendix (existing)
+- `intro` — belongs in an intro section, specific placement TBD (valid,
+  not an error — just means undecided)
+- `intro-visits` — Summary of visits and results section
+- `intro-legal` — Legal background section
+- `intro-history` — History of Acton's bounds section
+- `intro-map` — Overview map section
+- `intro-other-towns` — Other towns' reports section
+- `intro-policy` — Policy recommendations section
+- `intro-cover` — Cover page (handled separately by `acton_cover.py`)
+
+`include = yes` for ALL photos that should appear anywhere in the report,
+including intro sections. `include = no` is reserved for photos excluded
+from the report entirely (blurry, wrong location, genuine duplicates,
+etc.) — it does not mean "not decided which section yet" (that's what
+bare `intro` is for). One placement per photo is assumed for now; if a
+photo ever needs to appear in both a monument page and an intro section,
+a second section column would need to be added.
+
+`build_manifest.py` recognizes all of the above as valid (no warning) and
+reports a count of photos by section value in its summary output.
+`bounds2pdf.py` only pulls rows with `section == 'monument'` for the
+per-monument pages (see `bounds2pdf.py`'s photo-loading loop) — intro
+photos are already excluded there today; incorporating them into actual
+intro pages is future work once those pages are built.
 
 ### build_manifest.py behavior
 
@@ -335,14 +417,13 @@ All major features are implemented and working:
 
 ### Remaining work
 
-#### OSM screenshot caching (nice to have)
+#### OSM screenshot caching — COMPLETE
 
-Currently screenshots are re-captured on every run, which is slow (~4 seconds
-per monument × 59 monuments ≈ 4 minutes). The files `osm_screenshot_N.jpg`
-already exist from previous runs. Add a cache check:
-- If `osm_screenshot_{row}.jpg` exists and the OSM link for that row hasn't
-  changed, skip the browser capture and use the cached file.
-- Add a `--force-screenshots` flag to bypass the cache.
+`osm_url_cache.json` (in `code/osm_screenshots/`) tracks the OSM link used
+for each row; a screenshot is only re-captured if the cached file is
+missing or the link changed. `--force-screenshots` bypasses the cache.
+The browser isn't even launched when everything's cached, so a typical
+run now takes seconds instead of ~4 minutes for all 51 monuments.
 
 #### DocuShare photo linking and clickable images — COMPLETE
 

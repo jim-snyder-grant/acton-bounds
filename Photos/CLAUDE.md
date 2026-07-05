@@ -100,3 +100,16 @@ MANUAL_METADATA = {
 ## Adding a new takeout zip
 
 Drop the new `takeout-*.zip` file into this directory and re-run the script. All zips are processed together each time, so counts and duplicate numbering are always consistent across the full set.
+
+## photo_manifest.csv section column (added Jul 5 2026)
+
+`photo_manifest.csv` (built by `code/build_manifest.py`, not by anything
+in this directory) has a `section` column marking where each photo is
+used: `monument` (default, per-monument page), `appendix`, `intro-cover`,
+or one of the intro-section values (`intro`, `intro-visits`,
+`intro-legal`, `intro-history`, `intro-map`, `intro-other-towns`,
+`intro-policy`) for photos claude.ai is using in the introductory
+sections instead of a monument page. `include = yes` applies to all of
+these — `include = no` is only for photos excluded from the report
+entirely. See `code/claude.md`'s "Section column conventions" for the
+full list; this note just exists so it's visible from this directory too.

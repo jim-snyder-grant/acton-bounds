@@ -6,6 +6,48 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-05 [Both] First real accuracy review of README.md (previously only
+  security/secret-scrubbing had been checked, not content correctness):
+  fixed a stale "59 monuments" claim to the correct 51 (Jim confirmed 59
+  was likely a leftover from an older report version, possibly a page
+  count before each monument fit on one page). Also found and fixed a
+  matching stale reference in code/claude.md's OSM-screenshot-count
+  estimate, and discovered that same section's "Remaining work" item for
+  OSM screenshot caching was stale -- it's actually been complete for a
+  while (osm_url_cache.json + --force-screenshots, already marked done in
+  TODO.md) but code/claude.md was never updated to reflect it. No secrets
+  found in README.md on a fresh grep pass.
+2026-07-05 [Both] Established photo section conventions for intro photos:
+  section column now supports intro, intro-visits, intro-legal,
+  intro-history, intro-map, intro-other-towns, intro-policy in addition
+  to existing monument/appendix/intro-cover values. include=yes for all
+  report photos including intro; include=no reserved for truly excluded
+  photos. build_manifest.py updated to recognize new values and report
+  counts by section; code/claude.md and Photos/CLAUDE.md document the
+  full convention.
+2026-07-05 [claude.ai] Filesystem MCP now connected in Claude Desktop
+  (npx @modelcontextprotocol/server-filesystem pointed at Bounds folder).
+  claude.ai can now read plain text files directly without Jim dragging
+  them in. ODT and XLSX still require Drive MCP or drag-in. Session-start
+  protocol now: GitHub MCP reads CHANGELOG/TODO/README/claude.md; Drive
+  MCP or filesystem MCP for other files as needed. Drafted
+  "Monument Listings intro draft.md" (Drive only) per claude.ai's request,
+  describing per-monument page contents for the Monument Listings intro
+  section; MONUMENT_LISTINGS_INTRO_PAGES is currently 0.
+2026-07-05 [Both] claude.ai now has GitHub MCP read access via Docker
+  (github:get_file_contents, create_or_update_file, push_files,
+  delete_file, get_commit tools available). Write access not yet enabled
+  pending discussion of workflow implications -- Claude Code's perspective
+  (conflict risk, loss of the secret-scrubbing review gate, a lighter
+  branch-based middle ground) recorded in code/claude.md's Coordination
+  section. Session-start protocol updated: claude.ai reads CHANGELOG,
+  TODO, README, code/claude.md directly via get_file_contents instead of
+  web_fetch workarounds.
+2026-07-03 [claude.ai] README.md: added detailed session-start fetch
+  protocol explaining raw vs blob URLs, CDN caching issue, and the
+  search-workaround needed for raw.githubusercontent.com access (later
+  folded together with GitHub MCP guidance on Jul 5 2026 once claude.ai
+  gained MCP access).
 2026-07-03 [Claude Code] Deleted code/borb/ (46MB of unused example files
   from the abandoned borb PDF library approach; never referenced by any
   script, never tracked in git). Added code/requirements.txt (pandas,

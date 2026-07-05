@@ -6,7 +6,7 @@ Massachusetts town boundary monuments.
 Massachusetts General Laws Chapter 42 §2 requires towns to locate,
 inspect, and renew the markings on their boundary monuments at least
 once every five years. This project documents Acton's perambulation —
-the first in many years — of all 59 monuments marking the boundaries
+the first in many years — of all 51 monuments marking the boundaries
 between Acton and its six neighboring towns: Boxborough, Carlisle,
 Concord, Littleton, Maynard, and Stow (and Sudbury at a four-town
 corner). The work was authorized by a Select Board vote directing two
@@ -79,17 +79,41 @@ read these files in order:
 4. `Project Notes.md` — findings, decisions, and comparative analysis
 5. `Photos/CLAUDE.md` — photo pipeline details (if relevant)
 
-All repo files can be fetched directly (plain file content, not a
-rendered page — works reliably with a `web_fetch`-style tool) via:
-`https://raw.githubusercontent.com/jim-snyder-grant/acton-bounds/main/{path}`
+### How to fetch repo files
+
+If you have GitHub MCP access (tools like `github:get_file_contents`),
+use it directly — this is the most reliable method (available to
+claude.ai as of Jul 5 2026) and needs no URL tricks or workarounds.
+
+If you only have a web_fetch-style tool (no MCP), use the **raw URL**
+pattern, not the blob URL:
+
+- Raw (plain text, use this): `https://raw.githubusercontent.com/jim-snyder-grant/acton-bounds/main/{path}`
+- Blob (rendered page, avoid): `https://github.com/jim-snyder-grant/acton-bounds/blob/main/{path}`
+
+The blob URL wraps the file in GitHub's full rendered HTML page (nav,
+sidebars, etc.), which is harder to parse, and is subject to CDN caching
+— a fetch may return a stale version even after the file has been
+updated. The raw URL returns plain file content directly and isn't
+cached the same way, making it the reliable choice when MCP isn't available.
+
+As of July 2026, claude.ai's `web_fetch` tool specifically requires a URL
+to have appeared in a prior search result before it can be fetched, and
+`raw.githubusercontent.com` isn't indexed by search engines. Workaround:
+search for `jim-snyder-grant acton-bounds` first (brings
+`github.com/jim-snyder-grant` into the search results), which unlocks
+fetching raw URLs in the same session. Skip this step if your tool
+doesn't have that restriction, or if GitHub MCP access is available
+(preferred — see above).
 
 The Google Drive Bounds folder contains additional files not in the
-repo (photos, INBOX.md files). Ask Jim for the folder ID or access if
-needed. Note for claude.ai specifically:
-Drive folder *browsing* doesn't work via `web_fetch` (it's a
-JavaScript-rendered page) — individual Drive files can be fetched
-directly only if shared with "Anyone with the link"; otherwise ask Jim
-to drag the file into chat or paste its content/terminal output.
+repo (photos, INBOX.md files). claude.ai may have direct read access via
+Drive MCP or a filesystem MCP server (added Jul 5 2026) — ask Jim if
+unsure what's connected in your session. Otherwise ask Jim for the
+folder ID, or to drag the file into chat, or to paste its content/terminal
+output. Note: Drive folder *browsing* doesn't work via a plain `web_fetch`
+tool (it's a JavaScript-rendered page) — individual Drive files can only
+be fetched that way if shared with "Anyone with the link".
 
 ## Security notes for Claude instances
 
