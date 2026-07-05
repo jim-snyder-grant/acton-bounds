@@ -6,6 +6,19 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-05 [Both] Monument page order is now driven by a new `Order`
+  column in the Monuments sheet (1-51, clockwise around Acton's boundary
+  starting at the Acton/Concord/Maynard/Sudbury corner, replacing the old
+  implicit counter-clockwise-from-Boxborough/Stow spreadsheet row order).
+  Confirmed clockwise is correct by checking that it puts the existing
+  1904-report `Tie-break number` values in ascending order. bounds2pdf.py
+  now sorts explicitly by `Order` (hard error on blanks, warning on
+  gaps/duplicates, note if the sheet wasn't already sorted) so a future
+  accidental re-sort in the Sheet can't silently change page order.
+  code/claude.md documents the new column and sort behavior. Also fixed
+  the stale "59 monuments" count in "Monument Listings intro draft.md"
+  (Drive only) and added a note there on the new page order for
+  claude.ai's use in the intro section.
 2026-07-05 [Both] First real accuracy review of README.md (previously only
   security/secret-scrubbing had been checked, not content correctness):
   fixed a stale "59 monuments" claim to the correct 51 (Jim confirmed 59

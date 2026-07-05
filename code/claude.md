@@ -287,9 +287,24 @@ Key columns used by `bounds2pdf.py`:
 | `OpenStreetMap link` | URL for map screenshot; may be NaN |
 | `Tie-break number` | Used when multiple monuments share a name prefix |
 | `Date of visit` | May be a float (Excel serial date) or string |
+| `Order` | Integer 1–51, drives page order (see below) |
 
 There are also town columns (`Boxborough`, `Littleton`, etc.) marked with `X`
 for each town that shares that monument.
+
+**Page order (added Jul 5 2026):** monument pages appear in the order given
+by the `Order` column, not whatever order the sheet rows happen to be
+in — `bounds2pdf.py` sorts by it explicitly (see "bounds2pdf.py — Current
+State" below). This was added specifically so the intended order survives
+future accidental re-sorting/row-insertion in the Google Sheet; before
+this column existed, the report's order was just implicit spreadsheet row
+order. `Order` walks clockwise around Acton's boundary starting at the
+Acton/Concord/Maynard/Sudbury corner (a well-known landmark near the
+Acton Senior Center), which also happens to put the existing `Tie-break
+number` values (e.g. the two Carlisle and two Littleton monuments) in
+ascending order — confirmed against the live data. A few monuments known
+only from the 1904 report's unrecognized street names are placed at
+Jim's best-guess position in the sequence.
 
 ---
 
@@ -414,6 +429,13 @@ All major features are implemented and working:
   landscape sets, 3-across for all-portrait sets, wider as needed); captions
   in small italic; spills to second page only if truly can't fit at min size
 - Two-column layout: text left, OSM map right (150×150pt)
+- Page order: sorted explicitly by the `Order` column right after loading
+  the Monuments sheet (`df.sort_values('Order').reset_index(drop=True)`).
+  Hard error if any `Order` value is blank; a warning (not fatal) if the
+  values aren't a clean 1..N sequence; a note if the sheet's raw row order
+  didn't already match `Order` (harmless — it gets sorted either way, this
+  is just a heads-up that a manual re-sort in the Sheet would otherwise
+  have gone unnoticed)
 
 ### Remaining work
 

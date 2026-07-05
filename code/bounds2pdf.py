@@ -390,6 +390,21 @@ async def main():
     args = parser.parse_args()
 
     df = pd.read_excel('../Acton Bounds.xlsx', sheet_name='Monuments')
+
+    # Page order is driven by the 'Order' column (Jim's counter-clockwise
+    # walk starting at the Acton/Concord/Maynard/Sudbury corner -- see
+    # code/claude.md), not by however the sheet happens to be sorted. Sort
+    # explicitly here so a future accidental re-sort/insert in the sheet
+    # can't silently change the report's page order.
+    if df['Order'].isna().any():
+        raise SystemExit("Monuments sheet has blank 'Order' values -- fill in every row before running.")
+    if sorted(df['Order']) != list(range(1, len(df) + 1)):
+        print(f"WARNING: 'Order' column is not a clean 1..{len(df)} sequence "
+              f"(duplicates or gaps) -- check the Monuments sheet.")
+    if not df['Order'].is_monotonic_increasing:
+        print("NOTE: Monuments sheet rows were not already in Order-column sequence -- re-sorted for this run.")
+    df = df.sort_values('Order').reset_index(drop=True)
+
     df_contacts = pd.read_excel('../Acton Bounds.xlsx', sheet_name='Contacts')
     manifest = load_manifest('photo_manifest.csv')
     person_towns = load_person_towns('../Acton Bounds.xlsx')
