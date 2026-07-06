@@ -36,12 +36,10 @@ Owner tags: [Claude] [Claude Code] [Jim] [Both]
 
 - [ ] [Jim] Work with Dean to paint the Keefe Street monument
 - [ ] [Jim] Collect better coordinates with Town's iPad
-- [ ] [Jim] For "Not Found" monuments, fill in the "Date of visit" column in
-  the Google Sheet with the date(s) searched, where known — several already
-  have a date buried in "Notes on Location" text (e.g. "Jim looked 10/22
-  near boundary sign...") that just needs copying into the structured
-  field. Once filled in, the report will show it labeled "Date searched:"
-  instead of "Not yet searched" (bounds2pdf.py change done Jul 2 2026).
+- [x] [Jim] For "Not Found" monuments, fill in the "Date of visit" column in
+  the Google Sheet with the date(s) searched, where known — done Jul 5
+  2026; confirmed all 15 "Not Found" monuments now have a date filled in
+  (bounds2pdf.py already shows these labeled "Date searched:" since Jul 2 2026).
 - [x] [Both] Decide on number of decimal places for lat/lon in monument
   listings — Jim decided Jul 5 2026: report displays 5 digits (~1m
   precision, well within GPS/field accuracy), but the XLSX keeps whatever

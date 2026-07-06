@@ -6,6 +6,23 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-05 [Jim] Reworked the per-monument page headline per Jim's
+  formatting requests: name + "Monument Listing" on line 1 (no colon);
+  type (Corner/Street Crossing, no brackets) + status on line 2, status
+  highlighted in a box sized to just the status text using the same
+  font/size/weight as the rest of the headline (via ReportLab's `<span
+  backColor="...">` paragraph markup) instead of the old full-width grey
+  table cell; "Status" label removed; horizontal rule still separates the
+  headline from the detail fields below. Also found and fixed a real bug
+  this surfaced: `flowable_h()` measured text height at the page's nominal
+  468pt width instead of the ~456pt ReportLab actually renders into
+  (SimpleDocTemplate's page frame adds its own 6pt padding per side by
+  default), understating the height of long wrapped titles and letting
+  `choose_cols()` overallocate space to photos -- this was spilling 2 of
+  the 3 monuments with 3-line headlines ("...Powder Mill Road (Rte 62)",
+  both the Concord and Maynard sides) onto an unnecessary second page.
+  Fixed by measuring against a new `TEXT_W` constant; page count back to
+  51 (was 53). code/claude.md documents both changes in full.
 2026-07-05 [Jim] Coordinate precision decided: report displays 5 decimal
   places (~1m precision, well within GPS/field accuracy) via a display-
   time format in bounds2pdf.py; Acton Bounds.xlsx keeps whatever

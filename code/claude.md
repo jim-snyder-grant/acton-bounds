@@ -436,6 +436,33 @@ All major features are implemented and working:
   didn't already match `Order` (harmless — it gets sorted either way, this
   is just a heads-up that a manual re-sort in the Sheet would otherwise
   have gone unnoticed)
+- Two-line headline (name + "Monument Listing" on line 1; type + a
+  status box highlighted with `<span backColor="...">` on line 2, same
+  `TITLE_S` style/font/size for both lines) — added Jul 5 2026, replacing
+  the old single-line title + separate full-width status table
+
+**Bug found and fixed Jul 5 2026 — `flowable_h()` underestimated text
+height, could spill photos to an unnecessary second page:** ReportLab's
+`SimpleDocTemplate` adds its own 6pt padding on every side of the page
+frame by default (a `Frame` class default, not something this code sets)
+on top of the `MARGIN`-based page margins already accounted for in
+`AVAIL_W`. `flowable_h()` (used to measure how much vertical space the
+header/detail text takes, which then determines `remaining_h` for
+photos) was wrapping text at the full `AVAIL_W` (468pt) instead of the
+narrower width ReportLab actually renders into (456pt) — invisible for
+most text, but for a couple of long monument names the title paragraph
+wraps to 2 lines at 456pt while `flowable_h()` measured it as 1 line at
+468pt, understating `text_h` by ~20pt. That let `choose_cols()` allocate
+more room to photos than the page actually had once the real (taller,
+wrapped) title was drawn, pushing photos onto a spillover second page
+that wasn't really necessary. Fixed by adding a `TEXT_W = AVAIL_W - 12`
+constant (`FRAME_PAD = 6` per side) and measuring `flowable_h()` against
+it instead of `AVAIL_W`. Confirmed fix: "Acton/Concord Powder Mill Road
+(Rte 62)" and "Acton/Maynard Powder Mill Road (Rte 62)" (both 3-line
+headlines) now keep their photos on one page; total page count back to
+51 (was 53 with the two spillover pages). "Acton/Littleton W B Marker on
+Fort Pond Road" also has a 3-line headline but was never affected (its
+photos already fit in one page's remaining space either way).
 
 ### Remaining work
 

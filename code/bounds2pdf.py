@@ -31,6 +31,16 @@ MARGIN = 72                          # 1-inch margins
 AVAIL_W = PAGE_W - 2 * MARGIN       # 468 pt
 AVAIL_H = PAGE_H - 2 * MARGIN       # 648 pt
 
+# SimpleDocTemplate's page frame adds its own 6pt padding on every side (a
+# ReportLab default, not something we set) on top of the margins above, so
+# the true usable width for anything actually laid out in the frame is 12pt
+# narrower than AVAIL_W. Pre-measurement (flowable_h below) must wrap at
+# this width, not AVAIL_W, or it'll underestimate how tall a long wrapped
+# title really renders -- which then lets choose_cols() overallocate space
+# to photos and spill them onto a second page for no real reason.
+FRAME_PAD = 6
+TEXT_W = AVAIL_W - 2 * FRAME_PAD    # 456 pt
+
 PHOTOS_DIR = Path("../Photos/Monument Photos")
 OSM_DIR = Path("osm_screenshots")
 OSM_CACHE = OSM_DIR / "osm_url_cache.json"
@@ -54,10 +64,6 @@ MONUMENT_LISTINGS_INTRO_PAGES = 0
 TITLE_S = ParagraphStyle('MonTitle',
     fontName='Helvetica-Bold', fontSize=16, leading=20,
     alignment=TA_CENTER, spaceBefore=0, spaceAfter=4)
-
-STATUS_S = ParagraphStyle('MonStatus',
-    fontName='Helvetica', fontSize=14, leading=18,
-    spaceBefore=2, spaceAfter=2)
 
 SMALL = ParagraphStyle('MonSmall',
     fontName='Helvetica', fontSize=10, leading=13,
@@ -280,9 +286,9 @@ def photos_all_portrait(photos):
 # ---------------------------------------------------------------------------
 
 def flowable_h(f):
-    """Measure a flowable's rendered height at AVAIL_W."""
+    """Measure a flowable's rendered height at the true usable frame width."""
     try:
-        _, h = f.wrap(AVAIL_W, AVAIL_H)
+        _, h = f.wrap(TEXT_W, AVAIL_H)
         return h
     except Exception:
         return 0
@@ -450,27 +456,19 @@ async def main():
 
             ps = []   # flowables for this monument
 
-            # -- Title + rule --
+            # -- Two-line headline + rule --
+            # Line 1: monument name, then "Monument Listing".
+            # Line 2: type (Corner / Street Crossing), then the status,
+            # highlighted in a box sized to just the status text -- both
+            # lines share the same style so the status box matches the
+            # surrounding headline font/size/weight.
             ps.append(Paragraph(
-                f'Monument Listing: {esc(name)} [{esc(mtype)}]', TITLE_S))
+                f'{esc(name)} Monument Listing', TITLE_S))
+            ps.append(Paragraph(
+                f'{esc(mtype)} &nbsp;&nbsp;&nbsp;&nbsp;'
+                f'<span backColor="#c8c8c8">{esc(status)}</span>', TITLE_S))
             ps.append(HRFlowable(
                 width='100%', thickness=1, color=colors.black, spaceAfter=4))
-
-            # -- Status (grey-highlighted value) --
-            st = Table(
-                [[Paragraph('<b>Status:</b>', STATUS_S),
-                  Paragraph(esc(status), STATUS_S)]],
-                colWidths=[90, AVAIL_W - 90],
-            )
-            st.setStyle(TableStyle([
-                ('BACKGROUND', (1, 0), (1, 0), colors.HexColor('#c8c8c8')),
-                ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-                ('LEFTPADDING', (0, 0), (-1, -1), 4),
-                ('RIGHTPADDING', (0, 0), (-1, -1), 4),
-                ('TOPPADDING', (0, 0), (-1, -1), 2),
-                ('BOTTOMPADDING', (0, 0), (-1, -1), 2),
-            ]))
-            ps.append(st)
 
             # -- Date of visit --
             # "Not Found" means Jim went and searched but didn't locate the
