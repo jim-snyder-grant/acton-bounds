@@ -36,6 +36,14 @@ Owner tags: [Claude] [Claude Code] [Jim] [Both]
 
 - [ ] [Jim] Work with Dean to paint the Keefe Street monument
 - [ ] [Jim] Collect better coordinates with Town's iPad
+- [ ] [Jim] Get a picture of the Maynard side at Rte 27
+- [ ] [Jim] Review Powder Mill plans for the monument
+- [ ] [Jim] Walk the bounds between the ACC and AC corners (Ben's Woods)
+- [ ] [Jim] Check the west side of Main Street at the A/C crossing
+- [ ] [Jim] Get a better picture of the decoy ACW monument
+- [ ] [Jim] Walk the bounds between AW1 and ALW (cat head rock linestone)
+- [ ] [Jim] Check the other side of Fort Pond Road
+- [ ] [Jim] Get a map of old Sarah Indian Way road and walk it to the boundary
 - [x] [Jim] For "Not Found" monuments, fill in the "Date of visit" column in
   the Google Sheet with the date(s) searched, where known — done Jul 5
   2026; confirmed all 15 "Not Found" monuments now have a date filled in
@@ -100,13 +108,20 @@ Order below reflects planned appearance in the final report (tentative — may b
 
 1. - [x] [Both] Cover page: COMPLETE (FrontPage.svg/pdf in Bounds folder)
    - [x] [Claude Code] Add `orientation` (landscape/portrait/square) and `cover_candidate` (yes/blank, defaults to yes for included photos) columns to `photo_manifest.csv`, for claude.ai's Inkscape collage script — done Jun 30 2026 (`add_cover_columns.py`): 169 included photos classified (147 portrait, 22 landscape, 0 square), all opened successfully, safe to re-run (preserves manual overrides)
-2. - [ ] [Jim] Write a one-page (or two-page) introduction to the Monument Listings section — explains what the per-monument pages that follow are and how to read them. Once written, tell Claude Code the final page count so it can set `MONUMENT_LISTINGS_INTRO_PAGES` in `bounds2pdf.py` (currently 0) — this shifts the "Monument Listings, page X of N" footer so numbering continues correctly after this intro is merged in front of it during final assembly
-3. - [ ] [Claude] Legal background section (1648 law + MGL Ch. 42 §2; text nearly ready from Bounds Report parts.odt)
-4. - [ ] [Claude] History of Acton's bounds (material in hand from 1904 book, needs connective prose)
+2. - [ ] [Claude] Legal background section (1648 law + MGL Ch. 42 §2; text nearly ready from Bounds Report parts.odt)
+3. - [ ] [Claude] History of Acton's bounds (material in hand from 1904 book, needs connective prose)
+4. - [ ] [Both] Possible section on road name changes — right after History, or
+     folded into it (Jim to decide which): summarizes what was figured out
+     about 1904-report street names that no longer exist or aren't
+     recognized today, any old-name-to-current-name matches made along the
+     way, and notes where a monument's position in the report is only a
+     best guess because its 1904 street name couldn't be pinned down (see
+     the Order-column page-order work, code/claude.md)
 5. - [ ] [Both] Overview map: convert KML to static image with monument status indicated
 6. - [ ] [Both] Summary of visits and results (Jim to draft with Claude's help)
 7. - [ ] [Claude] Other towns' reports: bibliography + comparative notes section
 8. - [ ] [Claude] Policy recommendations section (rough notes in Bounds Report parts.odt)
+9. - [ ] [Jim] Write a one-page (or two-page) introduction to the Monument Listings section, placed right before the Monument Listings pages themselves — explains what the per-monument pages that follow are and how to read them. Once written, tell Claude Code the final page count so it can set `MONUMENT_LISTINGS_INTRO_PAGES` in `bounds2pdf.py` (currently 0) — this shifts the "Monument Listings, page X of N" footer so numbering continues correctly after this intro is merged in front of it during final assembly
 
 ---
 
