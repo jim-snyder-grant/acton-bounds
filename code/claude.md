@@ -405,8 +405,9 @@ intro pages is future work once those pages are built.
 ### What it currently does
 
 For each row in the Monuments sheet, it creates one PDF page containing:
-- Monument name + type (centered heading with underline)
-- Status (bold label + grey-highlighted value)
+- One-line headline: order number, monument name, and status, each
+  number/status in a colored box keyed to the status (see "Current
+  state" below) — centered, with a rule underneath
 - Coordinates (table with lat/long + source), or "Unknown Coordinates"
 - Nearest Acton street name
 - Nearest other town street name (if present)
@@ -436,10 +437,29 @@ All major features are implemented and working:
   didn't already match `Order` (harmless — it gets sorted either way, this
   is just a heads-up that a manual re-sort in the Sheet would otherwise
   have gone unnoticed)
-- Two-line headline (name + "Monument Listing" on line 1; type + a
-  status box highlighted with `<span backColor="...">` on line 2, same
-  `TITLE_S` style/font/size for both lines) — added Jul 5 2026, replacing
-  the old single-line title + separate full-width status table
+- One-line headline (added Jul 6 2026, superseding the Jul 5 2026
+  two-line version): `[order#] Name [status]`, no "Monument Listing"
+  text and no Corner/Street Crossing type — order number and status are
+  each in a small colored box (`<span backColor="..." textColor="...">`)
+  using that row's `STATUS_COLORS` entry; text color is picked
+  automatically per box via `knockout_text_color()` (relative-luminance
+  threshold, white on dark backgrounds / black on light ones), not
+  hand-picked per status. `TITLE_S` dropped from 16pt to 14pt so the
+  longest name ("Acton/Littleton W B Marker on Fort Pond Road", 44 chars)
+  still fits on one line at `TEXT_W` (worst case ~408pt of 456pt
+  available at 14pt; two rows would have overflowed at 16pt). The `Type`
+  column (Corner/Street Crossing) is no longer displayed anywhere on the
+  page. Order-number boxes are meant to be reused later as clickable
+  markers on an overview map (Jim's stated plan) — that will need each
+  monument page to have a named PDF destination/bookmark, which doesn't
+  exist yet; not needed for this change, just a known follow-on
+  dependency.
+
+  `STATUS_COLORS` (hex backgrounds): Painted `#2E7D32` green, Found
+  `#1565C0` blue, Couldn't paint `#EF6C00` orange, Not Found `#C62828`
+  red, Documented `#BDBDBD` light gray (the only one that resolves to
+  black text — deliberately the calmest color since it means no field
+  visit happened, not a field outcome).
 
 **Bug found and fixed Jul 5 2026 — `flowable_h()` underestimated text
 height, could spill photos to an unnecessary second page:** ReportLab's

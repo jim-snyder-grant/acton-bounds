@@ -6,6 +6,21 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-06 [Jim] Reworked the per-monument page headline again, to a
+  single line: `[order#] Name [status]`, dropping "Monument Listing" and
+  the Corner/Street Crossing type entirely. Order number and status each
+  sit in a small colored box keyed to that row's status (Painted green,
+  Found blue, Couldn't paint orange, Not Found red, Documented light
+  gray); text color (white knockout vs. black) is chosen automatically
+  per box from the background color's relative luminance, not hand-
+  picked per status. Headline font dropped from 16pt to 14pt so the
+  longest monument name still fits on one line at the true 456pt frame
+  width for every row (verified via Paragraph.wrap()); PDF regenerated,
+  page count still 51. Order-number boxes are meant to be reused as
+  clickable map markers later (a stated future plan, not built yet).
+  Also fixed a leftover comment in bounds2pdf.py's Order-column sort
+  that incorrectly said "counter-clockwise" (confirmed clockwise last
+  session). Full detail in code/claude.md.
 2026-07-05 [Jim] Reworked the per-monument page headline per Jim's
   formatting requests: name + "Monument Listing" on line 1 (no colon);
   type (Corner/Street Crossing, no brackets) + status on line 2, status

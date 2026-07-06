@@ -59,10 +59,30 @@ MAX_PHOTO_H = 200   # hard upper limit on photo height; actual cap computed dyna
 MONUMENT_LISTINGS_INTRO_PAGES = 0
 
 # ---------------------------------------------------------------------------
+# Status colors -- shared by the headline's order-number box and status box.
+# Text color (knockout white vs. black) is derived from each background's
+# relative luminance rather than hand-picked per status, so a future color
+# swap can't accidentally leave unreadable low-contrast text.
+# ---------------------------------------------------------------------------
+STATUS_COLORS = {
+    'Painted':         '#2E7D32',   # green -- done
+    'Found':           '#1565C0',   # blue -- located, partial success
+    "Couldn't paint":  '#EF6C00',   # orange -- found but an issue
+    'Not Found':       '#C62828',   # red -- problem
+    'Documented':      '#BDBDBD',   # light gray -- no field visit
+}
+
+def knockout_text_color(hex_color):
+    """Return '#ffffff' or '#000000', whichever contrasts better with hex_color."""
+    r, g, b = (int(hex_color[i:i + 2], 16) for i in (1, 3, 5))
+    luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
+    return '#000000' if luminance > 0.5 else '#ffffff'
+
+# ---------------------------------------------------------------------------
 # Paragraph styles
 # ---------------------------------------------------------------------------
 TITLE_S = ParagraphStyle('MonTitle',
-    fontName='Helvetica-Bold', fontSize=16, leading=20,
+    fontName='Helvetica-Bold', fontSize=14, leading=17,
     alignment=TA_CENTER, spaceBefore=0, spaceAfter=4)
 
 SMALL = ParagraphStyle('MonSmall',
@@ -397,8 +417,8 @@ async def main():
 
     df = pd.read_excel('../Acton Bounds.xlsx', sheet_name='Monuments')
 
-    # Page order is driven by the 'Order' column (Jim's counter-clockwise
-    # walk starting at the Acton/Concord/Maynard/Sudbury corner -- see
+    # Page order is driven by the 'Order' column (Jim's clockwise walk
+    # starting at the Acton/Concord/Maynard/Sudbury corner -- see
     # code/claude.md), not by however the sheet happens to be sorted. Sort
     # explicitly here so a future accidental re-sort/insert in the sheet
     # can't silently change the report's page order.
@@ -451,22 +471,26 @@ async def main():
                 story.append(PageBreak())
 
             name = safe_str(df.at[i, 'Name']) or 'Unknown'
-            mtype = safe_str(df.at[i, 'Type'])
             status = safe_str(df.at[i, 'Status'])
 
             ps = []   # flowables for this monument
 
-            # -- Two-line headline + rule --
-            # Line 1: monument name, then "Monument Listing".
-            # Line 2: type (Corner / Street Crossing), then the status,
-            # highlighted in a box sized to just the status text -- both
-            # lines share the same style so the status box matches the
-            # surrounding headline font/size/weight.
+            # -- One-line headline + rule --
+            # Order number, then name, then status -- order number and status
+            # share the same status color, each in a box sized to just its
+            # own text ("knockout" white text on dark backgrounds, black on
+            # light ones, decided automatically per color -- see
+            # knockout_text_color()). This also gives each monument a stable,
+            # colored order number to later reuse as a clickable marker on
+            # the overview map.
+            order_num = safe_str(df.at[i, 'Order'])
+            bg = STATUS_COLORS.get(status, '#BDBDBD')
+            fg = knockout_text_color(bg)
             ps.append(Paragraph(
-                f'{esc(name)} Monument Listing', TITLE_S))
-            ps.append(Paragraph(
-                f'{esc(mtype)} &nbsp;&nbsp;&nbsp;&nbsp;'
-                f'<span backColor="#c8c8c8">{esc(status)}</span>', TITLE_S))
+                f'<span backColor="{bg}" textColor="{fg}">&nbsp;{esc(order_num)}&nbsp;</span>'
+                f'&nbsp;&nbsp;{esc(name)}&nbsp;&nbsp;'
+                f'<span backColor="{bg}" textColor="{fg}">&nbsp;{esc(status)}&nbsp;</span>',
+                TITLE_S))
             ps.append(HRFlowable(
                 width='100%', thickness=1, color=colors.black, spaceAfter=4))
 
