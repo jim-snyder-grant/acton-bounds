@@ -283,7 +283,7 @@ Key columns used by `bounds2pdf.py`:
 | `From 1904 description` | Optional — historical description |
 | `Notes on Monument` | Optional |
 | `Coordinate Source` | Text description of source |
-| `Latitude` / `Longitude` | Decimal degrees WGS84; may be NaN if unknown |
+| `Latitude` / `Longitude` | Decimal degrees WGS84; may be NaN if unknown. Stored precision varies by monument (not normalized) -- `bounds2pdf.py` formats to 5 decimal places (~1m) for display only, decided Jul 5 2026 |
 | `OpenStreetMap link` | URL for map screenshot; may be NaN |
 | `Tie-break number` | Used when multiple monuments share a name prefix |
 | `Date of visit` | May be a float (Excel serial date) or string |

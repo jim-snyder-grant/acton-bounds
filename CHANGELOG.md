@@ -6,6 +6,12 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-05 [Jim] Coordinate precision decided: report displays 5 decimal
+  places (~1m precision, well within GPS/field accuracy) via a display-
+  time format in bounds2pdf.py; Acton Bounds.xlsx keeps whatever
+  precision each coordinate already has, untouched, in case the extra
+  digits are useful later. Documented in code/claude.md, README.md,
+  TODO.md (marked done), and "Monument Listings intro draft.md".
 2026-07-05 [Both] Monument page order is now driven by a new `Order`
   column in the Monuments sheet (1-51, clockwise around Acton's boundary
   starting at the Acton/Concord/Maynard/Sudbury corner, replacing the old

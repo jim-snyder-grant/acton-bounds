@@ -141,7 +141,8 @@ or in Google Drive only. When in doubt, ask Jim before committing.
   manual process (organize in Google Drive, move into DocuShare later)
   except for the individual photo uploads above
 - Cover page: built with SimpInkScr (Inkscape Python scripting extension)
-- Coordinate precision: 5 or 6 decimal places (decision pending)
+- Coordinate precision: report displays 5 decimal places (~1m); the XLSX
+  keeps whatever precision each coordinate already has, untouched
 - Neighboring towns' perambulation reports: Boxborough (2007), Concord
   (2017), Stow (2007), and Sudbury confirmed — all cross-referenced.
   Carlisle, Littleton, Westford, Maynard reports not yet obtained.

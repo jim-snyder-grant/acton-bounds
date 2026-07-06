@@ -42,11 +42,12 @@ Owner tags: [Claude] [Claude Code] [Jim] [Both]
   near boundary sign...") that just needs copying into the structured
   field. Once filled in, the report will show it labeled "Date searched:"
   instead of "Not yet searched" (bounds2pdf.py change done Jul 2 2026).
-- [ ] [Jim] Decide on number of decimal places for lat/lon in monument
-  listings (5 or 6 digits recommended; currently inconsistent across
-  monuments). Coordinate with planning staff re: precision of state corner
-  coordinates before deciding. Once decided, ask Claude Code to normalize
-  all coordinates in the spreadsheet/report to the chosen precision.
+- [x] [Both] Decide on number of decimal places for lat/lon in monument
+  listings — Jim decided Jul 5 2026: report displays 5 digits (~1m
+  precision, well within GPS/field accuracy), but the XLSX keeps whatever
+  precision is already stored per coordinate (not normalized/truncated),
+  in case the extra digits are useful later. `bounds2pdf.py` formats to
+  5 decimal places at display time only.
 - [ ] [Jim] Finish gathering improved coordinates for all monuments (some
   were significantly off; field work with Town's iPad ongoing)
 - [ ] [Claude Code] Once coordinates are finalized: generate a CSV of all

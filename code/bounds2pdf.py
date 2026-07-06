@@ -503,9 +503,12 @@ async def main():
             if pd.isna(lat):
                 ps.append(Paragraph('<b>Coordinates:</b> Unknown', DETL))
             else:
+                # Report shows 5 decimal places (~1m precision) regardless of
+                # how many digits are stored in the XLSX -- Jim wants to keep
+                # the full-precision source data in case it's useful later.
                 ps.append(Paragraph(
-                    f'<b>Coordinates:</b>  <b>Latitude</b> {esc(df.at[i, "Latitude"])}'
-                    f'  <b>Longitude</b> {esc(df.at[i, "Longitude"])}',
+                    f'<b>Coordinates:</b>  <b>Latitude</b> {df.at[i, "Latitude"]:.5f}'
+                    f'  <b>Longitude</b> {df.at[i, "Longitude"]:.5f}',
                     DETL))
                 coord_src = df.at[i, 'Coordinate Source']
                 second_line = []
