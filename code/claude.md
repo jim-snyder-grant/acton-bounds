@@ -455,6 +455,11 @@ All major features are implemented and working:
   exist yet; not needed for this change, just a known follow-on
   dependency.
 
+  **`STATUS_COLORS`/`knockout_text_color()` moved to their own module,
+  `code/status_colors.py`** (added Jul 6 2026), so a future map-generation
+  script can import the exact same status colors instead of duplicating
+  or drifting from them. `bounds2pdf.py` just imports from it now.
+
   `STATUS_COLORS` (hex backgrounds): Painted `#2E7D32` green, Found
   `#1565C0` blue, Couldn't paint `#EF6C00` orange, Not Found `#C62828`
   red, Documented `#BDBDBD` light gray (the only one that resolves to

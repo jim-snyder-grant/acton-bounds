@@ -23,6 +23,8 @@ from reportlab.platypus import (
 )
 from reportlab.pdfgen import canvas as pdfcanvas
 
+from status_colors import STATUS_COLORS, DEFAULT_STATUS_COLOR, knockout_text_color
+
 # ---------------------------------------------------------------------------
 # Page constants (letter: 612 × 792 pt)
 # ---------------------------------------------------------------------------
@@ -57,26 +59,6 @@ MAX_PHOTO_H = 200   # hard upper limit on photo height; actual cap computed dyna
 # Once Jim's Monument Listings intro is written, set this to its page count
 # (1 or 2) so the footer numbering here starts after it, e.g. 2 of N+1.
 MONUMENT_LISTINGS_INTRO_PAGES = 0
-
-# ---------------------------------------------------------------------------
-# Status colors -- shared by the headline's order-number box and status box.
-# Text color (knockout white vs. black) is derived from each background's
-# relative luminance rather than hand-picked per status, so a future color
-# swap can't accidentally leave unreadable low-contrast text.
-# ---------------------------------------------------------------------------
-STATUS_COLORS = {
-    'Painted':         '#2E7D32',   # green -- done
-    'Found':           '#1565C0',   # blue -- located, partial success
-    "Couldn't paint":  '#EF6C00',   # orange -- found but an issue
-    'Not Found':       '#C62828',   # red -- problem
-    'Documented':      '#BDBDBD',   # light gray -- no field visit
-}
-
-def knockout_text_color(hex_color):
-    """Return '#ffffff' or '#000000', whichever contrasts better with hex_color."""
-    r, g, b = (int(hex_color[i:i + 2], 16) for i in (1, 3, 5))
-    luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
-    return '#000000' if luminance > 0.5 else '#ffffff'
 
 # ---------------------------------------------------------------------------
 # Paragraph styles
@@ -484,7 +466,7 @@ async def main():
             # colored order number to later reuse as a clickable marker on
             # the overview map.
             order_num = safe_str(df.at[i, 'Order'])
-            bg = STATUS_COLORS.get(status, '#BDBDBD')
+            bg = STATUS_COLORS.get(status, DEFAULT_STATUS_COLOR)
             fg = knockout_text_color(bg)
             ps.append(Paragraph(
                 f'<span backColor="{bg}" textColor="{fg}">&nbsp;{esc(order_num)}&nbsp;</span>'
