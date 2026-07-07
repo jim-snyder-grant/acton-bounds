@@ -50,14 +50,16 @@ MAP_SIZE = 150      # OSM map display size in points
 MAP_GAP = 12        # gap between left text column and map column
 MAX_PHOTO_H = 200   # hard upper limit on photo height; actual cap computed dynamically
 
-# This script only generates the Monument Listings section — the intro
-# material (legal background, history, etc.) and Jim's planned one-page
-# (or two-page) introduction to the Monument Listings section itself are
-# separate documents, merged in front of this one during final assembly.
-# Footer page numbers below are self-contained to this section ("Monument
-# Listings, page X of N") so they don't depend on unfinished intro material.
-# Once Jim's Monument Listings intro is written, set this to its page count
-# (1 or 2) so the footer numbering here starts after it, e.g. 2 of N+1.
+# This script only generates the Monument Listings section — all of the
+# report's intro material (cover, legal background, history, road-name
+# changes, overview map, and Jim's Monument Listings intro) is a separate
+# document, merged in front of this one during final assembly. Footer page
+# numbers below are self-contained to this section ("Monument Listings,
+# page X of N") so they don't depend on unfinished intro material.
+# Once every intro section is fully drafted and paginated, set this to
+# their combined total page count (cover through Monument Listings intro,
+# all of it -- not just the Monument Listings intro alone) so the footer
+# numbering here starts after them. Leave at 0 throughout drafting/proofing.
 MONUMENT_LISTINGS_INTRO_PAGES = 0
 
 # ---------------------------------------------------------------------------
@@ -555,6 +557,11 @@ async def main():
             if not pd.isna(mon_notes):
                 left_items.append(Paragraph(
                     f'<b>Notes on Monument:</b> {esc(mon_notes)}', DETL))
+
+            next_steps = df.at[i, 'Possible Next Steps']
+            if not pd.isna(next_steps):
+                left_items.append(Paragraph(
+                    f'<b>Possible Next Steps:</b> {esc(next_steps)}', DETL))
 
             # -- OSM map (right column) or full-width fallback --
             osm_link = df.at[i, 'OpenStreetMap link']

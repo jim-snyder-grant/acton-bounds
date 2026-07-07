@@ -308,6 +308,7 @@ Key columns used by `bounds2pdf.py`:
 | `Notes on location` | Optional |
 | `From 1904 description` | Optional — historical description. Column name unchanged, but the printed label is "In 1904 description:" (Jul 7 2026, Jim's fix) so that the 8 monuments whose cell is just "no" (not mentioned in the 1904 book) read as a sensible answer instead of an odd non-answer |
 | `Notes on Monument` | Optional |
+| `Possible Next Steps` | Optional (added Jul 7 2026 via claude.ai/INBOX.md). Printed as **Possible Next Steps:** right after Notes on Monument, before the map/photos. Intended mainly for Not Found/Documented/Couldn't Paint pages, which otherwise have significant white space -- gives future Select Board members or town staff actionable guidance (which state agency to ask, cost-sharing under MGL Ch. 42, funding sources, etc.) |
 | `Coordinate Source` | Text description of source |
 | `Latitude` / `Longitude` | Decimal degrees WGS84; may be NaN if unknown. Stored precision varies by monument (not normalized) -- `bounds2pdf.py` formats to 5 decimal places (~1m) for display only, decided Jul 5 2026 |
 | `OpenStreetMap link` | URL for map screenshot; may be NaN |
@@ -441,6 +442,8 @@ For each row in the Monuments sheet, it creates one PDF page containing:
 - Notes on location (if present)
 - 1904 description (if present)
 - Notes on Monument (if present)
+- Possible Next Steps (if present) — added Jul 7 2026, see the
+  `Possible Next Steps` row in the Data Source table above
 - OSM map screenshot (captured live via Playwright, 300×300px)
 
 ### Current state
@@ -514,6 +517,30 @@ headlines) now keep their photos on one page; total page count back to
 51 (was 53 with the two spillover pages). "Acton/Littleton W B Marker on
 Fort Pond Road" also has a 3-line headline but was never affected (its
 photos already fit in one page's remaining space either way).
+
+### Page numbering — `MONUMENT_LISTINGS_INTRO_PAGES`
+
+Footer reads "Monument Listings, page X of N" (`NumberedCanvas`, standard
+ReportLab two-pass technique). This script only generates the Monument
+Listings section; the report's intro material (cover, legal background,
+history, road-name-changes, overview map, and Jim's Monument Listings
+intro — see `Acton Bounds TODO.md`'s "Introductory sections" list) is a
+separate document merged in front of this one during final assembly.
+
+`MONUMENT_LISTINGS_INTRO_PAGES` (near the top of `bounds2pdf.py`,
+currently `0`) is the page-count offset applied to both X and N so the
+footer keeps counting correctly once the intro is merged in front.
+Clarified Jul 4 2026 (via claude.ai/INBOX.md) that this must be the
+**total page count of everything that precedes the Monument Listings
+pages** — cover through the Monument Listings intro, all of it — not
+just the 1-2 page Monument Listings intro on its own as originally
+worded. It won't be known until every intro section is fully drafted and
+paginated, so leave it at `0` throughout all drafting/proofing work.
+
+Final assembly workflow: render all intro sections to PDF → count total
+pages → set `MONUMENT_LISTINGS_INTRO_PAGES` to that count → regenerate
+`bounds2pdf.py` → merge intro PDF + monument pages PDF (see "Final
+assembly" in `Acton Bounds TODO.md`).
 
 ### Remaining work
 

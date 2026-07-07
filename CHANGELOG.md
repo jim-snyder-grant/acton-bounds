@@ -6,6 +6,22 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-07 [claude.ai] bounds2pdf.py: add "Possible Next Steps" optional
+  field (renders only when non-empty; placed after Notes on Monument,
+  before photos; intended for Not Found/Documented/Couldn't paint pages)
+2026-07-07 [claude.ai] photo_manifest.csv: context photos for sparse
+  pages — Jim will add these; Claude Code rendering requires no changes
+2026-07-07 [Claude Code] Implemented the above: `bounds2pdf.py` renders
+  `Possible Next Steps` (bold label) right after Notes on Monument when
+  non-empty. Jim filled in 19 rows to test; caught and fixed a data-entry
+  mistake along the way (Acton/Westford Bear Hill Road's Possible Next
+  Steps text had been typed into the Name and Tie-break number cells
+  instead). Verified: 51 pages unchanged, text renders and wraps
+  correctly (spot-checked Order 7, 18, 42).
+2026-07-04 [claude.ai] code/claude.md: clarified that
+  MONUMENT_LISTINGS_INTRO_PAGES = total pages of all intro sections
+  (1-6), not just the Monument Listings intro page; will be set in
+  final assembly pass only
 2026-07-07 [Claude Code] Added `code/check_distance_to_line.py`: measures
   each Street-Crossing monument's perpendicular distance from the
   straight line connecting its two nearest Corner monuments (MA town
