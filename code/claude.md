@@ -518,29 +518,57 @@ headlines) now keep their photos on one page; total page count back to
 Fort Pond Road" also has a 3-line headline but was never affected (its
 photos already fit in one page's remaining space either way).
 
-### Page numbering — `MONUMENT_LISTINGS_INTRO_PAGES`
+### Page numbering — two-part footer (decided Jul 7 2026)
 
-Footer reads "Monument Listings, page X of N" (`NumberedCanvas`, standard
-ReportLab two-pass technique). This script only generates the Monument
-Listings section; the report's intro material (cover, legal background,
-history, road-name-changes, overview map, and Jim's Monument Listings
-intro — see `Acton Bounds TODO.md`'s "Introductory sections" list) is a
-separate document merged in front of this one during final assembly.
+Each page carries two independent footer counters, resolving the
+"nobody knows the final total page count while still drafting" problem
+without any manual offset bookkeeping:
 
-`MONUMENT_LISTINGS_INTRO_PAGES` (near the top of `bounds2pdf.py`,
-currently `0`) is the page-count offset applied to both X and N so the
-footer keeps counting correctly once the intro is merged in front.
-Clarified Jul 4 2026 (via claude.ai/INBOX.md) that this must be the
-**total page count of everything that precedes the Monument Listings
-pages** — cover through the Monument Listings intro, all of it — not
-just the 1-2 page Monument Listings intro on its own as originally
-worded. It won't be known until every intro section is fully drafted and
-paginated, so leave it at `0` throughout all drafting/proofing work.
+- **Right-justified, per-section, self-contained:** e.g. "Monument
+  Listings, page 12 of 51". Whatever tool renders a given section (this
+  script for Monument Listings, claude.ai's tooling for the intro
+  sections) draws only this half, counting just its own pages. It never
+  needs to know anything about any other section, at draft time or
+  final assembly.
+- **Left-justified, whole-report, stamped at final assembly:** e.g.
+  "Acton Bounds Report 2025-2026, page 23 of 73". Added in one pass
+  *after* every section is merged into the final PDF, by a small
+  Claude Code script (see "Final assembly" in `Acton Bounds TODO.md`)
+  that overlays this text on every page once — computed trivially at
+  that point since the true total is finally known.
 
-Final assembly workflow: render all intro sections to PDF → count total
-pages → set `MONUMENT_LISTINGS_INTRO_PAGES` to that count → regenerate
-`bounds2pdf.py` → merge intro PDF + monument pages PDF (see "Final
-assembly" in `Acton Bounds TODO.md`).
+This replaces the earlier `MONUMENT_LISTINGS_INTRO_PAGES` offset-constant
+design (used briefly Jul 4-7 2026): that approach required manually
+recomputing and setting a constant in `bounds2pdf.py` before every
+final-ish run, and only solved the problem for the Monument Listings
+section specifically. The two-part split needs no manual step and
+generalizes to every section the same way.
+
+`bounds2pdf.py`'s `NumberedCanvas._draw_footer()` implements only the
+right-justified half (see code) — the left half doesn't exist yet
+anywhere; the final-assembly stamping script is still a TODO item.
+
+#### Footer visual spec (for claude.ai to match in the intro sections)
+
+Style used by `NumberedCanvas._draw_footer()` in `bounds2pdf.py`, for
+visual consistency across every section:
+
+- **Page size:** US Letter, 8.5×11in (`reportlab.lib.pagesizes.letter`)
+- **Font:** Helvetica, 9pt, regular weight (not bold)
+- **Color:** `#555555` (medium gray, not black)
+- **Vertical position:** 26pt (0.36in) up from the bottom edge of the
+  page — i.e. `0.5 * 72 - 10` in point units
+- **Horizontal position:** both halves align to the same 72pt (1in)
+  margins the body text uses, not the physical page edge — right half
+  ends at `PAGE_W - MARGIN` (`drawRightString`), left half (added at
+  final assembly) starts at `MARGIN` (`drawString`)
+- **Right-half text:** `"{Section Name}, page {X} of {M}"` — Monument
+  Listings pages use "Monument Listings"; other sections should use
+  their own section name in the same pattern (e.g. "Legal Background,
+  page 2 of 3")
+- **Left-half text (final assembly only):** `"Acton Bounds Report
+  2025-2026, page {X} of {N}"`
+- No footer rule/line above the text, no other footer content
 
 ### Remaining work
 

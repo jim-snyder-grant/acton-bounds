@@ -117,8 +117,7 @@ Order below reflects planned appearance in the final report (tentative):
 5. - [ ] [Both] Overview map: convert KML to static image with monument
         status indicated
 6. - [ ] [Both] Monument Listings intro: one or two pages explaining what
-        the per-monument pages are and how to read them. Once page count
-        is known, tell Claude Code to set MONUMENT_LISTINGS_INTRO_PAGES.
+        the per-monument pages are and how to read them.
 7. - [ ] [Claude Code] Monument pages (bounds2pdf.py output) — COMPLETE
         pending finalized data
 8. - [ ] [Claude] Next steps (short closing section; replaces "Policy
@@ -127,6 +126,15 @@ Order below reflects planned appearance in the final report (tentative):
 Note: Other towns' perambulation reports will be mentioned in passing
 in section 4, not as a standalone section. Road name changes (previously
 its own possible item) are folded into section 3, History.
+
+- [ ] [Claude] Add a right-justified, self-contained footer to sections
+      2-6 (Legal background through Monument Listings intro): "{Section
+      Name}, page X of M", matching the Monument Listings pages' footer
+      style (Helvetica 9pt, #555555 gray, 1in side margins, 26pt above
+      the bottom edge). Each section only needs to count its own pages —
+      no need to know any other section's page count. Full visual spec
+      in code/claude.md under "Page numbering — two-part footer." Cover
+      page (section 1) is a title page and doesn't need one.
 
 ### Scope of section 4 — "How this report was created"
 
@@ -162,7 +170,11 @@ its own possible item) are folded into section 3, History.
 
 - [ ] [Jim] Decide on format for intro sections (PDF vs ODT)
 - [ ] [Jim] Re-export XLSX from Google Sheet before final report run
-- [ ] [Claude Code] Merge intro PDF + monument pages PDF with pypdf or similar
+- [ ] [Claude Code] Merge intro PDF + monument pages PDF with pypdf or
+      similar, then stamp a left-justified "Acton Bounds Report
+      2025-2026, page X of N" footer on every page of the merged result
+      (N = merged total page count) — see "Page numbering" in
+      code/claude.md
 - [ ] [Both] Design Google Drive archiving folder structure
 - [ ] [Jim] Manually move Google Drive folder into DocuShare
 - [ ] [Both] Categorize every file/folder in the Bounds Drive folder as one

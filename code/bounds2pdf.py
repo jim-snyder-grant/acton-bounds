@@ -53,14 +53,12 @@ MAX_PHOTO_H = 200   # hard upper limit on photo height; actual cap computed dyna
 # This script only generates the Monument Listings section — all of the
 # report's intro material (cover, legal background, history, road-name
 # changes, overview map, and Jim's Monument Listings intro) is a separate
-# document, merged in front of this one during final assembly. Footer page
-# numbers below are self-contained to this section ("Monument Listings,
-# page X of N") so they don't depend on unfinished intro material.
-# Once every intro section is fully drafted and paginated, set this to
-# their combined total page count (cover through Monument Listings intro,
-# all of it -- not just the Monument Listings intro alone) so the footer
-# numbering here starts after them. Leave at 0 throughout drafting/proofing.
-MONUMENT_LISTINGS_INTRO_PAGES = 0
+# document, merged in front of this one during final assembly. The footer
+# below is self-contained to this section ("Monument Listings, page X of
+# N", right-justified) and never needs to know the intro material's page
+# count -- a separate final-assembly script stamps the report-wide page
+# number (left-justified) across every page of the merged PDF once the
+# whole document exists. See "Page numbering" in code/claude.md.
 
 # ---------------------------------------------------------------------------
 # Paragraph styles
@@ -214,7 +212,10 @@ class LinkableImage(RLImage):
 
 
 class NumberedCanvas(pdfcanvas.Canvas):
-    """Draws a 'Monument Listings, page X of N' footer on every page.
+    """Draws a right-justified 'Monument Listings, page X of N' footer on
+    every page -- self-contained to this section (X and N never include
+    other sections' pages; see the module-level comment on this near the
+    top of the file for why).
 
     Standard ReportLab two-pass technique: buffer each page's drawing state
     via showPage(), then once the true page count is known (in save()),
@@ -237,12 +238,11 @@ class NumberedCanvas(pdfcanvas.Canvas):
         super().save()
 
     def _draw_footer(self, total_pages):
-        page = self._pageNumber + MONUMENT_LISTINGS_INTRO_PAGES
-        total = total_pages + MONUMENT_LISTINGS_INTRO_PAGES
         self.setFont('Helvetica', 9)
         self.setFillColor(colors.HexColor('#555555'))
-        self.drawCentredString(
-            PAGE_W / 2, 0.5 * 72 - 10, f'Monument Listings, page {page} of {total}')
+        self.drawRightString(
+            PAGE_W - MARGIN, 0.5 * 72 - 10,
+            f'Monument Listings, page {self._pageNumber} of {total_pages}')
 
 
 def photo_dims(path, col_width, max_h):

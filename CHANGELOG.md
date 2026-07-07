@@ -6,6 +6,25 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-07 [Both] Redesigned report-wide page numbering as a two-part
+  footer (Jim's proposal): right-justified per-section self-contained
+  counter (e.g. "Monument Listings, page 12 of 51"), rendered by
+  whichever tool generates that section, plus a left-justified
+  whole-report counter (e.g. "Acton Bounds Report 2025-2026, page 23 of
+  73") stamped across every page in one pass at final assembly, once the
+  true total is known. Replaces the `MONUMENT_LISTINGS_INTRO_PAGES`
+  offset-constant approach (used briefly Jul 4-7), which required a
+  manual recompute-and-set step and only solved the problem for the
+  Monument Listings section. `bounds2pdf.py`: removed the constant,
+  changed `NumberedCanvas._draw_footer()` from centered to
+  right-justified at the 1in margin, self-contained numbering (no
+  offset). Verified: 51 pages unchanged, footer renders correctly
+  ("Monument Listings, page 1 of 51", right-justified). Added TODOs:
+  claude.ai to add matching right-justified footers to sections 2-6;
+  Claude Code to stamp the left-justified whole-report footer as part of
+  the final-assembly merge step. Full spec in code/claude.md under "Page
+  numbering — two-part footer."
+
 2026-07-04 [claude.ai] TODO.md, Project Notes.md: revised report
   section order and scope — renamed "Summary of visits" to "How this
   report was created" (expanded scope); removed standalone "Other
