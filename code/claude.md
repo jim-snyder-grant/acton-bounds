@@ -263,6 +263,32 @@ directly but required), `Pillow`, `reportlab`, `playwright` — see
 with different dependencies (`gspread`, `google-auth-oauthlib` — see
 `Photos/requirements.txt`) since it talks to the Google Sheets API.
 
+### Standalone utility scripts (not part of the report pipeline)
+
+- **`extract_town_corners.py`** (added Jul 6 2026) — pulls Acton entries
+  out of a MassDOT `Town_Corners.kml` export into a CSV for hand-import
+  into the Sheet. `python3 extract_town_corners.py [kml_path] [out_csv]`
+  (defaults `Town_Corners.kml` / `acton_town_corners.csv`, both
+  gitignored working files, not tracked). Used once already to replace
+  11 NAD83-sourced coordinates with real WGS84 values (Jul 6 2026, see
+  CHANGELOG); worth re-running if a fresher KML export ever comes in.
+- **`check_distance_to_line.py`** (added Jul 7 2026) — QA check: for
+  each Street-Crossing monument, measures the perpendicular distance
+  from its recorded coordinates to the straight line connecting its two
+  nearest official Corner monuments (Massachusetts town boundaries are
+  straight survey lines between corners, so a large offset usually
+  means a bad recorded coordinate, not an actually-crooked boundary).
+  Substitutes the true Acton/Carlisle/Concord corner location (parsed
+  from that row's "Notes on Monument" text) as the line anchor there,
+  instead of the witness-monument coordinates stored in
+  Latitude/Longitude for that row. `python3 check_distance_to_line.py`,
+  prints every monument sorted worst-first. First run (Jul 7 2026) found
+  one clear data-entry bug (Acton/Maynard Conant Street's latitude was
+  off by a whole degree, ~110km) and 2 real unexplained offsets worth a
+  field re-check (Acton/Concord Great Road ~52m, Acton/Littleton Nagog
+  Hill Road ~16m) — see "Monument distance-to-line check.md" in Drive
+  for the full first-run results.
+
 ---
 
 ## Data Source: Acton Bounds.xlsx

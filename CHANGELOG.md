@@ -6,6 +6,19 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-07 [Claude Code] Added `code/check_distance_to_line.py`: measures
+  each Street-Crossing monument's perpendicular distance from the
+  straight line connecting its two nearest Corner monuments (MA town
+  boundaries are straight lines between corners), using the true
+  Acton/Carlisle/Concord corner location (parsed from its "Notes on
+  Monument" text) rather than that row's witness-monument coordinates.
+  First run found a clear data-entry bug -- Acton/Maynard Conant
+  Street's latitude was off by a whole degree (`43.4...` instead of
+  `42.4...`, ~110km) -- plus 2 real, unexplained offsets worth a field
+  re-check (Acton/Concord Great Road ~52m, Acton/Littleton Nagog Hill
+  Road ~16m). Full results in "Monument distance-to-line check.md"
+  (Drive). Documented in code/claude.md alongside extract_town_corners.py
+  under a new "Standalone utility scripts" section.
 2026-07-07 [Both] Claude Code read through all 51 monuments' notes
   fields for coherence and handed Jim a checklist; Jim worked through it
   directly in Acton Bounds.xlsx/the Sheet. Two changes affect the
