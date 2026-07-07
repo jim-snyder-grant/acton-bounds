@@ -280,7 +280,7 @@ Key columns used by `bounds2pdf.py`:
 | `Nearest other town street name` | Optional |
 | `Nearby landmark` | Optional |
 | `Notes on location` | Optional |
-| `From 1904 description` | Optional — historical description |
+| `From 1904 description` | Optional — historical description. Column name unchanged, but the printed label is "In 1904 description:" (Jul 7 2026, Jim's fix) so that the 8 monuments whose cell is just "no" (not mentioned in the 1904 book) read as a sensible answer instead of an odd non-answer |
 | `Notes on Monument` | Optional |
 | `Coordinate Source` | Text description of source |
 | `Latitude` / `Longitude` | Decimal degrees WGS84; may be NaN if unknown. Stored precision varies by monument (not normalized) -- `bounds2pdf.py` formats to 5 decimal places (~1m) for display only, decided Jul 5 2026 |

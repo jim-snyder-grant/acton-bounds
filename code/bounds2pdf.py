@@ -544,8 +544,12 @@ async def main():
 
             desc_1904 = df.at[i, 'From 1904 description']
             if not pd.isna(desc_1904):
+                # Label reads "In 1904 description:" (not "From") so that
+                # the 8 monuments whose cell just says "no" (not mentioned
+                # in the 1904 book) read as a sensible answer -- "In 1904
+                # description: no" -- rather than an odd non-answer.
                 left_items.append(Paragraph(
-                    f'<b>From 1904 description:</b> {esc(desc_1904)}', DETL))
+                    f'<b>In 1904 description:</b> {esc(desc_1904)}', DETL))
 
             mon_notes = df.at[i, 'Notes on Monument']
             if not pd.isna(mon_notes):

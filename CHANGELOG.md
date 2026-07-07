@@ -6,6 +6,29 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-07 [Both] Claude Code read through all 51 monuments' notes
+  fields for coherence and handed Jim a checklist; Jim worked through it
+  directly in Acton Bounds.xlsx/the Sheet. Two changes affect the
+  report's meaning, not just wording:
+  - **Status corrected on 2 monuments:** Acton/Westford (Order 20) and
+    Acton/Boxborough/Littleton (Order 36) were marked `Documented`
+    (meaning no field visit occurred) but their notes described an
+    actual on-site search with nothing found -- changed to `Not Found`
+    to match. Status color counts on any future summary/map will shift
+    by these 2.
+  - **"From 1904 description" label changed to "In 1904 description"**
+    in bounds2pdf.py, so the 8 monuments whose cell just says "no" (not
+    in the 1904 book) read as a sensible answer ("In 1904 description:
+    no") instead of an odd non-answer. Column name in the sheet is
+    unchanged, only the printed label.
+  Everything else was minor spreadsheet cleanup with no effect on
+  report logic: several typos fixed (coodinates/towalk/barm/acros), a
+  1904-book quote marked `[sic]` rather than corrected (kept verbatim
+  since it's a historical quotation), a truncated landmark note
+  completed, two double-spaced names/street fields fixed, and the
+  "same as Nashoba Road corner?" notes on Orders 25/27 replaced with a
+  clearer explanation of why those crossings may never have gotten
+  monuments. PDF regenerated, reflects all of the above.
 2026-07-06 [Jim] Reverted the `Coordinate Datum` column change below:
   Jim downloaded MassDOT's Town_Corners.kml (extracted via new
   code/extract_town_corners.py -> code/acton_town_corners.csv, 12 Acton
