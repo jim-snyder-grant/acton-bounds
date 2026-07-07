@@ -6,6 +6,18 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-04 [claude.ai] TODO.md, Project Notes.md: revised report
+  section order and scope — renamed "Summary of visits" to "How this
+  report was created" (expanded scope); removed standalone "Other
+  towns' reports" section; renamed "Policy recommendations" to "Next
+  steps"; confirmed Google Drive will be retired after project
+  completion (DocuShare + GitHub are durable archives)
+2026-07-07 [Claude Code] Applied the above (held pending Jul 4–7 since
+  it conflicted with a same-week direct restructure of TODO.md's
+  Introductory sections — Jim resolved in favor of claude.ai's version):
+  updated TODO.md's Introductory sections list to the 8-section
+  structure and added the matching "Report structure" section to
+  Project Notes.md.
 2026-07-07 [claude.ai] bounds2pdf.py: add "Possible Next Steps" optional
   field (renders only when non-empty; placed after Notes on Monument,
   before photos; intended for Not Found/Documented/Couldn't paint pages)

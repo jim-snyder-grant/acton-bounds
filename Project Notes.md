@@ -6,6 +6,26 @@ background) and Acton Bounds TODO.md (task list).
 
 ---
 
+## Report structure (current plan, as of July 2026)
+
+1. Cover page — COMPLETE
+2. Legal background
+3. History of Acton's bounds (road name changes folded in here)
+4. How this report was created
+5. Overview map
+6. Monument Listings intro
+7. Monument pages (per-monument PDF, bounds2pdf.py output)
+8. Next steps
+
+"Other towns' perambulation reports" is no longer a standalone section —
+will be mentioned in passing in section 4.
+
+Google Drive is a working folder only and will be retired after project
+completion. Durable archives: DocuShare and the public GitHub repo
+(github.com/jim-snyder-grant/acton-bounds).
+
+---
+
 ## Policy / tone decisions
 
 - **No proposal to replace monuments** in cover notes to neighboring towns.

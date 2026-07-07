@@ -104,24 +104,50 @@ Project Notes.md, not just here.)
 
 ## Introductory sections
 
-Order below reflects planned appearance in the final report (tentative — may be rearranged during drafting):
+Order below reflects planned appearance in the final report (tentative):
 
 1. - [x] [Both] Cover page: COMPLETE (FrontPage.svg/pdf in Bounds folder)
    - [x] [Claude Code] Add `orientation` (landscape/portrait/square) and `cover_candidate` (yes/blank, defaults to yes for included photos) columns to `photo_manifest.csv`, for claude.ai's Inkscape collage script — done Jun 30 2026 (`add_cover_columns.py`): 169 included photos classified (147 portrait, 22 landscape, 0 square), all opened successfully, safe to re-run (preserves manual overrides)
-2. - [ ] [Claude] Legal background section (1648 law + MGL Ch. 42 §2; text nearly ready from Bounds Report parts.odt)
-3. - [ ] [Claude] History of Acton's bounds (material in hand from 1904 book, needs connective prose)
-4. - [ ] [Both] Possible section on road name changes — right after History, or
-     folded into it (Jim to decide which): summarizes what was figured out
-     about 1904-report street names that no longer exist or aren't
-     recognized today, any old-name-to-current-name matches made along the
-     way, and notes where a monument's position in the report is only a
-     best guess because its 1904 street name couldn't be pinned down (see
-     the Order-column page-order work, code/claude.md)
-5. - [ ] [Both] Overview map: convert KML to static image with monument status indicated
-6. - [ ] [Both] Summary of visits and results (Jim to draft with Claude's help)
-7. - [ ] [Claude] Other towns' reports: bibliography + comparative notes section
-8. - [ ] [Claude] Policy recommendations section (rough notes in Bounds Report parts.odt)
-9. - [ ] [Jim] Write a one-page (or two-page) introduction to the Monument Listings section, placed right before the Monument Listings pages themselves — explains what the per-monument pages that follow are and how to read them. Once written, tell Claude Code the final page count so it can set `MONUMENT_LISTINGS_INTRO_PAGES` in `bounds2pdf.py` (currently 0) — this shifts the "Monument Listings, page X of N" footer so numbering continues correctly after this intro is merged in front of it during final assembly
+2. - [ ] [Claude] Legal background (1648 law + MGL Ch. 42 §2; text nearly
+        ready in Bounds Report parts.odt)
+3. - [ ] [Claude] History of Acton's bounds (material from 1904 book;
+        road-naming research done; Parmenter Road thread; needs connective
+        prose)
+4. - [ ] [Both] How this report was created (see scope note below)
+5. - [ ] [Both] Overview map: convert KML to static image with monument
+        status indicated
+6. - [ ] [Both] Monument Listings intro: one or two pages explaining what
+        the per-monument pages are and how to read them. Once page count
+        is known, tell Claude Code to set MONUMENT_LISTINGS_INTRO_PAGES.
+7. - [ ] [Claude Code] Monument pages (bounds2pdf.py output) — COMPLETE
+        pending finalized data
+8. - [ ] [Claude] Next steps (short closing section; replaces "Policy
+        recommendations")
+
+Note: Other towns' perambulation reports will be mentioned in passing
+in section 4, not as a standalone section. Road name changes (previously
+its own possible item) are folded into section 3, History.
+
+### Scope of section 4 — "How this report was created"
+
+- The Select Board vote authorizing Jim Snyder-Grant and Dean Charter
+  to conduct the perambulation (date TBD — Jim to look up)
+- The process of locating monuments: what we did, what we found,
+  what we didn't find, and what neighboring towns' records showed
+  (brief mention of cross-referencing Boxborough, Concord, Stow,
+  Sudbury reports — no separate bibliography section)
+- Reaching out for additional witnesses: process and outcomes
+- The painting process, with photos
+- A note on Claude's role: appreciative in tone, noting this level
+  of detailed municipal record-keeping would not have been practical
+  for a two-person volunteer effort a few years ago. Mention the
+  collaborative model (Claude Code for technical work, claude.ai for
+  writing/analysis, coordinated via GitHub repo).
+- Where the work is archived: DocuShare (Acton's permanent record)
+  and the public GitHub repo (reusable by any Massachusetts town).
+  Note: Google Drive was used as a working folder during the project
+  but will not be maintained after completion — the durable archives
+  are DocuShare and GitHub.
 
 ---
 
