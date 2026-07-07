@@ -6,6 +6,18 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-06 [Jim] Added a `Coordinate Datum` column to the Monuments
+  sheet (per-row, e.g. `WGS84 (EPSG 4326)` or `NAD83 (EPSG 26986)`) since
+  11 of the 50 monuments with known coordinates got their coordinates
+  from the state in NAD83 and haven't been reprojected to WGS84.
+  bounds2pdf.py now displays this column's value verbatim instead of
+  hardcoding "WGS84 (EPSG 4326)" for every row. Flagged for Jim to
+  double-check: EPSG 26986 is the Massachusetts State Plane *projected*
+  system (meters), while the Latitude/Longitude columns are ordinary
+  decimal-degree lat/lon -- geographic NAD83 is normally EPSG 4269, not
+  26986. Not changed pending Jim's confirmation of which code is
+  actually correct; the code just displays whatever string is in the
+  column, so no code change is needed either way.
 2026-07-06 [Jim] Reworked the per-monument page headline again, to a
   single line: `[order#] Name [status]`, dropping "Monument Listing" and
   the Corner/Street Crossing type entirely. Order number and status each
