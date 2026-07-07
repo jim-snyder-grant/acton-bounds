@@ -29,7 +29,11 @@ Format: YYYY-MM-DD [who] file changed: description
   mistake along the way (Acton/Westford Bear Hill Road's Possible Next
   Steps text had been typed into the Name and Tie-break number cells
   instead). Verified: 51 pages unchanged, text renders and wraps
-  correctly (spot-checked Order 7, 18, 42).
+  correctly (spot-checked Order 7, 18, 42). Correction: Jim's actual
+  usage isn't limited to Not Found/Documented/Couldn't paint — he also
+  added entries for damaged-but-Painted monuments (e.g. leaning or
+  buried monuments needing repair), so the field is for any monument
+  needing follow-up, not just the sparse-page statuses.
 2026-07-04 [claude.ai] code/claude.md: clarified that
   MONUMENT_LISTINGS_INTRO_PAGES = total pages of all intro sections
   (1-6), not just the Monument Listings intro page; will be set in
