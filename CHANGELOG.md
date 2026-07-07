@@ -6,6 +6,22 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-06 [Jim] Reverted the `Coordinate Datum` column change below:
+  Jim downloaded MassDOT's Town_Corners.kml (extracted via new
+  code/extract_town_corners.py -> code/acton_town_corners.csv, 12 Acton
+  corner entries, KML Point coordinates are always WGS84 regardless of
+  source projection) and used it to replace the 11 NAD83-sourced
+  monument coordinates with real WGS84 values. All 49 rows with known
+  coordinates are now WGS84 (2 rows have no coordinates at all, so no
+  datum). bounds2pdf.py's per-row datum display is reverted back to a
+  hardcoded "WGS84 (EPSG 4326)" for every row; the `Coordinate Datum`
+  column itself can now be removed from the sheet whenever Jim gets to
+  it. One row, Acton/Carlisle/Concord, is special: the real corner is
+  inside a house, so the state's own witness monument (dated 2007,
+  offset ~35m away) is what's actually recorded/visited -- that row
+  keeps its original witness-monument coordinates, with the true
+  corner's WGS84 location noted in "Notes on Monument" instead of
+  replacing the monument's own coordinates.
 2026-07-06 [Jim] Added a `Coordinate Datum` column to the Monuments
   sheet (per-row, e.g. `WGS84 (EPSG 4326)` or `NAD83 (EPSG 26986)`) since
   11 of the 50 monuments with known coordinates got their coordinates

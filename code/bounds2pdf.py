@@ -518,13 +518,7 @@ async def main():
                 second_line = []
                 if not pd.isna(coord_src):
                     second_line.append(f'<b>Coordinate Source:</b> {esc(coord_src)}')
-                # Most coordinates are WGS84, but some came from the state
-                # in NAD83 and haven't been reprojected -- read the per-row
-                # 'Coordinate Datum' column rather than assuming WGS84 for
-                # everything (Jul 6 2026; see code/claude.md).
-                datum = df.at[i, 'Coordinate Datum']
-                datum_display = esc(datum) if not pd.isna(datum) else 'Unknown'
-                second_line.append(f'<b>Datum:</b> {datum_display}')
+                second_line.append('<b>Datum:</b> WGS84 (EPSG 4326)')
                 ps.append(Paragraph('  '.join(second_line), DETL))
 
             # -- Left column: all fields between coords and photos --
