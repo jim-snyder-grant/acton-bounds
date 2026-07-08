@@ -6,7 +6,30 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
-2026-07-07 [Both] Redesigned report-wide page numbering as a two-part
+2026-07-07 [Both] Reviewed and confirmed "Monument Listings intro
+  draft.md" (Drive only) section by section with Jim. Added six new
+  sections beyond the original content: reading the colored order-
+  number/status boxes, Corner vs. Street Crossing (a monument's naming
+  pattern reveals which — corners are named just for the towns
+  involved, street crossings add the Acton-side street name), what each
+  Status value means, what each Coordinate Source value means, witness
+  markers / "Witness Bound" (kept intentionally unresolved per Jim —
+  "an interesting mystery for a person in the future"), and tie-break
+  numbers (corners are named for the towns that meet there; numbered
+  when a shared two-town boundary has more than one corner along it,
+  generally west-to-east/north-to-south). Corrected two of my own
+  drafting assumptions along the way: corners aren't only triple-town
+  meeting points (some are two-town corners where either the boundary
+  bends or just the far-side town changes on an otherwise straight
+  Acton line), and coordinate source "Mark R. phone" no longer exists —
+  Jim found a GIS iPad reading for that monument instead and removed
+  the name from the sheet (too specific to be useful to a reader).
+  Also genericized personal attribution (Dean did most of the actual
+  painting, not Jim) and pruned several implementation-only passages
+  that belonged in code/claude.md, not a reader-facing intro (exact
+  footer mechanics, exact display-rule edge cases) per Jim's framing:
+  "the intro is for humans to read to orient themselves... not for
+  people or AIs trying to recreate the report."
   footer (Jim's proposal): right-justified per-section self-contained
   counter (e.g. "Monument Listings, page 12 of 51"), rendered by
   whichever tool generates that section, plus a left-justified
