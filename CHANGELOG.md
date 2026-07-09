@@ -6,6 +6,15 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-09 [Claude Code] Resolved the Select Board vote-date question
+  (claude.ai read the minutes PDFs and relayed the answer via INBOX.md).
+  The Board voted 5-0 to approve the perambulation plan on October 21, 2024
+  (Item 14). Applied: TODO.md Field work item marked done; Project Notes.md
+  gained a RESOLVED line and a new "Select Board minutes" subsection
+  summarizing the three relevant meetings (Oct 21 2024 authorizing vote,
+  Jul 21 2025 progress update, Mar 16 2026 liaison appointment); Legal
+  Background - draft.md placeholder replaced with the confirmed date.
+
 2026-07-09 [Claude Code] Reran check_distance_to_line.py against the
   finalized iPad coordinates. All 3 issues from the Jul 7 run are
   resolved: Acton/Maynard Conant St (was ~110km, now 0.2m),

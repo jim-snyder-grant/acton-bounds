@@ -70,13 +70,13 @@ Owner tags: [Claude] [Claude Code] [Jim] [Both]
   shows a large offset (~19.5 m), but that one is a Witness Bound, which is
   intentionally set off the line, so it's expected — not part of this
   re-check.
-- [ ] [Jim] Look up the date of the Select Board vote directing Dean Charter
+- [x] [Jim] Look up the date of the Select Board vote directing Dean Charter
   and Jim Snyder-Grant (two Select Board members) to conduct the perambulation.
   Needed for the legal background and summary of visits sections of the report.
-  Jim has located 4 Select Board minutes/plan documents on DocuShare
-  confirming the vote/plan was in 2024 (not 2025); exact date pending
-  claude.ai extracting it from the PDFs Claude Code fetched and saved to
-  Drive's "Select Board Minutes/" folder Jul 9 2026.
+  — done Jul 9 2026: October 21, 2024, Item 14 ("Approve Plan for Perambulation
+  of Town Bounds"), approved 5-0. See Project Notes.md for full citation and two
+  related follow-up items (Jul 21 2025 progress update, Mar 16 2026 liaison
+  appointment).
 
 ---
 

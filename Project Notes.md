@@ -222,7 +222,8 @@ An early planning document with useful language for the introductory sections:
   about the Town, and the general benefits of being outside together" — worth
   echoing in the Summary of visits section
 - Describes the Select Board vote directing Dean Charter and Jim (two SB
-  members) to conduct the perambulation — date TBD, Jim to look up
+  members) to conduct the perambulation — the vote was October 21, 2024
+  (see "Select Board minutes" below)
 - Process details (4-5 markers per 3-hour session, weather/poison ivy
   constraints) could add color to Summary of visits
 - Note: document says fine is $20; verify against current statute before use
@@ -233,10 +234,49 @@ An early planning document with useful language for the introductory sections:
   roughly every 5 years since at least 1995. (This document's claim
   that Stow was most active predates this correction.)
 
+### Select Board minutes (Drive: Select Board Minutes/)
+
+Three minutes documents track the project through the Board, good raw
+material for the "How this report was created" section (progress-reporting
+to the Board, the liaison arrangement, and the paint-vs-QR-code/stick idea
+for dating future perambulations, plus eventual GIS map integration):
+
+- **October 21, 2024** — Item 14, "Approve Plan for Perambulation of Town
+  Bounds." Jim outlined the history of perambulation and the process learned
+  from the Town of Stow; noted paint must be applied on dry surfaces at a
+  certain temperature; suggested Town GIS Office involvement. **"Ms. Nicol
+  moved, seconded by Mr. Snyder-Grant to approve plan for perambulation of
+  town bounds and approved 5-0."** Mr. Charter and Mr. Snyder-Grant would go
+  out to survey the markers. Board present: Fran Arsenault, Alissa Nicol,
+  Dean Charter, David Martin, Jim Snyder-Grant. *This is the authorizing
+  vote.*
+- **July 21, 2025** — Item 12, "Discuss Perambulation and Progress on
+  Painting of Bounds Throughout Acton." Jim updated the Board with photos
+  from area monuments; noted the process is required by law and reports will
+  be public (Town Clerk, DocuShare, shared with adjoining towns); some
+  markers missing/possibly buried; discussed alternatives to paint for
+  dating markers; Ms. Nicol supported possibly using CPA funding to
+  repair/straighten markers; Jim has been recording coordinates and
+  suggested GIS Department involvement for accuracy. *Progress update, not a
+  new vote.*
+- **March 16, 2026** — Item 4, "Report on Perambulation (Town Boundaries)
+  Project." Jim reported the bulk of the work complete, report still in
+  process; the Board approved 5-0 appointing him liaison for the
+  Perambulation Report after his Select Board term ends, reporting back
+  later in 2026. Discussed using a stick or QR code instead of paint to
+  memorialize future perambulation dates, and future GIS map integration.
+  *Liaison appointment, not a new vote.*
+
 ---
 
 ## Open questions / loose ends
 
+- RESOLVED Jul 9 2026: Select Board voted 5-0 to approve the perambulation
+  plan on **October 21, 2024** (Item 14, "Approve Plan for Perambulation of
+  Town Bounds"). Moved by Ms. Nicol, seconded by Mr. Snyder-Grant. Source:
+  `2024-10-21 Select Board Minutes.pdf` (Drive: Select Board Minutes/). See
+  the "Select Board minutes" subsection above for the full citation and two
+  related follow-up meetings.
 - RESOLVED Jul 8 2026 (claude.ai): MGL Ch. 42 §3, which held the
   penalty, was repealed in 1973. Current law (§2, checked live) has no
   fine. Both the $5 (1648 law) and $20 (Perambulation Plan.odt) figures
