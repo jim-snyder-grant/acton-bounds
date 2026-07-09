@@ -288,6 +288,14 @@ with different dependencies (`gspread`, `google-auth-oauthlib` — see
   field re-check (Acton/Concord Great Road ~52m, Acton/Littleton Nagog
   Hill Road ~16m) — see "Monument distance-to-line check.md" in Drive
   for the full first-run results.
+- **`generate_geocoding_csv.py`** (added Jul 9 2026) — exports monument
+  coordinates as a `lon,lat` CSV (`../monument_coordinates_for_geoapify.csv`,
+  gitignored working file, not tracked) for Geoapify's drag-and-drop
+  reverse-geocoding tool. `python3 generate_geocoding_csv.py`. Sorted by
+  `Order`, full (untruncated) precision, skips the 2 rows with no
+  coordinates. No name/ID column, per Jim's spec for the drag-and-drop
+  format — match Geoapify's output back to monuments by row position.
+  Re-run any time after coordinates change to get a fresh export.
 
 ---
 

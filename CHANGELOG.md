@@ -6,6 +6,13 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-09 [Claude Code] Added `code/generate_geocoding_csv.py` and ran
+  it: 49 monuments' full-precision coordinates exported as
+  `monument_coordinates_for_geoapify.csv` (lon/lat columns only, per
+  Jim's spec) for Geoapify's drag-and-drop reverse-geocoding tool. 2
+  monuments with no recorded coordinates skipped. Jim confirmed
+  drag-and-drop is simpler than API calls for this one-off use.
+
 2026-07-09 [Jim] TODO.md Field work: batch status update on the 13
   open [Jim] items. 5 marked done (Town's iPad coordinates, west side
   of Main St at the A/C crossing, ACW decoy picture, other side of Fort
