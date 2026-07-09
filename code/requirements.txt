@@ -3,3 +3,5 @@ openpyxl
 Pillow
 reportlab
 playwright
+geopandas
+matplotlib

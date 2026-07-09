@@ -296,6 +296,29 @@ with different dependencies (`gspread`, `google-auth-oauthlib` — see
   coordinates. No name/ID column, per Jim's spec for the drag-and-drop
   format — match Geoapify's output back to monuments by row position.
   Re-run any time after coordinates change to get a fresh export.
+- **`overview_map.py`** (added Jul 9 2026) — generates the report's
+  Overview Map (intro section 5): a single legal-portrait (8.5×14in)
+  page with Acton's boundary as a thick gold line through the corner
+  monuments in `Order` sequence, every monument as a hollow type-coded
+  icon (Corner=circle, Street Crossing=square, Witness=triangle), and a
+  numbered, status-colored callout box per monument arranged
+  counter-clockwise around the page perimeter (Order 1 = ACMS = lower
+  right). Rotation (~27.97°) is derived programmatically from the
+  ACMS→AMS coordinates, not hardcoded. The base map inside the boundary
+  is real MassGIS data cached under `gis_data/` (gitignored): MassDOT
+  RoadInventory roads (fetched by bbox from the ArcGIS REST service,
+  cached to `roads_acton.geojson`) and MassDEP Hydrography 1:25,000 open
+  water (`hydro25k.zip`, `POLY_CODE in {1,6}` = reservoir/lake/pond).
+  Callout leaders leave each box from its interior-facing edge (inner
+  corner for the 4 corner boxes) and bow away from the town center.
+  Imports `STATUS_COLORS`/`knockout_text_color` from `status_colors.py`
+  so box colors match the monument pages. Outputs `overview_map.pdf`
+  (vector, the deliverable) and `overview_map.png` (raster preview),
+  both gitignored. `python3 overview_map.py [--refresh-roads]`. Needs
+  `geopandas`+`matplotlib` (in `requirements.txt`). A right-justified
+  footer ("Overview Map, page 1 of 1") is drawn to match the other
+  sections; PDF named-destination anchors for clickable boxes are not
+  built yet (see Overview Map spec / TODO).
 
 ---
 

@@ -6,6 +6,32 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-09 [Claude Code] Overview Map (report section 5) built:
+  code/overview_map.py generates a legal-portrait 8.5x14 vector PDF —
+  gold boundary through corner monuments in Order sequence (ACC true
+  corner substituted at Order 12), hollow type-coded icons, 51
+  status-colored numbered callout boxes (per-side corner-fix placement,
+  CCW from Order 1 = ACMS lower-right), legend, compass rose. Base map
+  is real MassGIS data cached in gitignored code/gis_data/ (MassDOT
+  RoadInventory roads + MassDEP Hydrography 1:25,000 open water),
+  clipped to inside the boundary only. requirements.txt gains
+  geopandas+matplotlib. Applied Jim's latest tweaks (notes.forclaude.code):
+  callout leaders now leave each box from its interior-facing edge
+  (inner corner for corner boxes), single "Route 2" road label, and a
+  right-justified "Overview Map, page 1 of 1" footer matching the other
+  sections. Documented in code/claude.md (standalone utilities).
+  Still open: PDF anchors for clickable boxes.
+
+2026-07-09 [Claude Code] Consolidated Overview Map spec.md into one
+  authoritative document and deleted the six INBOX-overview-map-*.md
+  messages (update, update-2, basemap, mockup-handoff, corner-fix,
+  consolidate) now folded into it — per the consolidation request in
+  INBOX-overview-map-consolidate.md. The spec now reflects the built
+  state (page size, rotation-from-coordinates, base-map data sources,
+  boundary/ACC substitution, icons, corner-fix box placement,
+  interior-edge callout attachment, legend/compass, caption, footer)
+  plus the remaining open item (clickable-box PDF anchors).
+
 2026-07-09 [Claude Code] Resolved the Select Board vote-date question
   (claude.ai read the minutes PDFs and relayed the answer via INBOX.md).
   The Board voted 5-0 to approve the perambulation plan on October 21, 2024
