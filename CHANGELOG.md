@@ -6,6 +6,51 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-09 [Claude Code] Fetched the 4 DocuShare PDFs claude.ai couldn't
+  render (its web_fetch tool returned empty content and this session
+  has no browser tool) -- saved to new Drive folder "Select Board
+  Minutes/": 2024-10-21 Select Board Minutes.pdf, Perambulation Plan.pdf,
+  Select Board Minutes item12.pdf (Jul 21 2025), 2026-03-16 Select Board
+  Minutes.pdf. One fetch hit a transient DocuShare guest-license limit
+  on first try, succeeded on retry. Content extraction (vote date,
+  "2025 vs 2024" typo check, general skim of doc 4) left to claude.ai
+  per Jim's steer -- not done here.
+2026-07-08 [claude.ai via INBOX] README.md: updated claude.ai access
+  model -- now has GitHub MCP + filesystem MCP but agreed NOT to write
+  directly to repo; all repo changes still go through Claude Code via
+  INBOX.md; added filesystem path and MCP tool examples to orientation
+  section. Deviated from the INBOX text once: it included the literal
+  local filesystem path as an example, which embeds Jim's Google account
+  email as the Insync sync-folder name -- replaced with a placeholder
+  and a pointer to ask Jim for the real path instead, per the standing
+  rule against emails in public repo files.
+2026-07-08 [claude.ai] Drafted "Legal Background - draft.md" (Drive only).
+  Includes the 1648 law text and current MGL Ch. 42 §2 text (both verified
+  live). Resolved the open $5/$20 fine question from Project Notes.md:
+  confirmed at malegislature.gov that MGL Ch. 42 §3 (which held the
+  penalty) was repealed in 1973 -- current law imposes no fine at all.
+  Per Jim: last substantial Acton perambulation before this one was 1986
+  (per stone markings); corrected "most consistent neighbor" from Stow to
+  Sudbury (marks the Acton/Concord/Maynard/Sudbury corner roughly every 5
+  years since at least 1995). Select Board vote date still open pending
+  minutes (now fetched, see entry above); draft has a placeholder.
+2026-07-08 [claude.ai] Drafted "Monument Listings intro - plain language
+  rewrite.md" (Drive only) -- simpler-language version of Claude Code's
+  original per Jim's request (shorter sentences/words, more bullets,
+  matching History section style). Original left untouched; Jim to
+  compare and pick/merge.
+2026-07-08 [Both] Discussed Claude Code's proposed branch-based workflow
+  (claude.ai commits doc-only changes to a non-main branch, fast-forward
+  after a grep-for-secrets pass) as an alternative to the INBOX.md
+  round-trip. Jim decided to keep INBOX.md as-is for now.
+2026-07-08 [Jim] Root-caused the duplicate "Monument notes review.md"
+  files (one .md, one Google Doc): opening a Drive .md file directly in
+  Google Docs silently creates a converted Doc copy as a side effect --
+  distinct from the Insync same-name-duplicate issue already documented
+  in code/claude.md. Both stray copies deleted; Jim will use text tools
+  on the Insync-synced files instead of opening them in Google Docs
+  going forward.
+
 2026-07-07 [Both] Reviewed and confirmed "Monument Listings intro
   draft.md" (Drive only) section by section with Jim. Added six new
   sections beyond the original content: reading the colored order-

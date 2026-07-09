@@ -62,11 +62,11 @@ via an INBOX.md protocol: claude.ai writes proposed changes to
 applies them at the start of each session, then deletes the file.
 Jim relays tasks between them and reviews changes.
 
-**This repo is read-only for claude.ai** — it has no git credentials or
-GitHub API access, so it can fetch files but cannot commit, push, or
-create files here. All changes to repo-tracked files still go through
-Claude Code via the INBOX.md protocol above, even for files claude.ai
-can now read directly.
+**claude.ai does not write directly to this repo** — even though it has
+GitHub MCP tools available (as of Jul 2026), all changes to repo-tracked
+files go through Claude Code via the INBOX.md protocol. This ensures Jim,
+claude.ai, and Claude Code all see and understand what goes into the
+public repo before it's committed.
 
 ## Orientation for a new Claude instance
 
@@ -79,41 +79,43 @@ read these files in order:
 4. `Project Notes.md` — findings, decisions, and comparative analysis
 5. `Photos/CLAUDE.md` — photo pipeline details (if relevant)
 
-### How to fetch repo files
+### How to access project files
 
-If you have GitHub MCP access (tools like `github:get_file_contents`),
-use it directly — this is the most reliable method (available to
-claude.ai as of Jul 5 2026) and needs no URL tricks or workarounds.
+**Check what MCP tools are available first** — this determines your best
+approach.
 
-If you only have a web_fetch-style tool (no MCP), use the **raw URL**
-pattern, not the blob URL:
+**If you have GitHub MCP tools** (`github:get_file_contents` etc.) — use
+them directly. This is the most reliable method and needs no URL tricks.
+Read these files to orient yourself:
+1. `CHANGELOG.md` — what changed recently (start here)
+2. `Acton Bounds TODO.md` — current task list
+3. `code/claude.md` — technical spec and code status
+4. `Project Notes.md` — findings, decisions, comparative analysis
 
-- Raw (plain text, use this): `https://raw.githubusercontent.com/jim-snyder-grant/acton-bounds/main/{path}`
-- Blob (rendered page, avoid): `https://github.com/jim-snyder-grant/acton-bounds/blob/main/{path}`
+Example:
+  `github:get_file_contents(owner="jim-snyder-grant", repo="acton-bounds", path="CHANGELOG.md")`
 
-The blob URL wraps the file in GitHub's full rendered HTML page (nav,
-sidebars, etc.), which is harder to parse, and is subject to CDN caching
-— a fetch may return a stale version even after the file has been
-updated. The raw URL returns plain file content directly and isn't
-cached the same way, making it the reliable choice when MCP isn't available.
+Even with GitHub MCP access, do NOT write directly to the repo — propose
+changes via INBOX.md and let Claude Code commit them (see AI collaboration
+model above).
 
-As of July 2026, claude.ai's `web_fetch` tool specifically requires a URL
-to have appeared in a prior search result before it can be fetched, and
-`raw.githubusercontent.com` isn't indexed by search engines. Workaround:
-search for `jim-snyder-grant acton-bounds` first (brings
-`github.com/jim-snyder-grant` into the search results), which unlocks
-fetching raw URLs in the same session. Skip this step if your tool
-doesn't have that restriction, or if GitHub MCP access is available
-(preferred — see above).
+**If you have filesystem MCP tools** — the Bounds Drive folder is synced
+locally and can be read directly. This avoids any caching issues with
+web fetches. Ask Jim for the allowed root path — it's not written here
+because Insync names the local sync folder after his Google account
+email, which must not appear in this public repo (see "Security notes"
+below).
 
-The Google Drive Bounds folder contains additional files not in the
-repo (photos, INBOX.md files). claude.ai may have direct read access via
-Drive MCP or a filesystem MCP server (added Jul 5 2026) — ask Jim if
-unsure what's connected in your session. Otherwise ask Jim for the
-folder ID, or to drag the file into chat, or to paste its content/terminal
-output. Note: Drive folder *browsing* doesn't work via a plain `web_fetch`
-tool (it's a JavaScript-rendered page) — individual Drive files can only
-be fetched that way if shared with "Anyone with the link".
+Example:
+  `filesystem:read_text_file(path="<allowed root>/Acton Bounds TODO.md")`
+
+**If you only have web_fetch** — use the raw URL pattern (not blob URLs,
+which cache stale content):
+  `https://raw.githubusercontent.com/jim-snyder-grant/acton-bounds/main/{path}`
+
+As of July 2026, web_fetch requires URLs to appear in a prior search
+result. Workaround: search for `jim-snyder-grant acton-bounds` first,
+then fetch raw URLs. Skip if your version doesn't have this restriction.
 
 ## Security notes for Claude instances
 

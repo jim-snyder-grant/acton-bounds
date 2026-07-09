@@ -69,6 +69,10 @@ Owner tags: [Claude] [Claude Code] [Jim] [Both]
 - [ ] [Jim] Look up the date of the Select Board vote directing Dean Charter
   and Jim Snyder-Grant (two Select Board members) to conduct the perambulation.
   Needed for the legal background and summary of visits sections of the report.
+  Jim has located 4 Select Board minutes/plan documents on DocuShare
+  confirming the vote/plan was in 2024 (not 2025); exact date pending
+  claude.ai extracting it from the PDFs Claude Code fetched and saved to
+  Drive's "Select Board Minutes/" folder Jul 9 2026.
 
 ---
 
@@ -108,8 +112,8 @@ Order below reflects planned appearance in the final report (tentative):
 
 1. - [x] [Both] Cover page: COMPLETE (FrontPage.svg/pdf in Bounds folder)
    - [x] [Claude Code] Add `orientation` (landscape/portrait/square) and `cover_candidate` (yes/blank, defaults to yes for included photos) columns to `photo_manifest.csv`, for claude.ai's Inkscape collage script — done Jun 30 2026 (`add_cover_columns.py`): 169 included photos classified (147 portrait, 22 landscape, 0 square), all opened successfully, safe to re-run (preserves manual overrides)
-2. - [ ] [Claude] Legal background (1648 law + MGL Ch. 42 §2; text nearly
-        ready in Bounds Report parts.odt)
+2. - [ ] [Claude] Legal background — drafted (Drive: "Legal Background -
+        draft.md"), pending Select Board vote date and Jim's review
 3. - [ ] [Claude] History of Acton's bounds (material from 1904 book;
         road-naming research done; Parmenter Road thread; needs connective
         prose)
@@ -117,7 +121,10 @@ Order below reflects planned appearance in the final report (tentative):
 5. - [ ] [Both] Overview map: convert KML to static image with monument
         status indicated
 6. - [ ] [Both] Monument Listings intro: one or two pages explaining what
-        the per-monument pages are and how to read them.
+        the per-monument pages are and how to read them. A plain-language
+        rewrite exists in Drive ("Monument Listings intro - plain
+        language rewrite.md") alongside the original, pending Jim's
+        pick/merge.
 7. - [ ] [Claude Code] Monument pages (bounds2pdf.py output) — COMPLETE
         pending finalized data
 8. - [ ] [Claude] Next steps (short closing section; replaces "Policy

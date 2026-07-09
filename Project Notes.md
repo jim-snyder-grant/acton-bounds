@@ -226,16 +226,22 @@ An early planning document with useful language for the introductory sections:
 - Process details (4-5 markers per 3-hour session, weather/poison ivy
   constraints) could add color to Summary of visits
 - Note: document says fine is $20; verify against current statute before use
+- Per Jim (Jul 8 2026): Acton's last substantial perambulation before
+  2025-2026 was 1986, per stone markings. Sudbury, not Stow, has been
+  the most consistent neighbor in recent decades — its
+  Acton/Concord/Maynard/Sudbury corner marking shows a fresh mark
+  roughly every 5 years since at least 1995. (This document's claim
+  that Stow was most active predates this correction.)
 
 ---
 
 ## Open questions / loose ends
 
-- The Perambulation Plan.odt (Oct 2024 draft by Dean Charter and Jim) cites
-  the fine for non-compliance as $20 against Select Board members. Earlier
-  in project notes we referred to it as $5. Check the actual current text of
-  MGL Ch. 42 §2 before the fine amount appears anywhere in the report.
-  URL: https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter42/
+- RESOLVED Jul 8 2026 (claude.ai): MGL Ch. 42 §3, which held the
+  penalty, was repealed in 1973. Current law (§2, checked live) has no
+  fine. Both the $5 (1648 law) and $20 (Perambulation Plan.odt) figures
+  are historical/stale — neither appears in current law. Legal
+  Background draft reflects this.
 - Acton/Stow Liberty Street and Stow Street monuments don't appear in Stow's
   2007 summary table — unclear if they're tracked under different bound
   numbers or simply omitted.
