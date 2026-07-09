@@ -6,6 +6,15 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-09 [Jim] TODO.md: reverse geocoding tried and decided against.
+  Reviewed Geoapify's results on the 49-monument CSV; the returned
+  addresses don't add enough useful information over the coordinates
+  already in the report, and coordinates are more useful than a street
+  address for someone navigating to a monument anyway. Collapsed the
+  3-item TODO sequence (generate CSV / upload / add Nearest address
+  column) into one done-and-decided-against entry. No spreadsheet or
+  report changes.
+
 2026-07-09 [Claude Code] Added `code/generate_geocoding_csv.py` and ran
   it: 49 monuments' full-precision coordinates exported as
   `monument_coordinates_for_geoapify.csv` (lon/lat columns only, per

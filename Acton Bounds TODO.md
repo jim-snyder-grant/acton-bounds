@@ -52,16 +52,12 @@ Owner tags: [Claude] [Claude Code] [Jim] [Both]
 - [x] [Jim] Finish gathering improved coordinates for all monuments (some
   were significantly off; field work with Town's iPad ongoing) — done
   Jul 9 2026
-- [ ] [Claude Code] Once coordinates are finalized: generate a CSV of all
-  monument coordinates (name, lat, lon) for reverse geocoding
-- [ ] [Jim] Upload CSV to Geoapify online reverse geocoding tool
-  (geoapify.com/tools/reverse-geocoding-online) — free, no account needed,
-  accepts CSV/Excel, returns addresses + distance-to-nearest-address column.
-  Use the distance column to flag woodland/no-address monuments where the
-  nearest address is far away, and discard those results.
-- [ ] [Both] Review geocoded addresses; add useful ones to the spreadsheet
-  as a new "Nearest address" column; discard unhelpful results (woodland
-  corners, roads that no longer exist, etc.)
+- [x] [Both] Reverse geocoding (CSV generated, uploaded to Geoapify,
+  results reviewed) — done Jul 9 2026, decided against: Jim concluded
+  the addresses returned don't add enough useful information over the
+  coordinates already in the report. Future searchers navigating to a
+  monument are better served by coordinates than a street address
+  anyway. No "Nearest address" column added.
 - [ ] [Jim] Look up the date of the Select Board vote directing Dean Charter
   and Jim Snyder-Grant (two Select Board members) to conduct the perambulation.
   Needed for the legal background and summary of visits sections of the report.
