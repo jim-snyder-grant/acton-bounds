@@ -6,6 +6,21 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-09 [Jim] TODO.md Field work: batch status update on the 13
+  open [Jim] items. 5 marked done (Town's iPad coordinates, west side
+  of Main St at the A/C crossing, ACW decoy picture, other side of Fort
+  Pond Road, finishing improved coordinates for all monuments). 6
+  removed rather than marked done -- their content moved to individual
+  monuments' "Possible Next Steps" field in the spreadsheet instead
+  (Keefe Street painting, Maynard-side Rte 27 picture, Powder Mill
+  plans review, ACC/AC Ben's Woods walk, AW1/ALW walk, Sarah Indian Way
+  map/walk): tracking the specific action against the specific
+  monument is more useful going forward than a generic TODO line, and
+  they weren't actually complete. Geoapify CSV upload still open;
+  Select Board vote date unchanged (pending claude.ai). Coordinates
+  being finalized unblocks the next TODO item (Claude Code generating
+  a reverse-geocoding CSV) -- not started yet, Jim hasn't asked for it.
+
 2026-07-09 [Claude Code] Fetched the 4 DocuShare PDFs claude.ai couldn't
   render (its web_fetch tool returned empty content and this session
   has no browser tool) -- saved to new Drive folder "Select Board

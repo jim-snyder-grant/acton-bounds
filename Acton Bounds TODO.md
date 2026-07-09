@@ -34,16 +34,11 @@ Owner tags: [Claude] [Claude Code] [Jim] [Both]
 
 ## Field work
 
-- [ ] [Jim] Work with Dean to paint the Keefe Street monument
-- [ ] [Jim] Collect better coordinates with Town's iPad
-- [ ] [Jim] Get a picture of the Maynard side at Rte 27
-- [ ] [Jim] Review Powder Mill plans for the monument
-- [ ] [Jim] Walk the bounds between the ACC and AC corners (Ben's Woods)
-- [ ] [Jim] Check the west side of Main Street at the A/C crossing
-- [ ] [Jim] Get a better picture of the decoy ACW monument
-- [ ] [Jim] Walk the bounds between AW1 and ALW (cat head rock linestone)
-- [ ] [Jim] Check the other side of Fort Pond Road
-- [ ] [Jim] Get a map of old Sarah Indian Way road and walk it to the boundary
+- [x] [Jim] Collect better coordinates with Town's iPad — done Jul 9 2026
+- [x] [Jim] Check the west side of Main Street at the A/C crossing — done
+  Jul 9 2026
+- [x] [Jim] Get a better picture of the decoy ACW monument — done Jul 9 2026
+- [x] [Jim] Check the other side of Fort Pond Road — done Jul 9 2026
 - [x] [Jim] For "Not Found" monuments, fill in the "Date of visit" column in
   the Google Sheet with the date(s) searched, where known — done Jul 5
   2026; confirmed all 15 "Not Found" monuments now have a date filled in
@@ -54,8 +49,9 @@ Owner tags: [Claude] [Claude Code] [Jim] [Both]
   precision is already stored per coordinate (not normalized/truncated),
   in case the extra digits are useful later. `bounds2pdf.py` formats to
   5 decimal places at display time only.
-- [ ] [Jim] Finish gathering improved coordinates for all monuments (some
-  were significantly off; field work with Town's iPad ongoing)
+- [x] [Jim] Finish gathering improved coordinates for all monuments (some
+  were significantly off; field work with Town's iPad ongoing) — done
+  Jul 9 2026
 - [ ] [Claude Code] Once coordinates are finalized: generate a CSV of all
   monument coordinates (name, lat, lon) for reverse geocoding
 - [ ] [Jim] Upload CSV to Geoapify online reverse geocoding tool
