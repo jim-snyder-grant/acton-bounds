@@ -145,14 +145,13 @@ Note: Other towns' perambulation reports will be mentioned in passing
 in section 4, not as a standalone section. Road name changes (previously
 its own possible item) are folded into section 3, History.
 
-- [ ] [Claude] Add a right-justified, self-contained footer to sections
-      2-6 (Legal background through Monument Listings intro): "{Section
-      Name}, page X of M", matching the Monument Listings pages' footer
-      style (Helvetica 9pt, #555555 gray, 1in side margins, 26pt above
-      the bottom edge). Each section only needs to count its own pages —
-      no need to know any other section's page count. Full visual spec
-      in code/claude.md under "Page numbering — two-part footer." Cover
-      page (section 1) is a title page and doesn't need one.
+- [x] [Claude Code] Right-justified per-section footer — DONE for
+      Markdown-sourced intro sections via `code/intro2pdf.py` (Jul 9
+      2026): renders any intro `.md` to a styled PDF with the matching
+      "{Section Name}, page X of M" footer (Helvetica 9pt, #555555, 1in
+      margins, 26pt above the bottom edge; section name from the first
+      `#` H1). Sections authored some other way still need to match this
+      style themselves. Cover page (section 1) is a title page, no footer.
 
 ### Scope of section 4 — "How this report was created"
 
