@@ -122,8 +122,15 @@ Order below reflects planned appearance in the final report (tentative):
         road-naming research done; Parmenter Road thread; needs connective
         prose)
 4. - [ ] [Both] How this report was created (see scope note below)
-5. - [ ] [Both] Overview map: convert KML to static image with monument
-        status indicated
+5. - [x] [Claude Code] Overview map — BUILT (`code/overview_map.py`,
+        Jul 9 2026): legal-portrait vector PDF, gold boundary through
+        corner monuments, type-coded icons, 51 status-colored numbered
+        callout boxes, real MassGIS roads + open water inside the
+        boundary, legend/compass/footer. Full spec in "Overview Map
+        spec.md" (Drive). Remaining: [ ] clickable callout boxes linking
+        to each monument's listing page — needs PDF named-destination
+        anchors surviving the final merge (see Final assembly; Jim to
+        confirm whether the map ships in the same PDF as the listings).
 6. - [ ] [Both] Monument Listings intro: one or two pages explaining what
         the per-monument pages are and how to read them. A plain-language
         rewrite exists in Drive ("Monument Listings intro - plain
