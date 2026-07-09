@@ -319,6 +319,21 @@ with different dependencies (`gspread`, `google-auth-oauthlib` — see
   footer ("Overview Map, page 1 of 1") is drawn to match the other
   sections; PDF named-destination anchors for clickable boxes are not
   built yet (see Overview Map spec / TODO).
+- **`intro2pdf.py`** (added Jul 9 2026) — renders an intro-section
+  Markdown file to a styled PDF matching the monument-listing pages:
+  US Letter, 1in margins, Helvetica body, and the same right-justified
+  per-section footer ("<Section Name>, page X of N", 9pt `#555555` via
+  the shared two-pass canvas technique). Supported Markdown: `#` H1
+  (centered title + rule; also becomes the footer's section name unless
+  `--section` is given), `##` H2, justified paragraphs, `-`/`*` bullets,
+  `>` block quotes (gold left rule, multi-paragraph aware), `---` rules,
+  and inline `**bold**`/`*italic*`. `python3 intro2pdf.py <file.md>
+  [more.md ...] [--section NAME] [--out OUT.pdf]`; output defaults to the
+  input path with a `.pdf` extension. Used for the drafted intro
+  sections in Drive (Legal Background, Monument Listings intro, etc.) —
+  those are Drive-only working files, not tracked. Draft-note headers and
+  bracketed `[editor: ...]` asides render literally, so strip them from
+  the Markdown before a final run.
 
 ---
 

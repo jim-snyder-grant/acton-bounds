@@ -6,6 +6,19 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-09 [Claude Code] Added code/intro2pdf.py: renders an intro-section
+  Markdown file to a styled PDF matching the monument-listing pages (US
+  Letter, 1in margins, Helvetica, right-justified per-section footer via
+  the shared two-pass canvas). Supports H1/H2, justified paragraphs,
+  bullets, gold-barred block quotes, rules, and inline bold/italic;
+  section name comes from the first H1 (or --section). Verified against
+  the two drafted intro sections in Drive ("Legal Background - draft.md",
+  "Monument Listings intro - plain language rewrite.md") -- both render
+  cleanly. This is the first of the three report-assembly pieces from
+  notes.forclaude.code; the intro-MD-to-PDF step is now available.
+  Draft-note headers / [bracketed] asides in the source .md render
+  literally and should be stripped before a final run.
+
 2026-07-09 [Claude Code] Overview Map (report section 5) built:
   code/overview_map.py generates a legal-portrait 8.5x14 vector PDF —
   gold boundary through corner monuments in Order sequence (ACC true
