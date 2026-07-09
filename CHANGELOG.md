@@ -6,6 +6,16 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-09 [Claude Code] Reran check_distance_to_line.py against the
+  finalized iPad coordinates. All 3 issues from the Jul 7 run are
+  resolved: Acton/Maynard Conant St (was ~110km, now 0.2m),
+  Acton/Concord Great Rd (~52m -> 0.6m), Acton/Littleton Nagog Hill Rd
+  (~16m -> 4.0m). Every crossing is now <=4m off-line except
+  Acton/Littleton Fort Pond Road (~8.6m) -- added a TODO.md Field work
+  item for Jim to re-check that reading with the iPad. The neighboring
+  W B Marker on Fort Pond Road (~19.5m) is a Witness Bound, expected to
+  sit off the line, so not flagged. No spreadsheet or code changes.
+
 2026-07-09 [Jim] TODO.md: reverse geocoding tried and decided against.
   Reviewed Geoapify's results on the 49-monument CSV; the returned
   addresses don't add enough useful information over the coordinates

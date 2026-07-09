@@ -58,6 +58,18 @@ Owner tags: [Claude] [Claude Code] [Jim] [Both]
   coordinates already in the report. Future searchers navigating to a
   monument are better served by coordinates than a street address
   anyway. No "Nearest address" column added.
+- [ ] [Jim] Re-check the measured coordinates for Acton/Littleton Fort Pond
+  Road (Order 30) with the iPad when next in the field. The
+  distance-to-line QA check (`check_distance_to_line.py`, rerun Jul 9 2026)
+  puts it ~8.6 m off the straight boundary line between its two nearest
+  corners — small, but the largest unexplained offset remaining after the
+  coordinate finalization (every other crossing is now ≤4 m). Could be
+  this crossing's reading, or one of the two corner anchors on that
+  segment (Acton/Littleton 2, Acton/Boxborough/Littleton). Note: the
+  neighboring Acton/Littleton W B Marker on Fort Pond Road (Order 31) also
+  shows a large offset (~19.5 m), but that one is a Witness Bound, which is
+  intentionally set off the line, so it's expected — not part of this
+  re-check.
 - [ ] [Jim] Look up the date of the Select Board vote directing Dean Charter
   and Jim Snyder-Grant (two Select Board members) to conduct the perambulation.
   Needed for the legal background and summary of visits sections of the report.
