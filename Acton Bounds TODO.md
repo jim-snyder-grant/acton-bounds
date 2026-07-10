@@ -136,6 +136,13 @@ Order below reflects planned appearance in the final report (tentative):
         rewrite exists in Drive ("Monument Listings intro - plain
         language rewrite.md") alongside the original, pending Jim's
         pick/merge.
+   - [ ] [Claude] Consider reordering so the Monument Listings intro comes
+         *before* the Overview Map (currently map = 5, intro = 6), and have
+         claude.ai rewrite the intro so it introduces the overview map at
+         the same time as the per-monument listings — one intro covering
+         both, since the map and the listings share the same numbered-box
+         system. If adopted, swap sections 5↔6 in `code/report_sections.csv`
+         and re-run assembly.
 7. - [ ] [Claude Code] Monument pages (bounds2pdf.py output) — COMPLETE
         pending finalized data
 8. - [ ] [Claude] Next steps (short closing section; replaces "Policy

@@ -6,6 +6,14 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-09 [Claude Code] TODO.md: added a consideration (for claude.ai) —
+  Jim would like to reorder so the Monument Listings intro comes *before*
+  the Overview Map, and have claude.ai rewrite that intro to introduce the
+  overview map at the same time as the per-monument listings (one intro
+  covering both, since they share the numbered-box system). If adopted,
+  swap sections 5↔6 in report_sections.csv and re-run assembly. See the
+  Introductory sections list, item 6.
+
 2026-07-09 [Claude Code] overview_map.py: narrowed the legend box (leg_w
   2.35->1.95) and nudged its center left (leg_cx 4.85->4.65) so its right
   edge no longer overlaps the gold boundary line; the left edge is
