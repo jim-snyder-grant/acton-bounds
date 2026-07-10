@@ -6,6 +6,11 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-09 [Claude Code] overview_map.py: narrowed the legend box (leg_w
+  2.35->1.95) and nudged its center left (leg_cx 4.85->4.65) so its right
+  edge no longer overlaps the gold boundary line; the left edge is
+  unchanged and all labels still fit comfortably. Re-ran the assembly.
+
 2026-07-09 [Claude Code] overview_map.py: added a centered "Overview Map"
   title (bold, rule beneath, intro-section H1 style) in a reserved band at
   the top of the page; the map/perimeter-boxes shift down to make room, no

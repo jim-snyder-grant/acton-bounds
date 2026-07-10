@@ -506,12 +506,15 @@ def main():
 
 
 def draw_legend(ax, rot_rad):
-    leg_w = 2.35
+    # Width snug to the content ("Couldn't paint" is the widest label) and the
+    # center nudged left so the right edge clears the gold boundary line; the
+    # left edge stays where it was (it already had clear space).
+    leg_w = 1.95
     row_h = 0.34
     n_status, n_types = len(STATUS_COLORS), len(ICON_MARKERS)
     title_h, header_h, gap_h, pad = 0.44, 0.30, 0.16, 0.18
     leg_h = pad + title_h + header_h + n_status * row_h + gap_h + header_h + n_types * row_h + pad
-    leg_cx, leg_cy = 4.85, 7.55
+    leg_cx, leg_cy = 4.65, 7.55
     leg_x0, leg_y0 = leg_cx - leg_w / 2, leg_cy - leg_h / 2
     ax.add_patch(FancyBboxPatch((leg_x0, leg_y0), leg_w, leg_h,
                  boxstyle="round,pad=0.05,rounding_size=0.08",
