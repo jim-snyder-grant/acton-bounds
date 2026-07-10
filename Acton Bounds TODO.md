@@ -187,11 +187,16 @@ its own possible item) are folded into section 3, History.
 
 - [ ] [Jim] Decide on format for intro sections (PDF vs ODT)
 - [ ] [Jim] Re-export XLSX from Google Sheet before final report run
-- [ ] [Claude Code] Merge intro PDF + monument pages PDF with pypdf or
-      similar, then stamp a left-justified "Acton Bounds Report
-      2025-2026, page X of N" footer on every page of the merged result
-      (N = merged total page count) — see "Page numbering" in
-      code/claude.md
+- [x] [Claude Code] Merge section PDFs and stamp the left-justified
+      "Acton Bounds Report 2025-2026, page X of N" whole-report footer —
+      DONE Jul 9 2026 (`code/assemble_report.py`, uses pypdf). Section
+      order/list lives in `code/report_sections.csv`
+      (order,section,file,footer); missing sections skip gracefully so
+      partial drafts assemble; mixed page sizes (letter + legal map)
+      handled. Verified on the 5 sections that exist today → 57-page PDF
+      with both footers correct. Output: "Acton Bounds Report 2025-2026 -
+      FULL.pdf". (Once History / How-created / Next-steps sections exist,
+      just add/enable their rows in the manifest and re-run.)
 - [ ] [Both] Design Google Drive archiving folder structure
 - [ ] [Jim] Manually move Google Drive folder into DocuShare
 - [ ] [Both] Categorize every file/folder in the Bounds Drive folder as one

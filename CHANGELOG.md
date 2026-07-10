@@ -6,6 +6,25 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-09 [Claude Code] Added code/assemble_report.py + report_sections.csv:
+  the final-assembly step. Concatenates the section PDFs in the order given
+  by report_sections.csv (order,section,file,footer) and stamps the
+  left-justified whole-report footer "Acton Bounds Report 2025-2026, page X
+  of N" on every merged page once the true total is known -- completing the
+  two-part footer (each section already carries its own right-justified
+  footer). Missing sections skip with a warning (partial drafts assemble);
+  footer=no suppresses the whole-report footer on a section (e.g. the cover)
+  while still consuming a page number; mixed page sizes handled (letter
+  sections + legal-size overview map). Verified: assembled the 5 sections
+  that exist today (Cover, Legal Background, Overview Map, Monument Listings
+  intro, Monument Listings) into a 57-page PDF with both footers landing
+  correctly across sizes. Needs pypdf (added to requirements.txt). This is
+  the third of the three report-assembly pieces from notes.forclaude.code.
+  Output name is "Acton Bounds Report 2025-2026 - FULL.pdf" for now, kept
+  distinct from bounds2pdf.py's monument-listings output at "Acton Bounds
+  Report 2025-2026.pdf"; report_sections.csv is a local (untracked) working
+  file. Remaining piece: clickable callout boxes (PDF anchors).
+
 2026-07-09 [Claude Code] Added code/intro2pdf.py: renders an intro-section
   Markdown file to a styled PDF matching the monument-listing pages (US
   Letter, 1in margins, Helvetica, right-justified per-section footer via

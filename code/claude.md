@@ -334,6 +334,28 @@ with different dependencies (`gspread`, `google-auth-oauthlib` — see
   those are Drive-only working files, not tracked. Draft-note headers and
   bracketed `[editor: ...]` asides render literally, so strip them from
   the Markdown before a final run.
+- **`assemble_report.py`** (added Jul 9 2026) — the final-assembly step:
+  concatenates the section PDFs in the order given by `report_sections.csv`
+  and stamps the LEFT-justified whole-report footer ("Acton Bounds Report
+  2025-2026, page X of N") on every page once the true merged total N is
+  known (the second half of the two-part footer — each section already
+  carries its own right-justified footer). `report_sections.csv` columns:
+  `order,section,file,footer`; `file` resolves relative to the Bounds
+  folder; `footer=no` suppresses the whole-report footer on that section
+  (e.g. the cover) while still consuming a page number. Missing section
+  files are skipped with a warning, so a partial draft assembles fine.
+  Handles mixed page sizes (letter sections + the legal-size overview
+  map) — the footer lands at the same 1in-from-left, 26pt-up spot on
+  every page. Needs `pypdf` (in `requirements.txt`). `python3
+  assemble_report.py [--manifest CSV] [--out PATH]`; output defaults to
+  `../Acton Bounds Report 2025-2026 - FULL.pdf`. NOTE: `report_sections.csv`
+  is currently a local (untracked/gitignored) working file — ask Jim
+  before adding it to the `.gitignore` allowlist. NOTE: the monument
+  listings section is still `bounds2pdf.py`'s `../Acton Bounds Report
+  2025-2026.pdf` output; to let the assembled report take that canonical
+  name, `bounds2pdf.py` should eventually emit a section-named file (e.g.
+  `monument_listings.pdf`) instead — not done yet, hence the distinct
+  "- FULL" output name.
 
 ---
 
@@ -591,8 +613,12 @@ section specifically. The two-part split needs no manual step and
 generalizes to every section the same way.
 
 `bounds2pdf.py`'s `NumberedCanvas._draw_footer()` implements only the
-right-justified half (see code) — the left half doesn't exist yet
-anywhere; the final-assembly stamping script is still a TODO item.
+right-justified half (see code); the left half is stamped at final
+assembly by `assemble_report.py` (added Jul 9 2026 — see its entry under
+"Standalone utility scripts"), which overlays "Acton Bounds Report
+2025-2026, page X of N" on every merged page once the true total is known.
+`intro2pdf.py` draws the right-justified half for the Markdown intro
+sections in the same style.
 
 #### Footer visual spec (for claude.ai to match in the intro sections)
 
