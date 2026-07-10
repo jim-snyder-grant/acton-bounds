@@ -326,7 +326,7 @@ with different dependencies (`gspread`, `google-auth-oauthlib` — see
   per-section footer ("<Section Name>, page X of N", 9pt `#555555` via
   the shared two-pass canvas technique). Supported Markdown: `#` H1
   (centered title + rule; also becomes the footer's section name unless
-  `--section` is given), `##` H2, justified paragraphs, `-`/`*` bullets,
+  `--section` is given), `##` H2, left-aligned paragraphs, `-`/`*` bullets,
   `>` block quotes (gold left rule, multi-paragraph aware), `---` rules,
   and inline `**bold**`/`*italic*`. `python3 intro2pdf.py <file.md>
   [more.md ...] [--section NAME] [--out OUT.pdf]`; output defaults to the

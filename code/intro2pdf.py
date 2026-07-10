@@ -12,7 +12,7 @@ Supported Markdown (what the current intro drafts use):
   # H1            -> section title (centered, bold, rule beneath). Also becomes
                     the footer's section name unless --section is given.
   ## H2           -> subsection heading
-  paragraph       -> justified body text (blank line separates paragraphs)
+  paragraph       -> left-aligned body text (blank line separates paragraphs)
   - item          -> bullet list (also `* item`)
   > quote         -> block quote (gold left rule, indented); blank `>` splits
                     quote paragraphs
@@ -33,7 +33,7 @@ import re
 import sys
 
 from reportlab.lib.pagesizes import letter
-from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY, TA_LEFT
+from reportlab.lib.enums import TA_CENTER, TA_LEFT
 from reportlab.lib import colors
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.platypus import (SimpleDocTemplate, Paragraph, Spacer, Table,
@@ -56,7 +56,7 @@ H1 = ParagraphStyle("H1", fontName="Helvetica-Bold", fontSize=18, leading=22,
 H2 = ParagraphStyle("H2", fontName="Helvetica-Bold", fontSize=13, leading=16,
                     spaceBefore=14, spaceAfter=4)
 BODY = ParagraphStyle("Body", fontName="Helvetica", fontSize=11, leading=15,
-                      alignment=TA_JUSTIFY, spaceBefore=2, spaceAfter=6)
+                      alignment=TA_LEFT, spaceBefore=2, spaceAfter=6)
 BULLET = ParagraphStyle("Bullet", parent=BODY, alignment=TA_LEFT,
                         leftIndent=20, bulletIndent=6,
                         spaceBefore=1, spaceAfter=3)

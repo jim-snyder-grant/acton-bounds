@@ -6,6 +6,13 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-09 [Claude Code] intro2pdf.py: body paragraphs are now left-aligned
+  (ragged right) instead of fully justified -- Jim found the justified
+  spacing created stretched-out "rivers." Only the BODY style changed;
+  headings/bullets/quotes were already left-aligned. Regenerated the two
+  intro section PDFs and re-ran the assembly (57pp) so the final report
+  reflects it.
+
 2026-07-09 [Claude Code] bounds2pdf.py now emits its Monument Listings
   section to code/monument_listings.pdf (gitignored, alongside
   overview_map.pdf) instead of the whole-report name, so assemble_report.py
