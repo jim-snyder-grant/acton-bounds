@@ -17,6 +17,12 @@ Supported Markdown (what the current intro drafts use):
   > quote         -> block quote (gold left rule, indented); blank `>` splits
                     quote paragraphs
   ---             -> horizontal rule
+  ![cap](path)    -> photo; consecutive image lines (no blank line between)
+                    group into one dynamic-grid row (<=3 across), caption in
+                    small italic beneath, same as the monument pages. Paths
+                    resolve relative to the script dir / cwd / the .md's own
+                    dir. If the filename matches a photo_manifest.csv row with
+                    a docushare_url, the image links to it.
   **bold**  *italic*  -> inline emphasis
 
 Usage:
@@ -27,18 +33,26 @@ Note: draft-note headers and bracketed [editor: ...] asides in the source .md
 render literally -- strip them from the Markdown before a final run.
 """
 import argparse
+import csv
 import html
+import io
+import math
 import os
 import re
 import sys
 
+from PIL import Image as PILImage
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.enums import TA_CENTER, TA_LEFT
 from reportlab.lib import colors
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.platypus import (SimpleDocTemplate, Paragraph, Spacer, Table,
-                                TableStyle, HRFlowable)
+                                TableStyle, HRFlowable, Image as RLImage)
 from reportlab.pdfgen import canvas as pdfcanvas
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+IMG_RE = re.compile(r"!\[(.*?)\]\((.*?)\)\s*$")
+MAX_PHOTO_H = 220   # hard upper limit on an intro photo's display height (pt)
 
 # --- page geometry: identical to bounds2pdf.py ---
 PAGE_W, PAGE_H = letter          # 612 x 792 pt
@@ -63,6 +77,125 @@ BULLET = ParagraphStyle("Bullet", parent=BODY, alignment=TA_LEFT,
 QUOTE = ParagraphStyle("Quote", fontName="Helvetica", fontSize=10.5, leading=14,
                        textColor=colors.HexColor("#333333"),
                        spaceBefore=3, spaceAfter=3, alignment=TA_LEFT)
+# Matches bounds2pdf.py's photo caption style so intro photos read the same.
+CAPTION = ParagraphStyle("Caption", fontName="Helvetica-Oblique", fontSize=8,
+                         leading=10, alignment=TA_CENTER,
+                         spaceBefore=2, spaceAfter=0)
+
+
+class LinkableImage(RLImage):
+    """Image flowable that also draws a clickable link over itself.
+
+    relative=1 anchors the link rect to the flowable's own draw-time
+    transform, so it lands correctly regardless of table/hAlign placement.
+    (Same technique as bounds2pdf.py's LinkableImage.)
+    """
+    def __init__(self, *args, link_url=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.link_url = link_url
+
+    def draw(self):
+        super().draw()
+        if self.link_url:
+            self.canv.linkURL(
+                self.link_url, (0, 0, self.drawWidth, self.drawHeight), relative=1)
+
+
+def load_docushare_map():
+    """filename -> docushare_url from photo_manifest.csv (best-effort, may be empty)."""
+    path = os.path.join(SCRIPT_DIR, "photo_manifest.csv")
+    ds = {}
+    try:
+        with open(path, newline="", encoding="utf-8") as fh:
+            for row in csv.DictReader(fh):
+                url = (row.get("docushare_url") or "").strip()
+                if url:
+                    ds[row["filename"]] = url
+    except FileNotFoundError:
+        pass
+    return ds
+
+
+def resolve_image_path(raw, md_dir):
+    """Find an image path referenced in the Markdown, trying a few bases.
+
+    The intro drafts write paths like `../Photos/Monument Photos/x.jpg`
+    relative to code/ (matching bounds2pdf.py's convention), but be forgiving
+    about where intro2pdf.py is actually invoked from.
+    """
+    if os.path.isabs(raw) and os.path.exists(raw):
+        return raw
+    for base in (SCRIPT_DIR, os.getcwd(), md_dir):
+        cand = os.path.normpath(os.path.join(base, raw))
+        if os.path.exists(cand):
+            return cand
+    return None
+
+
+def photo_dims(path, col_width, max_h):
+    """Return (display_width, display_height) fitting col_width, capped at max_h."""
+    with PILImage.open(path) as img:
+        nat_w, nat_h = img.size
+    natural_h = col_width * nat_h / nat_w
+    if natural_h > max_h:
+        return int(max_h * nat_w / nat_h), int(max_h)
+    return int(col_width), int(natural_h)
+
+
+def to_jpeg_bytes(path, display_width, display_height, dpi_scale=2):
+    """Resize to display_size x dpi_scale and return JPEG bytes (keeps PDF small)."""
+    with PILImage.open(path) as img:
+        img = img.convert("RGB").resize(
+            (int(display_width * dpi_scale), int(display_height * dpi_scale)),
+            PILImage.LANCZOS)
+        buf = io.BytesIO()
+        img.save(buf, format="JPEG", quality=85)
+        return buf.getvalue()
+
+
+def build_image_group(group, md_dir, ds_map):
+    """Turn consecutive ![cap](path) lines into dynamic-grid photo-row tables."""
+    resolved = []
+    for cap, raw in group:
+        p = resolve_image_path(raw, md_dir)
+        if p is None:
+            print(f"  WARNING: intro image not found, skipping: {raw}", file=sys.stderr)
+            continue
+        resolved.append((p, cap, ds_map.get(os.path.basename(p))))
+    if not resolved:
+        return []
+
+    n = len(resolved)
+    cols = min(n, 3)
+    col_width = int((TEXT_W - (cols - 1) * 8) // cols)
+    flowables, n_rows = [], math.ceil(n / cols)
+    for row_i in range(n_rows):
+        chunk = resolved[row_i * cols:(row_i + 1) * cols]
+        cells = []
+        for p, cap, url in chunk:
+            dw, dh = photo_dims(p, col_width, MAX_PHOTO_H)
+            img = LinkableImage(io.BytesIO(to_jpeg_bytes(p, dw, dh)),
+                                width=dw, height=dh, hAlign="CENTER",
+                                link_url=url or None)
+            content = [img]
+            if cap:
+                content.append(Paragraph(inline(cap), CAPTION))
+            cells.append(content)
+        for _ in range(cols - len(chunk)):
+            cells.append([Spacer(1, 1)])
+        t = Table([cells], colWidths=[col_width + 4] * cols)
+        t.setStyle(TableStyle([
+            ("VALIGN", (0, 0), (-1, -1), "TOP"),
+            ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+            ("LEFTPADDING", (0, 0), (-1, -1), 2),
+            ("RIGHTPADDING", (0, 0), (-1, -1), 2),
+            ("TOPPADDING", (0, 0), (-1, -1), 0),
+            ("BOTTOMPADDING", (0, 0), (-1, -1), 2),
+        ]))
+        if row_i > 0:
+            flowables.append(Spacer(1, 6))
+        flowables.append(t)
+    return flowables
 
 
 def inline(text):
@@ -96,8 +229,9 @@ def quote_block(qlines):
     return tbl
 
 
-def parse_markdown(text):
+def parse_markdown(text, md_dir=".", ds_map=None):
     """Return (flowables, first_h1_title)."""
+    ds_map = ds_map or {}
     lines = text.split("\n")
     flow, para = [], []
     title = None
@@ -144,6 +278,22 @@ def parse_markdown(text):
             flow.append(Spacer(1, 4))
             flow.append(quote_block(qlines))
             flow.append(Spacer(1, 6))
+            continue
+
+        if IMG_RE.match(line):
+            flush_para()
+            group = []
+            while i < n:
+                m = IMG_RE.match(lines[i].strip())
+                if not m:
+                    break
+                group.append((m.group(1), m.group(2)))
+                i += 1
+            imgs = build_image_group(group, md_dir, ds_map)
+            if imgs:
+                flow.append(Spacer(1, 4))
+                flow.extend(imgs)
+                flow.append(Spacer(1, 6))
             continue
 
         if re.match(r"[-*]\s+", line):
@@ -194,7 +344,8 @@ def make_canvas(section_name):
 def render(md_path, out_path=None, section=None):
     with open(md_path, encoding="utf-8") as fh:
         text = fh.read()
-    flow, title = parse_markdown(text)
+    md_dir = os.path.dirname(os.path.abspath(md_path))
+    flow, title = parse_markdown(text, md_dir=md_dir, ds_map=load_docushare_map())
     section_name = section or title or os.path.splitext(os.path.basename(md_path))[0]
     if out_path is None:
         out_path = os.path.splitext(md_path)[0] + ".pdf"

@@ -99,12 +99,18 @@ Only one shared monument: the Acton/Concord/Maynard/Sudbury four-town corner.
 Sudbury confirmed status as "good." Nothing to flag — simplest of all the
 cross-references.
 
-### Not yet read (no report obtained)
+### Not obtained — decided against further pursuit (Jul 10 2026)
 
 - Carlisle
 - Littleton
 - Westford
 - Maynard
+
+Jim requested these four towns' perambulation reports once, back in 2025,
+and got no response. He decided (Jul 10 2026) not to pursue a second round,
+since it isn't expected to turn up anything new. Comparative analysis for
+these four towns will therefore not be done — the cross-referencing in this
+report is limited to Boxborough, Concord, Stow, and Sudbury.
 
 ---
 

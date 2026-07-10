@@ -6,6 +6,31 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-10 [Claude Code] Processed 8 INBOX files -- all 8 report sections
+  now drafted, rendered, and assembled into one 63-page PDF for the first
+  time. (1) intro2pdf.py gained image support: `![cap](path)` lines group
+  into a dynamic-grid photo row (<=3 across) with italic captions and
+  optional DocuShare links, paths resolved against script dir/cwd/md dir;
+  needed for "How This Report Was Created" (3 photos). (2) Rendered the five
+  approved intro drafts -- Legal Background (v2), History, How This Report
+  Was Created, the combined Monument Listings — Introduction, and Next
+  Steps -- to PDFs at the Bounds root. (3) report_sections.csv: swapped so
+  the Monument Listings intro (5) precedes the Overview Map (6) per the
+  combined-intro decision, and pointed rows at the new PDFs. (4) Re-ran
+  assemble_report.py -> "Acton Bounds Report 2025-2026.pdf", 63 pages, all
+  8 sections; verified both footer halves across letter+legal sizes and all
+  51 overview-map box links resolving to the right listings pages (Order 1
+  -> p11 ... Order 51 -> p61). (5) TODO.md: closed the Fort Pond Road
+  recheck (resolved, not deferred -- westerly-of-two 1904 monuments
+  explains the ~8.6m offset), dropped the Carlisle/Littleton/Westford/
+  Maynard clerk-letter + cross-reference items (decided against further
+  pursuit), kept the Boxborough/Concord/Stow cover-note items, and marked
+  intro items 2-8 done. Project Notes.md: renamed the "Not yet read"
+  comparative-analysis subsection to reflect that closed decision. NOTE:
+  installed pypdf into the `bounds` pyenv (it's in requirements.txt but was
+  missing from the env); geopandas/matplotlib are also absent but weren't
+  needed since overview_map.pdf was already built.
+
 2026-07-09 [Claude Code] Clickable overview-map callout boxes -- the last
   of the three report-assembly pieces. overview_map.py writes a sidecar
   (overview_map_links.json) with each box's rectangle in PDF points;

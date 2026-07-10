@@ -58,18 +58,17 @@ Owner tags: [Claude] [Claude Code] [Jim] [Both]
   coordinates already in the report. Future searchers navigating to a
   monument are better served by coordinates than a street address
   anyway. No "Nearest address" column added.
-- [ ] [Jim] Re-check the measured coordinates for Acton/Littleton Fort Pond
-  Road (Order 30) with the iPad when next in the field. The
-  distance-to-line QA check (`check_distance_to_line.py`, rerun Jul 9 2026)
-  puts it ~8.6 m off the straight boundary line between its two nearest
-  corners — small, but the largest unexplained offset remaining after the
-  coordinate finalization (every other crossing is now ≤4 m). Could be
-  this crossing's reading, or one of the two corner anchors on that
-  segment (Acton/Littleton 2, Acton/Boxborough/Littleton). Note: the
-  neighboring Acton/Littleton W B Marker on Fort Pond Road (Order 31) also
-  shows a large offset (~19.5 m), but that one is a Witness Bound, which is
-  intentionally set off the line, so it's expected — not part of this
-  re-check.
+- [x] [Jim] Re-check the measured coordinates for Acton/Littleton Fort Pond
+  Road (Order 30) — resolved without a field recheck (Jul 10 2026). The
+  ~8.6 m offset from `check_distance_to_line.py` is explained by the 1904
+  survey's two monuments on the easterly and westerly sides of "the Cash
+  Road" at this crossing; what's recorded is the westerly one, so the
+  offset is expected, not a bad reading. See that row's "Notes on Location"
+  in the Sheet and "Next Steps - draft.md" (Drive) for the full
+  explanation. No further recheck needed. (The neighboring Acton/Littleton
+  W B Marker on Fort Pond Road, Order 31, ~19.5 m off-line, is a Witness
+  Bound intentionally set off the line — always expected, never part of
+  this check.)
 - [x] [Jim] Look up the date of the Select Board vote directing Dean Charter
   and Jim Snyder-Grant (two Select Board members) to conduct the perambulation.
   Needed for the legal background and summary of visits sections of the report.
@@ -86,27 +85,28 @@ Owner tags: [Claude] [Claude Code] [Jim] [Both]
 - [x] [Claude] Concord cross-reference table — done
 - [x] [Claude] Stow cross-reference table — done
 - [x] [Claude] Sudbury — done (one corner, confirmed good)
-- [ ] [Jim] Obtain and read Carlisle perambulation report
-- [ ] [Jim] Obtain and read Littleton perambulation report
-- [ ] [Jim] Obtain and read Westford perambulation report
-- [ ] [Jim] Obtain and read Maynard perambulation report
-- [ ] [Claude] Cross-reference Carlisle once report obtained
-- [ ] [Claude] Cross-reference Littleton once report obtained
-- [ ] [Claude] Cross-reference Westford once report obtained
-- [ ] [Claude] Cross-reference Maynard once report obtained
+- [x] [Jim] Carlisle/Littleton/Westford/Maynard perambulation reports —
+  decided against further pursuit (Jul 10 2026). Requested once in 2025;
+  no response, and a second request isn't expected to turn up anything
+  new. Comparative analysis for these four towns will not be done.
 
 (Full findings for Boxborough/Concord/Stow/Sudbury are written up in
 Project Notes.md, not just here.)
 
 ---
 
-## Town clerk letters
+## Neighboring-town cover notes
 
-- [ ] [Jim] Send inquiry letters to Carlisle, Littleton, Westford, Maynard clerks (drafts ready)
+Cover notes accompany Acton's report to the neighbors whose bounds it
+cross-references. The Carlisle/Littleton/Westford/Maynard clerk-letter and
+cover-note items were dropped Jul 10 2026 (see the Comparative analysis
+note above — those four towns' reports were never obtained and are no
+longer being pursued). The three below stand because those towns' reports
+*were* obtained and cross-referenced.
+
 - [ ] [Claude] Draft cover note to Boxborough Select Board
 - [ ] [Claude] Draft cover note to Concord Select Board
 - [ ] [Claude] Draft cover note to Stow Select Board
-- [ ] [Both] Draft cover notes to Carlisle, Littleton, Westford, Maynard (after reports received)
 
 ---
 
@@ -116,13 +116,33 @@ Order below reflects planned appearance in the final report (tentative):
 
 1. - [x] [Both] Cover page: COMPLETE (FrontPage.svg/pdf in Bounds folder)
    - [x] [Claude Code] Add `orientation` (landscape/portrait/square) and `cover_candidate` (yes/blank, defaults to yes for included photos) columns to `photo_manifest.csv`, for claude.ai's Inkscape collage script — done Jun 30 2026 (`add_cover_columns.py`): 169 included photos classified (147 portrait, 22 landscape, 0 square), all opened successfully, safe to re-run (preserves manual overrides)
-2. - [ ] [Claude] Legal background — drafted (Drive: "Legal Background -
-        draft.md"), pending Select Board vote date and Jim's review
-3. - [ ] [Claude] History of Acton's bounds (material from 1904 book;
-        road-naming research done; Parmenter Road thread; needs connective
-        prose)
-4. - [ ] [Both] How this report was created (see scope note below)
-5. - [x] [Claude Code] Overview map — BUILT (`code/overview_map.py`,
+2. - [x] [Claude] Legal background — approved draft "Legal Background -
+        draft v2.md" (Drive), rendered to "Legal Background.pdf" and in the
+        assembled report (Jul 10 2026). Pending only Jim's read-through of
+        the rendered PDF.
+3. - [x] [Claude] History of Acton's bounds — approved draft "History of
+        Actons Bounds - draft.md" (Drive), rendered to "History.pdf" and in
+        the assembled report (Jul 10 2026). Two minor threads may still see
+        wording updates (automobile-era road-naming research; Parmenter
+        Road path) but neither blocks inclusion.
+4. - [x] [Both] How this report was created — draft "How This Report Was
+        Created - draft.md" (Drive, 3 photos), rendered to "How This Report
+        Was Created.pdf" and in the assembled report (Jul 10 2026). Needed
+        new image support in `intro2pdf.py` (added Jul 10 2026). See scope
+        note below. Jim is still considering moving its opening
+        (Select Board vote) paragraph to the very front of the report.
+5. - [x] [Both] Monument Listings — Introduction: one intro covering both
+        the per-monument pages and the overview map, since they share the
+        numbered-box system. Approved combined draft "Monument Listings and
+        Overview Map intro - combined draft.md" (Drive), rendered to
+        "Monument Listings — Introduction.pdf" and in the assembled report
+        (Jul 10 2026). Now placed *before* the Overview Map (the reorder
+        below is done).
+   - [x] [Claude] Reorder so the Monument Listings intro comes *before* the
+         Overview Map, with one combined intro introducing both — DONE
+         Jul 10 2026: sections swapped in `code/report_sections.csv`
+         (intro = 5, map = 6) and assembly re-run.
+6. - [x] [Claude Code] Overview map — BUILT (`code/overview_map.py`,
         Jul 9 2026): legal-portrait vector PDF, gold boundary through
         corner monuments, type-coded icons, 51 status-colored numbered
         callout boxes, real MassGIS roads + open water inside the
@@ -131,23 +151,12 @@ Order below reflects planned appearance in the final report (tentative):
         box is an internal link to that monument's page in the merged
         report (added at assembly from an `overview_map_links.json`
         sidecar; targets `listings_start + Order - 1`). Verified in the
-        57-page assembled PDF.
-6. - [ ] [Both] Monument Listings intro: one or two pages explaining what
-        the per-monument pages are and how to read them. A plain-language
-        rewrite exists in Drive ("Monument Listings intro - plain
-        language rewrite.md") alongside the original, pending Jim's
-        pick/merge.
-   - [ ] [Claude] Consider reordering so the Monument Listings intro comes
-         *before* the Overview Map (currently map = 5, intro = 6), and have
-         claude.ai rewrite the intro so it introduces the overview map at
-         the same time as the per-monument listings — one intro covering
-         both, since the map and the listings share the same numbered-box
-         system. If adopted, swap sections 5↔6 in `code/report_sections.csv`
-         and re-run assembly.
+        63-page assembled PDF (Order 1 → p11 … Order 51 → p61).
 7. - [ ] [Claude Code] Monument pages (bounds2pdf.py output) — COMPLETE
         pending finalized data
-8. - [ ] [Claude] Next steps (short closing section; replaces "Policy
-        recommendations")
+8. - [x] [Claude] Next steps — approved draft "Next Steps - draft.md"
+        (Drive), rendered to "Next Steps.pdf" and in the assembled report
+        (Jul 10 2026). Closing section; replaced "Policy recommendations".
 
 Note: Other towns' perambulation reports will be mentioned in passing
 in section 4, not as a standalone section. Road name changes (previously
