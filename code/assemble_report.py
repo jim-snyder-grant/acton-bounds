@@ -27,6 +27,7 @@ Usage:
 """
 import argparse
 import csv
+import json
 import os
 import sys
 from io import BytesIO
@@ -34,11 +35,20 @@ from io import BytesIO
 from reportlab.pdfgen import canvas as pdfcanvas
 from reportlab.lib.colors import HexColor
 from pypdf import PdfReader, PdfWriter
+from pypdf.generic import (ArrayObject, DictionaryObject, FloatObject,
+                           NameObject, NumberObject)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BOUNDS = os.path.join(HERE, "..")              # section files resolve from here
 DEFAULT_MANIFEST = os.path.join(HERE, "report_sections.csv")
 DEFAULT_OUT = os.path.join(BOUNDS, "Acton Bounds Report 2025-2026.pdf")
+
+# For the clickable overview-map callout boxes: which section is the map and
+# which is the monument listings (matched by file basename), plus the sidecar
+# of box rectangles overview_map.py writes.
+MAP_BASENAME = "overview_map.pdf"
+LISTINGS_BASENAME = "monument_listings.pdf"
+LINKS_JSON = os.path.join(HERE, "overview_map_links.json")
 
 REPORT_TITLE = "Acton Bounds Report 2025-2026"
 MARGIN = 72               # 1 inch from the left edge
@@ -72,6 +82,49 @@ def footer_overlay(width, height, text):
     return PdfReader(buf).pages[0]
 
 
+def add_overview_map_links(writer, map_start, listings_start, listings_count):
+    """Drop an internal 'go to this monument's page' link over each callout box
+    on the overview-map page. Box rectangles come from overview_map.py's sidecar
+    (overview_map_links.json); the target is the monument's page in the merged
+    doc -- listings_start + (Order - 1), since bounds2pdf.py emits one page per
+    monument in Order sequence.
+
+    Skips quietly (rather than risk wrong links) if either section is absent,
+    the sidecar is missing, or the listings page count doesn't match the box
+    count 1:1 (e.g. a monument page ever spilled onto two pages)."""
+    if map_start is None or listings_start is None:
+        return
+    if not os.path.exists(LINKS_JSON):
+        print("  (no overview_map_links.json -- skipping clickable callout boxes)")
+        return
+    with open(LINKS_JSON) as fh:
+        boxes = json.load(fh)["boxes"]
+    if listings_count != len(boxes):
+        print(f"  WARNING: monument-listings pages ({listings_count}) != callout "
+              f"boxes ({len(boxes)}); skipping clickable boxes to avoid mis-links")
+        return
+    map_page = writer.pages[map_start]
+    annots = map_page.get(NameObject("/Annots"))
+    if annots is None:
+        annots = ArrayObject()
+        map_page[NameObject("/Annots")] = annots
+    for order_str, rect in boxes.items():
+        target = listings_start + (int(order_str) - 1)
+        annot = DictionaryObject({
+            NameObject("/Type"): NameObject("/Annot"),
+            NameObject("/Subtype"): NameObject("/Link"),
+            NameObject("/Rect"): ArrayObject([FloatObject(v) for v in rect]),
+            NameObject("/Border"): ArrayObject([NumberObject(0)] * 3),  # no visible box
+            # local GoTo destination referencing the actual page object
+            NameObject("/Dest"): ArrayObject(
+                [writer.pages[target].indirect_reference, NameObject("/Fit")]),
+            NameObject("/P"): map_page.indirect_reference,
+        })
+        annots.append(writer._add_object(annot))
+    print(f"  added {len(boxes)} clickable callout-box links on the overview map "
+          f"(page {map_start + 1})")
+
+
 def main():
     ap = argparse.ArgumentParser(description="Assemble the final report PDF.")
     ap.add_argument("--manifest", default=DEFAULT_MANIFEST,
@@ -86,6 +139,7 @@ def main():
     readers = []          # keep references so pages stay valid until write
     pages = []            # (page_obj, footer_flag)
     plan = []             # (section, file, n_pages, present)
+    map_start = listings_start = listings_count = None   # 0-based page indices
     for row in rows:
         path = os.path.normpath(os.path.join(BOUNDS, row["file"]))
         if not os.path.exists(path):
@@ -94,6 +148,12 @@ def main():
             continue
         reader = PdfReader(path)
         readers.append(reader)
+        start_idx = len(pages)
+        base = os.path.basename(path)
+        if base == MAP_BASENAME:
+            map_start = start_idx
+        elif base == LISTINGS_BASENAME:
+            listings_start, listings_count = start_idx, len(reader.pages)
         for pg in reader.pages:
             pages.append((pg, row["footer"]))
         plan.append((row["section"], row["file"], len(reader.pages), True))
@@ -111,6 +171,8 @@ def main():
             text = f"{REPORT_TITLE}, page {gi} of {total}"
             pg.merge_page(footer_overlay(w, h, text))
         writer.add_page(pg)
+
+    add_overview_map_links(writer, map_start, listings_start, listings_count)
 
     with open(args.out, "wb") as fh:
         writer.write(fh)

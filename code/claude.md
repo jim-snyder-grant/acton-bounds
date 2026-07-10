@@ -318,8 +318,10 @@ with different dependencies (`gspread`, `google-auth-oauthlib` — see
   both gitignored. `python3 overview_map.py [--refresh-roads]`. Needs
   `geopandas`+`matplotlib` (in `requirements.txt`). A right-justified
   footer ("Overview Map, page 1 of 1") is drawn to match the other
-  sections; PDF named-destination anchors for clickable boxes are not
-  built yet (see Overview Map spec / TODO).
+  sections. Also writes `overview_map_links.json` (gitignored sidecar):
+  each callout box's rectangle in PDF points, which `assemble_report.py`
+  uses to make the boxes clickable links to each monument's page in the
+  merged report.
 - **`intro2pdf.py`** (added Jul 9 2026) — renders an intro-section
   Markdown file to a styled PDF matching the monument-listing pages:
   US Letter, 1in margins, Helvetica body, and the same right-justified
@@ -356,6 +358,17 @@ with different dependencies (`gspread`, `google-auth-oauthlib` — see
   own `../Acton Bounds Report 2025-2026.pdf`. NOTE: `report_sections.csv`
   is currently a local (untracked/gitignored) working file — ask Jim
   before adding it to the `.gitignore` allowlist.
+  **Clickable overview-map boxes:** if both the Overview Map and Monument
+  Listings sections are present, it reads `overview_map_links.json` and
+  overlays an internal "go to that monument's page" link annotation over
+  each callout box on the map page (target = `listings_start + Order - 1`,
+  since `bounds2pdf.py` emits one page per monument in `Order` order). The
+  `/Dest` references the real page object (not a bare page number, which
+  some viewers ignore) with an invisible border. It skips linking (rather
+  than risk wrong targets) if the sidecar is missing or the listings page
+  count doesn't match the box count 1:1 — so if a monument page ever spills
+  to two pages, the links are dropped with a warning instead of pointing at
+  the wrong pages.
 
 ---
 

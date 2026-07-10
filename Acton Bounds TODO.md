@@ -127,10 +127,11 @@ Order below reflects planned appearance in the final report (tentative):
         corner monuments, type-coded icons, 51 status-colored numbered
         callout boxes, real MassGIS roads + open water inside the
         boundary, legend/compass/footer. Full spec in "Overview Map
-        spec.md" (Drive). Remaining: [ ] clickable callout boxes linking
-        to each monument's listing page — needs PDF named-destination
-        anchors surviving the final merge (see Final assembly; Jim to
-        confirm whether the map ships in the same PDF as the listings).
+        spec.md" (Drive). Clickable callout boxes: DONE Jul 9 2026 — each
+        box is an internal link to that monument's page in the merged
+        report (added at assembly from an `overview_map_links.json`
+        sidecar; targets `listings_start + Order - 1`). Verified in the
+        57-page assembled PDF.
 6. - [ ] [Both] Monument Listings intro: one or two pages explaining what
         the per-monument pages are and how to read them. A plain-language
         rewrite exists in Drive ("Monument Listings intro - plain

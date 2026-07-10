@@ -52,6 +52,7 @@ HYDRO_ZIP = os.path.join(GIS_DIR, "hydro25k.zip")
 ROADS_CACHE = os.path.join(GIS_DIR, "roads_acton.geojson")
 OUT_PDF = os.path.join(HERE, "overview_map.pdf")
 OUT_PNG = os.path.join(HERE, "overview_map.png")
+LINKS_JSON = os.path.join(HERE, "overview_map_links.json")
 
 ROADS_URL = ("https://gis.massdot.state.ma.us/arcgis/rest/services/Roads/"
              "RoadInventory/MapServer/0/query")
@@ -458,9 +459,17 @@ def main():
         ax.plot(fx, fy, marker=marker, markersize=12, markerfacecolor="none",
                 markeredgecolor="#1a1a1a", markeredgewidth=2.0, zorder=4)
 
+    # box rectangles in PDF points (fig inches * 72; matplotlib's PDF origin is
+    # bottom-left, same as PDF) -- written to a sidecar so assemble_report.py can
+    # drop an internal "go to that monument's page" link over each box.
+    box_rects = {}
     for _, row in df.iterrows():
         order = int(row["Order"])
         fx, fy = positions[order]
+        box_rects[order] = [round((fx - box_size / 2) * 72, 2),
+                            round((fy - box_size / 2) * 72, 2),
+                            round((fx + box_size / 2) * 72, 2),
+                            round((fy + box_size / 2) * 72, 2)]
         color = STATUS_COLORS.get(row["Status"], DEFAULT_STATUS_COLOR)
         txt_color = knockout_text_color(color)
         if not pd.isna(row["rx"]):
@@ -501,8 +510,13 @@ def main():
 
     fig.savefig(OUT_PDF)
     fig.savefig(OUT_PNG, dpi=200)
+
+    with open(LINKS_JSON, "w") as fh:
+        json.dump({"page_w_pt": fig_w_in * 72, "page_h_pt": fig_h_in * 72,
+                   "boxes": box_rects}, fh, indent=2)
+
     print(f"  roads: {n_roads_drawn} segments, {n_road_labels} labeled")
-    print(f"Wrote {OUT_PDF} and {OUT_PNG}")
+    print(f"Wrote {OUT_PDF}, {OUT_PNG}, {os.path.basename(LINKS_JSON)}")
 
 
 def draw_legend(ax, rot_rad):

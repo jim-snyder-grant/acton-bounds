@@ -6,6 +6,19 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-09 [Claude Code] Clickable overview-map callout boxes -- the last
+  of the three report-assembly pieces. overview_map.py writes a sidecar
+  (overview_map_links.json) with each box's rectangle in PDF points;
+  assemble_report.py overlays an internal "go to that monument's page" link
+  over each box on the merged map page (target = listings_start + Order - 1).
+  /Dest references the real page object (spec-correct, not a bare page
+  number) with an invisible border. Verified in the assembled 57pp PDF: 51
+  links, Order 1->p7, 7->p13, 25->p31, 51->p57, page count unchanged. Skips
+  linking with a warning if the sidecar is missing or the listings page
+  count doesn't match the box count 1:1 (spillover guard). All three pieces
+  from notes.forclaude.code (intro2pdf, assemble_report, clickable boxes)
+  are now done.
+
 2026-07-09 [Claude Code] TODO.md: added a consideration (for claude.ai) —
   Jim would like to reorder so the Monument Listings intro comes *before*
   the Overview Map, and have claude.ai rewrite that intro to introduce the
