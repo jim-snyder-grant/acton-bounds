@@ -6,6 +6,11 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-09 [Claude Code] overview_map.py: added a centered "Overview Map"
+  title (bold, rule beneath, intro-section H1 style) in a reserved band at
+  the top of the page; the map/perimeter-boxes shift down to make room, no
+  collision. Updated Overview Map spec.md and re-ran the assembly (57pp).
+
 2026-07-09 [Claude Code] intro2pdf.py: body paragraphs are now left-aligned
   (ragged right) instead of fully justified -- Jim found the justified
   spacing created stretched-out "rivers." Only the BODY style changed;

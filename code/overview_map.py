@@ -208,9 +208,13 @@ def main():
 
     fig_w_in, fig_h_in = 8.5, 14.0
     MARGIN_IN = 0.4
-    draw_w_in, draw_h_in = fig_w_in - 2 * MARGIN_IN, fig_h_in - 2 * MARGIN_IN
+    TITLE_BAND_IN = 0.65   # reserved strip at the top for the "Overview Map" title
+    draw_w_in = fig_w_in - 2 * MARGIN_IN
+    draw_h_in = fig_h_in - 2 * MARGIN_IN - TITLE_BAND_IN
     scale = min(draw_w_in / page_w_m, draw_h_in / page_h_m)
 
+    # to_fig centers the map within [MARGIN_IN, MARGIN_IN + draw_h_in] vertically,
+    # i.e. below the reserved title band, keeping the bottom margin fixed.
     def to_fig(mx, my):
         mx = np.asarray(mx); my = np.asarray(my)
         fx = MARGIN_IN + (mx - page_xmin) * scale + (draw_w_in - page_w_m * scale) / 2
@@ -472,6 +476,14 @@ def main():
 
     # --- legend ---
     draw_legend(ax, rot_rad)
+
+    # --- title (centered bold + rule, matching the intro sections' H1) in the
+    #     reserved top band, above the perimeter boxes ---
+    title_y = fig_h_in - MARGIN_IN - 0.30
+    ax.text(fig_w_in / 2, title_y, "Overview Map", ha="center", va="center",
+            fontsize=20, fontweight="bold", color="#000000", zorder=8)
+    rule_y = title_y - 0.27
+    ax.plot([mx0f, mx1f], [rule_y, rule_y], color="#333333", linewidth=1.0, zorder=8)
 
     # --- caption ---
     ax.text(fig_w_in / 2, MARGIN_IN + 0.15,
