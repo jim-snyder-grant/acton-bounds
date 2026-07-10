@@ -38,7 +38,7 @@ from pypdf import PdfReader, PdfWriter
 HERE = os.path.dirname(os.path.abspath(__file__))
 BOUNDS = os.path.join(HERE, "..")              # section files resolve from here
 DEFAULT_MANIFEST = os.path.join(HERE, "report_sections.csv")
-DEFAULT_OUT = os.path.join(BOUNDS, "Acton Bounds Report 2025-2026 - FULL.pdf")
+DEFAULT_OUT = os.path.join(BOUNDS, "Acton Bounds Report 2025-2026.pdf")
 
 REPORT_TITLE = "Acton Bounds Report 2025-2026"
 MARGIN = 72               # 1 inch from the left edge

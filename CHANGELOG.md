@@ -6,6 +6,18 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-09 [Claude Code] bounds2pdf.py now emits its Monument Listings
+  section to code/monument_listings.pdf (gitignored, alongside
+  overview_map.pdf) instead of the whole-report name, so assemble_report.py
+  can output the canonical ../Acton Bounds Report 2025-2026.pdf. Updated
+  report_sections.csv (row 7 -> code/monument_listings.pdf) and
+  assemble_report.py's default output accordingly. Regenerated both:
+  monument_listings.pdf (51pp) then the assembled ../Acton Bounds Report
+  2025-2026.pdf (57pp), verified the two-part footer on the first monument
+  page ("...page 7 of 57" left, "Monument Listings, page 1 of 51" right).
+  The old whole-report file at that root path (previously just the
+  listings) is now correctly the full assembled report.
+
 2026-07-09 [Claude Code] Added code/assemble_report.py + report_sections.csv:
   the final-assembly step. Concatenates the section PDFs in the order given
   by report_sections.csv (order,section,file,footer) and stamps the

@@ -621,13 +621,17 @@ async def main():
         if browser:
             await browser.close()
 
+    # Output is the Monument Listings *section* PDF, not the whole report:
+    # assemble_report.py merges this with the other sections into the final
+    # '../Acton Bounds Report 2025-2026.pdf'. Kept in code/ (gitignored)
+    # alongside overview_map.pdf.
     doc = SimpleDocTemplate(
-        '../Acton Bounds Report 2025-2026.pdf', pagesize=letter,
+        'monument_listings.pdf', pagesize=letter,
         leftMargin=MARGIN, rightMargin=MARGIN,
         topMargin=MARGIN, bottomMargin=MARGIN,
     )
     doc.build(story, canvasmaker=NumberedCanvas)
-    print('Done — ../Acton Bounds Report 2025-2026.pdf written.')
+    print('Done — monument_listings.pdf written.')
 
 
 if __name__ == '__main__':

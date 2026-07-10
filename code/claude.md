@@ -234,7 +234,7 @@ Bounds/                        # root of the project (Google Drive / Insync)
 │       └── *.jpg              # see filename convention below
 ├── code/                      # THIS directory — all code lives here
 │   ├── CLAUDE.md              # this file
-│   ├── bounds2pdf.py          # main report generator — produces output.pdf
+│   ├── bounds2pdf.py          # Monument Listings section — produces monument_listings.pdf
 │   ├── build_manifest.py      # builds/updates photo_manifest.csv
 │   ├── photo_manifest.csv     # editable photo curation sheet (see below)
 │   └── osm_screenshots/       # OSM map tiles, one per monument row index
@@ -253,7 +253,8 @@ pip install -r requirements.txt
 playwright install chromium   # one-time: downloads the browser binary
                                # pip alone doesn't install this
 python3 build_manifest.py     # step 1: build/update photo manifest
-python3 bounds2pdf.py         # step 2: generate output.pdf
+python3 bounds2pdf.py         # step 2: generate monument_listings.pdf
+python3 assemble_report.py    # step 3: merge all sections -> final report PDF
 ```
 
 Dependencies: `pandas`, `openpyxl` (pandas' `.xlsx` engine, not imported
@@ -348,14 +349,13 @@ with different dependencies (`gspread`, `google-auth-oauthlib` — see
   map) — the footer lands at the same 1in-from-left, 26pt-up spot on
   every page. Needs `pypdf` (in `requirements.txt`). `python3
   assemble_report.py [--manifest CSV] [--out PATH]`; output defaults to
-  `../Acton Bounds Report 2025-2026 - FULL.pdf`. NOTE: `report_sections.csv`
+  the canonical `../Acton Bounds Report 2025-2026.pdf`. As of Jul 9 2026
+  `bounds2pdf.py` emits its Monument Listings *section* to
+  `code/monument_listings.pdf` (gitignored, alongside `overview_map.pdf`)
+  rather than the whole-report name, precisely so the assembled output can
+  own `../Acton Bounds Report 2025-2026.pdf`. NOTE: `report_sections.csv`
   is currently a local (untracked/gitignored) working file — ask Jim
-  before adding it to the `.gitignore` allowlist. NOTE: the monument
-  listings section is still `bounds2pdf.py`'s `../Acton Bounds Report
-  2025-2026.pdf` output; to let the assembled report take that canonical
-  name, `bounds2pdf.py` should eventually emit a section-named file (e.g.
-  `monument_listings.pdf`) instead — not done yet, hence the distinct
-  "- FULL" output name.
+  before adding it to the `.gitignore` allowlist.
 
 ---
 
