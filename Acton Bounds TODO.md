@@ -194,9 +194,11 @@ its own possible item) are folded into section 3, History.
       (order,section,file,footer); missing sections skip gracefully so
       partial drafts assemble; mixed page sizes (letter + legal map)
       handled. Verified on the 5 sections that exist today → 57-page PDF
-      with both footers correct. Output: "Acton Bounds Report 2025-2026 -
-      FULL.pdf". (Once History / How-created / Next-steps sections exist,
-      just add/enable their rows in the manifest and re-run.)
+      with both footers correct. `bounds2pdf.py` now emits its section to
+      `code/monument_listings.pdf`, so the assembly owns the canonical
+      output "Acton Bounds Report 2025-2026.pdf". (Once History /
+      How-created / Next-steps sections exist, just add/enable their rows
+      in the manifest and re-run.)
 - [ ] [Both] Design Google Drive archiving folder structure
 - [ ] [Jim] Manually move Google Drive folder into DocuShare
 - [ ] [Both] Categorize every file/folder in the Bounds Drive folder as one
