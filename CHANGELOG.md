@@ -6,6 +6,27 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-12 [Claude Code] NEW WORKFLOW — canonical report sources in git +
+  a `from-claude-ai/` staging folder. TWO NEW CONVENTIONS, both aimed at
+  keeping the Bounds root clean and making the report reproducible from a
+  clone. (1) **`Bounds/report/`** now holds the canonical, stable-named
+  section sources (`Introduction.md`, `History.md`, `The Work Behind This
+  Report.md`, `Monument Listings — Introduction.md`, `Next Steps.md`),
+  tracked in git (allowlist: `report/*.md` only; rendered `report/*.pdf`
+  stay ignored as build artifacts). `report_sections.csv` is now tracked
+  too and its rows point at `report/*.pdf`. Re-rendered all five into
+  `report/` and re-assembled — "Acton Bounds Report 2025-2026.pdf" still 64
+  pages, all 51 overview-map links still resolve (p12-62). The stale root
+  copies of those drafts/PDFs were deleted. (2) **claude.ai handoffs now go
+  in `Bounds/from-claude-ai/`** (Drive-only, never tracked) instead of the
+  Bounds root — for claude.ai: drop report-section drafts there named for
+  their final section title (e.g. `Introduction.md`, no `draft`/`v2`
+  suffixes), and instruction files as `INBOX-<slug>.md`; Claude Code
+  greps each for secrets, promotes drafts into `report/`, renders +
+  re-assembles, then deletes the staging copy. Full spec in code/claude.md
+  ("Canonical report sources" + updated INBOX protocol). Folder ID stored
+  locally, not committed.
+
 2026-07-12 [Claude Code] Processed 3 INBOX files (intro-section content and
   renames). (1) History: rendered `History of Actons Bounds - draft v2.md`
   (adds a new "The 1904 Atlas itself" subsection) -> History.pdf, now 3 pages.

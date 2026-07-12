@@ -1,0 +1,9 @@
+order,section,file,footer
+1,Cover,FrontPage.pdf,no
+2,Introduction,report/Introduction.pdf,yes
+3,History of Acton's Bounds,report/History.pdf,yes
+4,The Work Behind This Report,report/The Work Behind This Report.pdf,yes
+5,Monument Listings — Introduction,report/Monument Listings — Introduction.pdf,yes
+6,Overview Map,code/overview_map.pdf,yes
+7,Monument Listings,code/monument_listings.pdf,yes
+8,Next Steps,report/Next Steps.pdf,yes

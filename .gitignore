@@ -10,6 +10,7 @@
 # Allow looking inside these directories (see per-directory rules below).
 !/code/
 !/Photos/
+!/report/
 !/.gitignore
 
 # Reviewed by Jim and confirmed clean of personal/sensitive info (Jul 2 2026).
@@ -34,6 +35,17 @@
 !/code/claude.md
 !/code/.python-version
 !/code/requirements.txt
+# Assembly manifest (build config, like a Makefile): scanned clean of
+# IDs/PII Jul 12 2026 -- only relative paths + section names.
+!/code/report_sections.csv
+
+# --- report/ ---
+# Canonical report-section sources (Markdown), maintained by Claude Code and
+# rendered to PDF by intro2pdf.py. Only the .md sources are tracked; the
+# generated *.pdf render outputs stay ignored (build artifacts). Each .md is
+# scanned for secrets/PII before it lands here (see code/claude.md).
+/report/*
+!/report/*.md
 
 # --- Photos/ ---
 /Photos/*

@@ -82,8 +82,19 @@ future Inkscape/GUI-console script that needs a local secret or path.
 
 ## Coordination with claude.ai — INBOX.md protocol
 
-At the start of every Claude Code session, check the Bounds Google Drive
-folder for any file named INBOX.md (or INBOX*.md).
+At the start of every Claude Code session, check the **`from-claude-ai/`
+staging subfolder** of the Bounds Drive folder (`Bounds/from-claude-ai/`,
+created Jul 12 2026) for any file named INBOX.md (or INBOX*.md). This
+subfolder is where claude.ai now drops everything it hands off — both INBOX
+messages and the report-section draft `.md` files they reference — so that
+this churn stays out of the Bounds root. It is Drive-only (never tracked in
+git; `.gitignore` denies it by default). Its Drive folder ID lives in the
+local gitignored `Bounds/.from-claude-ai-folder-id` (not committed — Drive
+IDs are secrets). Day-to-day you just read and delete the local Insync
+mirror at `Bounds/from-claude-ai/`; you only need the ID for Drive-MCP
+operations. (Historical note: before Jul 12 2026 claude.ai wrote INBOX and
+draft files directly to the Bounds root — a few legacy drafts may still
+linger there.)
 
 If one or more exist:
 1. Read each file carefully
@@ -172,6 +183,47 @@ conflict risk and workflow disruption:
   this diff" to "review this diff already sitting on a branch"; and
   `git pull` before editing becomes mandatory for Claude Code only once
   this actually ships (not needed yet, since claude.ai has no write access today).
+
+## Canonical report sources — the `report/` directory (added Jul 12 2026)
+
+The report's editable section sources (the intro-section Markdown) now live
+as **canonical, stable-named files in `Bounds/report/`**, which IS tracked in
+git (allowlisted: only `report/*.md`; the rendered `report/*.pdf` outputs
+stay ignored as build artifacts). This closes the reproducibility gap — a
+fresh clone now has the code *and* the text inputs to rebuild the report
+(`Acton Bounds.xlsx` + `code/report_sections.csv` + `report/*.md`), which
+serves the "another town can reuse the process" goal the report itself
+states.
+
+Current canonical sources (H1 sets each section's footer name):
+`Introduction.md`, `History.md`, `The Work Behind This Report.md`,
+`Monument Listings — Introduction.md`, `Next Steps.md`. (The Cover, Overview
+Map, and Monument Listings sections have no `.md` source — they come from
+`FrontPage.pdf` and the two generating scripts.)
+
+**Promotion workflow (Drive draft → tracked canonical):**
+1. claude.ai writes a new/updated draft into `Bounds/from-claude-ai/` (see
+   INBOX protocol above), named for its final section title (e.g.
+   `Introduction.md`) — not `draft`/`v2` names anymore.
+2. Claude Code **greps it for secrets/PII first** (emails, phone numbers,
+   Drive/Sheet/DocuShare IDs, absolute home paths — same gate as any
+   allowlist addition), then copies the content to `report/<Canonical>.md`.
+3. Render with `intro2pdf.py ... --out ../report/<Canonical>.pdf` (run from
+   `code/` so the `../Photos/...` image paths in a draft resolve), update
+   `report_sections.csv` if the section name/file changed, re-run
+   `assemble_report.py`, re-verify the overview-map links.
+4. Delete the now-promoted staging copy from `from-claude-ai/` (and any
+   Insync `(2)` duplicate) — "move" means *copy into `report/` + delete the
+   staging original*, since git isn't literally moving the Drive file.
+5. `git add`/commit/push the tracked `report/*.md` (+ csv/docs) changes.
+
+**Naming convention for claude.ai handoffs** (relayed via CHANGELOG so
+claude.ai picks it up): drop files in `from-claude-ai/`; name a report-section
+draft with its **final section title** + `.md` (Claude Code promotes it to
+`report/` under that same name); name instruction files `INBOX-<slug>.md`.
+If a correction is needed before Claude Code processes it, just re-create the
+same filename — Insync makes a `(2)` copy and Claude Code takes the newest by
+`modifiedTime` (existing duplicate-reconciliation rule).
 
 ## CHANGELOG protocol
 
@@ -355,9 +407,12 @@ with different dependencies (`gspread`, `google-auth-oauthlib` — see
   `bounds2pdf.py` emits its Monument Listings *section* to
   `code/monument_listings.pdf` (gitignored, alongside `overview_map.pdf`)
   rather than the whole-report name, precisely so the assembled output can
-  own `../Acton Bounds Report 2025-2026.pdf`. NOTE: `report_sections.csv`
-  is currently a local (untracked/gitignored) working file — ask Jim
-  before adding it to the `.gitignore` allowlist.
+  own `../Acton Bounds Report 2025-2026.pdf`. `report_sections.csv` is
+  **tracked** as of Jul 12 2026 (allowlisted — it's build config, like a
+  Makefile, and was scanned clean of IDs/PII first). Its `.md`-derived
+  section rows now point at `report/*.pdf` (see the "Canonical report
+  sources" section); the Cover stays `FrontPage.pdf` and the Overview Map /
+  Monument Listings rows stay `code/*.pdf`.
   **Clickable overview-map boxes:** if both the Overview Map and Monument
   Listings sections are present, it reads `overview_map_links.json` and
   overlays an internal "go to that monument's page" link annotation over
