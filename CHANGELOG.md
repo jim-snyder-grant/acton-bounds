@@ -6,6 +6,24 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-12 [Claude Code] Processed 3 INBOX files (intro-section content and
+  renames). (1) History: rendered `History of Actons Bounds - draft v2.md`
+  (adds a new "The 1904 Atlas itself" subsection) -> History.pdf, now 3 pages.
+  (2) Renamed the "Legal Background" section to "Introduction": rendered
+  `Introduction - draft.md` -> Introduction.pdf (opens with the Oct 21 2024
+  Select Board vote paragraph moved up from the next section), replaced
+  Legal Background.pdf, updated report_sections.csv row 2. (3) Renamed "How
+  This Report Was Created" to "The Work Behind This Report": rendered
+  `The Work Behind This Report - draft.md` (opening vote paragraph removed;
+  uses the corrected "(2)" duplicate body ending "...won't be maintained once
+  the report is complete.") -> The Work Behind This Report.pdf, updated
+  report_sections.csv row 4. Re-ran assemble_report.py -> "Acton Bounds
+  Report 2025-2026.pdf", now 64 pages (was 63); re-verified all 51
+  overview-map callout-box links still resolve 1:1 to the shifted listings
+  pages (now p12-62, Order 1 -> p12 ... Order 51 -> p62). Deleted the
+  superseded "How This Report Was Created" drafts/PDF and both v2 duplicates,
+  plus Legal Background.pdf and the 3 INBOX files.
+
 2026-07-10 [Claude Code] Processed 8 INBOX files -- all 8 report sections
   now drafted, rendered, and assembled into one 63-page PDF for the first
   time. (1) intro2pdf.py gained image support: `![cap](path)` lines group
