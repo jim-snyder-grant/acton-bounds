@@ -6,6 +6,18 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-12 [Claude Code] intro2pdf.py: keep `##` subheads with the content
+  that follows them (keep-with-next), so a subhead is never stranded at the
+  foot of a page while its material begins on the next. New
+  keep_headings_with_next() post-pass wraps each H2 + any following Spacers +
+  the first real content block (paragraph, image row, quote, or bullet) in a
+  KeepTogether; consecutive headings are left un-consumed so each binds to its
+  own body. General/layout-only -- re-flows correctly as the text shifts with
+  edits. Fixed the two reported cases ("The painting process" -> now on the
+  same page as its equipment photos; "A road that disappeared: Parmenter Road"
+  -> now with its paragraph). Re-rendered all five report/*.pdf and
+  re-assembled -- still 64 pages, all 51 overview-map links resolve (p12-62).
+
 2026-07-12 [Claude Code] NEW WORKFLOW — canonical report sources in git +
   a `from-claude-ai/` staging folder. TWO NEW CONVENTIONS, both aimed at
   keeping the Bounds root clean and making the report reproducible from a

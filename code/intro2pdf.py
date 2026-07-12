@@ -11,7 +11,8 @@ final assembly, not here.
 Supported Markdown (what the current intro drafts use):
   # H1            -> section title (centered, bold, rule beneath). Also becomes
                     the footer's section name unless --section is given.
-  ## H2           -> subsection heading
+  ## H2           -> subsection heading (kept on the same page as the content
+                    that follows it -- never stranded at a page foot)
   paragraph       -> left-aligned body text (blank line separates paragraphs)
   - item          -> bullet list (also `* item`)
   > quote         -> block quote (gold left rule, indented); blank `>` splits
@@ -47,7 +48,8 @@ from reportlab.lib.enums import TA_CENTER, TA_LEFT
 from reportlab.lib import colors
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.platypus import (SimpleDocTemplate, Paragraph, Spacer, Table,
-                                TableStyle, HRFlowable, Image as RLImage)
+                                TableStyle, HRFlowable, KeepTogether,
+                                Image as RLImage)
 from reportlab.pdfgen import canvas as pdfcanvas
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -315,6 +317,36 @@ def parse_markdown(text, md_dir=".", ds_map=None):
     return flow, title
 
 
+def keep_headings_with_next(flow):
+    """Bind each `##` subhead to the content that follows it (keep-with-next),
+    so a heading is never stranded alone at the foot of a page while its
+    material starts on the next one.
+
+    For each H2 paragraph we wrap it, plus any immediately following Spacers,
+    plus the first real content flowable after them (paragraph, image row,
+    quote, bullet, ...), in a KeepTogether. Intervening Spacers matter because
+    an image/quote block emits a leading Spacer, so a plain style-level
+    keepWithNext flag would only tie the heading to that empty spacer. A run of
+    consecutive headings is left un-consumed so each still binds to its own
+    body. This is layout-only and general -- it re-flows correctly no matter
+    how the text shifts as the source is edited.
+    """
+    out, i, n = [], 0, len(flow)
+    while i < n:
+        f = flow[i]
+        if getattr(f, "style", None) is H2:
+            group, j = [f], i + 1
+            while j < n and isinstance(flow[j], Spacer):
+                group.append(flow[j]); j += 1
+            if j < n and getattr(flow[j], "style", None) is not H2:
+                group.append(flow[j]); j += 1
+            out.append(KeepTogether(group))
+            i = j
+        else:
+            out.append(f); i += 1
+    return out
+
+
 def make_canvas(section_name):
     """Canvas subclass that stamps the per-section right-justified footer,
     using the same two-pass count-then-draw technique as bounds2pdf.py."""
@@ -346,6 +378,7 @@ def render(md_path, out_path=None, section=None):
         text = fh.read()
     md_dir = os.path.dirname(os.path.abspath(md_path))
     flow, title = parse_markdown(text, md_dir=md_dir, ds_map=load_docushare_map())
+    flow = keep_headings_with_next(flow)
     section_name = section or title or os.path.splitext(os.path.basename(md_path))[0]
     if out_path is None:
         out_path = os.path.splitext(md_path)[0] + ".pdf"
