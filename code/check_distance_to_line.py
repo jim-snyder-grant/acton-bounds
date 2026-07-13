@@ -9,10 +9,11 @@ Not part of the report pipeline -- a standalone diagnostic Jim asked for.
 """
 import math
 import re
+from pathlib import Path
 
 import pandas as pd
 
-XLSX = '../Acton Bounds.xlsx'
+XLSX = Path(__file__).resolve().parent.parent / 'Acton Bounds.xlsx'   # Bounds root
 
 # Acton/Carlisle/Concord's Latitude/Longitude columns hold the *witness*
 # monument's position (the real corner is inside a house; the state put up

@@ -6,6 +6,22 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-12 [Claude Code] Run the whole pipeline from the project root (no
+  more `cd code/`). Every script now anchors its data paths to its own file
+  location (HERE = code/, ROOT = Bounds/) instead of assuming the CWD is
+  `code/`: fixed bounds2pdf.py, build_manifest.py, add_cover_columns.py,
+  merge_docushare.py, scrape_docushare.py, check_distance_to_line.py, and
+  generate_geocoding_csv.py (assemble_report.py, overview_map.py, intro2pdf.py
+  already self-anchored). Added a root `.python-version` (= bounds, tracked)
+  so pyenv activates the report env at the root too; `Photos/` keeps its own
+  `photos` env. Verified the full pipeline end-to-end from the root:
+  bounds2pdf -> code/monument_listings.pdf, intro2pdf -> report/*.pdf,
+  assemble_report -> 64-page report with all 51 overview-map links intact;
+  all edited scripts byte-compile. Updated code/claude.md "Running the
+  Scripts" (run-from-root, output locations, why two pyenv envs). This is
+  Tier 2 of the dev-workflow cleanup; the pruned permission allowlist (Tier 1)
+  comes next, targeting the now-canonical `python3 code/<script>.py` forms.
+
 2026-07-12 [Claude Code] intro2pdf.py: keep `##` subheads with the content
   that follows them (keep-with-next), so a subhead is never stranded at the
   foot of a page while its material begins on the next. New

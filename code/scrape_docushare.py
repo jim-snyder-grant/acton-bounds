@@ -37,7 +37,7 @@ from pathlib import Path
 from urllib.parse import unquote
 
 DEFAULT_COLLECTION_URL = 'https://doc.actonma.gov/dsweb/View/Collection-20474'
-OUTPUT_PATH = 'docushare_urls.csv'
+OUTPUT_PATH = Path(__file__).resolve().parent / 'docushare_urls.csv'   # code-local
 
 # Each document's table row starts at <tr about="..."> and runs to the next
 # </tr> (rows aren't nested in this markup, confirmed against a real fetch).

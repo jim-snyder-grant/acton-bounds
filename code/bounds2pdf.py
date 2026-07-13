@@ -43,8 +43,17 @@ AVAIL_H = PAGE_H - 2 * MARGIN       # 648 pt
 FRAME_PAD = 6
 TEXT_W = AVAIL_W - 2 * FRAME_PAD    # 456 pt
 
-PHOTOS_DIR = Path("../Photos/Monument Photos")
-OSM_DIR = Path("osm_screenshots")
+# Anchor all paths to this script's own location so it runs correctly from
+# any working directory (HERE = code/, ROOT = the Bounds project folder).
+# Shared data lives under ROOT; code-local files (manifest, screenshots,
+# section-PDF output) live under HERE.
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parent
+XLSX_PATH = ROOT / "Acton Bounds.xlsx"
+PHOTOS_DIR = ROOT / "Photos" / "Monument Photos"
+MANIFEST_PATH = HERE / "photo_manifest.csv"
+LISTINGS_OUT = HERE / "monument_listings.pdf"
+OSM_DIR = HERE / "osm_screenshots"
 OSM_CACHE = OSM_DIR / "osm_url_cache.json"
 MAP_SIZE = 150      # OSM map display size in points
 MAP_GAP = 12        # gap between left text column and map column
@@ -399,7 +408,7 @@ async def main():
                         help='Re-capture all OSM screenshots, ignoring the cache')
     args = parser.parse_args()
 
-    df = pd.read_excel('../Acton Bounds.xlsx', sheet_name='Monuments')
+    df = pd.read_excel(XLSX_PATH, sheet_name='Monuments')
 
     # Page order is driven by the 'Order' column (Jim's clockwise walk
     # starting at the Acton/Concord/Maynard/Sudbury corner -- see
@@ -415,9 +424,9 @@ async def main():
         print("NOTE: Monuments sheet rows were not already in Order-column sequence -- re-sorted for this run.")
     df = df.sort_values('Order').reset_index(drop=True)
 
-    df_contacts = pd.read_excel('../Acton Bounds.xlsx', sheet_name='Contacts')
-    manifest = load_manifest('photo_manifest.csv')
-    person_towns = load_person_towns('../Acton Bounds.xlsx')
+    df_contacts = pd.read_excel(XLSX_PATH, sheet_name='Contacts')
+    manifest = load_manifest(MANIFEST_PATH)
+    person_towns = load_person_towns(XLSX_PATH)
 
     contacts = {}
     for _, crow in df_contacts.iterrows():
@@ -626,7 +635,7 @@ async def main():
     # '../Acton Bounds Report 2025-2026.pdf'. Kept in code/ (gitignored)
     # alongside overview_map.pdf.
     doc = SimpleDocTemplate(
-        'monument_listings.pdf', pagesize=letter,
+        str(LISTINGS_OUT), pagesize=letter,
         leftMargin=MARGIN, rightMargin=MARGIN,
         topMargin=MARGIN, bottomMargin=MARGIN,
     )

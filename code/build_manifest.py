@@ -19,11 +19,14 @@ from pathlib import Path
 import pandas as pd
 
 # ---------------------------------------------------------------------------
-# Paths (all relative to code/)
+# Paths anchored to this script's location, so it runs from any working
+# directory (HERE = code/, ROOT = the Bounds project folder).
 # ---------------------------------------------------------------------------
-PHOTOS_DIR = Path("../Photos/Monument Photos")
-XLSX_PATH = Path("../Acton Bounds.xlsx")
-MANIFEST_PATH = Path("photo_manifest.csv")
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parent
+PHOTOS_DIR = ROOT / "Photos" / "Monument Photos"
+XLSX_PATH = ROOT / "Acton Bounds.xlsx"
+MANIFEST_PATH = HERE / "photo_manifest.csv"
 
 MANIFEST_COLUMNS = [
     "filename",

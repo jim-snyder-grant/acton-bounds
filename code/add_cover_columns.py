@@ -23,8 +23,10 @@ from pathlib import Path
 
 from PIL import Image
 
-PHOTOS_DIR = Path("../Photos/Monument Photos")
-MANIFEST_PATH = Path("photo_manifest.csv")
+HERE = Path(__file__).resolve().parent          # code/
+ROOT = HERE.parent                               # Bounds project folder
+PHOTOS_DIR = ROOT / "Photos" / "Monument Photos"
+MANIFEST_PATH = HERE / "photo_manifest.csv"
 
 MANIFEST_COLUMNS = [
     "filename",

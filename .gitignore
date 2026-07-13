@@ -12,6 +12,9 @@
 !/Photos/
 !/report/
 !/.gitignore
+# Root pyenv selector (= "bounds") so the report env activates at the project
+# root, which is where all scripts are now meant to be run from (Jul 12 2026).
+!/.python-version
 
 # Reviewed by Jim and confirmed clean of personal/sensitive info (Jul 2 2026).
 !/Acton Bounds TODO.md

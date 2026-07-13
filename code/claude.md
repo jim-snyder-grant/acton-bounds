@@ -297,24 +297,37 @@ Bounds/                        # root of the project (Google Drive / Insync)
 
 ## Running the Scripts
 
-All scripts are run from the `code/` directory:
+**Run everything from the project root (the `Bounds/` folder)** — the same
+directory git operates in. As of Jul 12 2026 every script anchors its data
+paths to its own file location (`HERE = code/`, `ROOT = Bounds/`), so it works
+from any working directory; and a root-level `.python-version` (= `bounds`)
+makes pyenv activate the report environment at the root too (`Photos/` keeps
+its own `photos` env). There is no longer any need to `cd code/` first.
 
 ```bash
-cd code/
-pip install -r requirements.txt
+# from the Bounds project root:
+pip install -r code/requirements.txt
 playwright install chromium   # one-time: downloads the browser binary
                                # pip alone doesn't install this
-python3 build_manifest.py     # step 1: build/update photo manifest
-python3 bounds2pdf.py         # step 2: generate monument_listings.pdf
-python3 assemble_report.py    # step 3: merge all sections -> final report PDF
+python3 code/build_manifest.py     # step 1: build/update photo manifest
+python3 code/bounds2pdf.py         # step 2: generate code/monument_listings.pdf
+python3 code/intro2pdf.py report/<Section>.md --out report/<Section>.pdf  # step 2b: render intro sections
+python3 code/assemble_report.py    # step 3: merge all sections -> ../Acton Bounds Report 2025-2026.pdf
 ```
 
+Where outputs land: `bounds2pdf.py` and `overview_map.py` write their section
+PDFs into `code/` (`monument_listings.pdf`, `overview_map.pdf`); `intro2pdf.py`
+writes into `report/`; `assemble_report.py` writes the merged report to the
+Bounds root. All are gitignored except the `report/*.md` sources.
+
 Dependencies: `pandas`, `openpyxl` (pandas' `.xlsx` engine, not imported
-directly but required), `Pillow`, `reportlab`, `playwright` — see
-`requirements.txt`. The pyenv environment for `code/` is `bounds` (see
-`.python-version`); `Photos/` has its own separate `photos` environment
-with different dependencies (`gspread`, `google-auth-oauthlib` — see
-`Photos/requirements.txt`) since it talks to the Google Sheets API.
+directly but required), `Pillow`, `reportlab`, `playwright`, `pypdf`,
+`geopandas`, `matplotlib` — see `requirements.txt`. Two separate pyenv
+environments, on purpose: **`bounds`** (report generation — activated at both
+the project root and `code/` via `.python-version`) and **`photos`** (the
+`Photos/` Google-Takeout/Sheets-API pipeline, `gspread` +
+`google-auth-oauthlib`, its own `Photos/.python-version`). They're kept apart
+because only the photo pipeline talks to Google APIs.
 
 ### Standalone utility scripts (not part of the report pipeline)
 
@@ -846,12 +859,12 @@ have a `docushare_url` as of Jul 2 2026 — these are just cleanup):
 3. Drop the new `takeout-*.zip` into `../Photos/`
 4. Run `python3 ../Photos/process_takeout.py` from the Photos directory
    (it re-processes all zips together for consistent naming)
-5. Run `python3 build_manifest.py` from `code/` — new photos are added to
-   the manifest; existing edits are preserved
+5. Run `python3 code/build_manifest.py` (from the project root) — new photos
+   are added to the manifest; existing edits are preserved
 6. Edit `photo_manifest.csv` to set captions, exclude unwanted photos, etc.
 7. Upload batch to DocuShare (manual), then run scrape + merge scripts to
    populate `docushare_url` column (see above)
-8. Run `python3 bounds2pdf.py` to regenerate the report
+8. Run `python3 code/bounds2pdf.py` to regenerate the report
 
 ---
 

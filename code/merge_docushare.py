@@ -14,8 +14,9 @@ Run from the code/ directory:
 import csv
 from pathlib import Path
 
-DOCUSHARE_URLS_PATH = Path('docushare_urls.csv')
-MANIFEST_PATH = Path('photo_manifest.csv')
+HERE = Path(__file__).resolve().parent          # code/ (both files are code-local)
+DOCUSHARE_URLS_PATH = HERE / 'docushare_urls.csv'
+MANIFEST_PATH = HERE / 'photo_manifest.csv'
 
 MANIFEST_COLUMNS = [
     'filename',

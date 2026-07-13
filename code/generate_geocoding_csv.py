@@ -3,10 +3,13 @@ reverse-geocoding drag-and-drop tool (geoapify.com/tools/reverse-geocoding-onlin
 
 Not part of the report pipeline -- a standalone utility Jim asked for.
 """
+from pathlib import Path
+
 import pandas as pd
 
-XLSX = '../Acton Bounds.xlsx'
-OUT = '../monument_coordinates_for_geoapify.csv'
+ROOT = Path(__file__).resolve().parent.parent          # Bounds root
+XLSX = ROOT / 'Acton Bounds.xlsx'
+OUT = ROOT / 'monument_coordinates_for_geoapify.csv'
 
 
 def main():
