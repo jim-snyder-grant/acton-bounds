@@ -6,6 +6,17 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-12 [Claude Code] Allowlist (code/.claude/settings.local.json,
+  personal/uncommitted): two Jim-approved additions to the Tier-1 policy noted
+  below. (1) `cp` auto-allowed ONLY when the source is the from-claude-ai/
+  staging folder (unquoted `cp ../from-claude-ai/*` + quoted
+  `cp "../from-claude-ai/*` for section names with spaces), so promoting a
+  staged draft no longer prompts; all other cp/mv/rm still prompt (Drive-file
+  safety). (2) `echo *` auto-allowed (replacing a useless auto-added
+  exact-string echo rule) -- echo just prints; the only risky forms are
+  redirection (`echo x > file`) and command substitution (`echo $(cmd)`),
+  which aren't how this project writes files (Write/Edit tools do that).
+
 2026-07-12 [Claude Code] Processed first INBOX from the new from-claude-ai/
   staging folder: promoted an updated report/History.md. Only the "Why some
   roads carry different names today" section changed (diff-confirmed, rest
