@@ -350,6 +350,18 @@ python3 code/assemble_report.py    # step 3: merge all sections -> ../Acton Boun
 python3 code/verify_report.py      # step 4: check every overview-map link resolves (PASS/FAIL, exit 0/1)
 ```
 
+**Or just use the Makefile** (added Jul 13 2026, at the project root):
+`make report` runs steps 2b+2 and assembles; `make all` also verifies;
+`make help` lists every target; `make verify` / `make clean` /
+`make overview-map` (needs geopandas) / `make manifest` (photo rescan) are
+separate. It's a **task runner, not an incremental build** — because nearly
+every input/output filename contains spaces (and an em-dash), which Make can't
+use as file targets/prerequisites, every target is `.PHONY` and re-runs its
+step (each is fast, so this is fine). `overview-map` and `manifest` are
+deliberately *not* part of the default build (heavy deps / hand-curated input).
+Run it from the root (`make report`) or from `code/` as `make -C .. report`
+(`-C` is not a git command, so it doesn't trip the git-hook safety prompt).
+
 Where outputs land: `bounds2pdf.py` and `overview_map.py` write their section
 PDFs into `code/` (`monument_listings.pdf`, `overview_map.pdf`); `intro2pdf.py`
 writes into `report/`; `assemble_report.py` writes the merged report to the

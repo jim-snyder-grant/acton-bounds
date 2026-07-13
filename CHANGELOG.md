@@ -6,6 +6,19 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-13 [Claude Code] Added a root Makefile wrapping the build pipeline
+  (tracked; allowlisted in .gitignore). `make report` renders the intro
+  sections + monument listings and assembles; `make all` also verifies;
+  `make help` self-documents; `make verify` / `clean` / `overview-map`
+  (geopandas) / `manifest` (photo rescan) are separate targets. It's a
+  deliberate TASK RUNNER, not an incremental Make: almost every input/output
+  filename has spaces (and one an em-dash), which Make can't use as
+  targets/prereqs, so all targets are .PHONY and re-run their (fast) step.
+  overview-map and manifest are intentionally excluded from the default build
+  (heavy deps / hand-curated input). Tested end to end: make all -> 64-page
+  report, verify PASS. (`make` itself is not yet in the personal allowlist --
+  running it currently prompts; the underlying pipeline scripts already are.)
+
 2026-07-13 [Claude Code] Decided Jim's section-edit workflow and documented it
   in code/claude.md ("Canonical report sources"): Jim edits report/<Section>.md
   IN PLACE with a local Markdown editor (not Google Docs -- it would convert
