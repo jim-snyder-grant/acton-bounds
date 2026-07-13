@@ -6,6 +6,17 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-12 [Claude Code] Processed first INBOX from the new from-claude-ai/
+  staging folder: promoted an updated report/History.md. Only the "Why some
+  roads carry different names today" section changed (diff-confirmed, rest
+  byte-identical): reworded one automobile-era sentence and added two
+  paragraphs -- one on roads that already had their 1904 names (Laws Brook /
+  Strawberry Hill / Nagog Hill) vs. those renamed since (Central St, Pope Rd,
+  Main St), and one on the 1922 New England Interstate route-numbering system
+  (Route 2 was originally NE Interstate Route 7). Scanned clean, re-rendered,
+  re-assembled (still 64 pages, History still p3-5), verify_report.py PASS.
+  Deleted both staged files. New staging workflow worked end to end.
+
 2026-07-12 [Claude Code] code/claude.md (Source control): recorded the
   convention to run git in place, never `cd <dir> && git …` — git discovers
   the repo root, and the `cd`-then-git prefix trips Claude Code's
