@@ -6,6 +6,17 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-13 [Claude Code] Decided Jim's section-edit workflow and documented it
+  in code/claude.md ("Canonical report sources"): Jim edits report/<Section>.md
+  IN PLACE with a local Markdown editor (not Google Docs -- it would convert
+  the file); no from-jim/ staging folder, because git is the change detector
+  (and gives automatic conflict detection vs. claude.ai's from-claude-ai/
+  versions). When Jim says a section is ready, Claude Code git-diffs report/,
+  scans the diff, re-renders + assembles + verifies, commits crediting Jim, and
+  logs it. Two rules: act only when Jim says an edit is ready (ask before
+  touching a dirty file he didn't mention -- WIP safety); flag Jim-vs-claude.ai
+  divergence on the same section before promoting either.
+
 2026-07-12 [Claude Code] Allowlist (code/.claude/settings.local.json,
   personal/uncommitted): two Jim-approved additions to the Tier-1 policy noted
   below. (1) `cp` auto-allowed ONLY when the source is the from-claude-ai/

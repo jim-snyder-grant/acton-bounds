@@ -237,6 +237,28 @@ If a correction is needed before Claude Code processes it, just re-create the
 same filename — Insync makes a `(2)` copy and Claude Code takes the newest by
 `modifiedTime` (existing duplicate-reconciliation rule).
 
+**Jim's direct edits — no staging folder (decided Jul 13 2026).** Unlike
+claude.ai (create-only, no git), Jim has full local + git access, so he edits
+the canonical `report/<Section>.md` files **in place** with any local Markdown
+editor (not Google Docs, which would convert the file). There is no `from-jim/`
+folder — git *is* the change detector, which also makes conflict detection
+automatic. Flow when Jim says he's edited a section (or asks Claude Code to
+"check my edits"):
+
+1. `git diff report/` (or `git status`) to see exactly which sections changed
+   and what changed in them.
+2. Grep the diff for secrets/PII (same gate as any change to a public file).
+3. Re-render the affected section(s) with `intro2pdf.py`, re-run
+   `assemble_report.py`, re-verify with `verify_report.py`.
+4. Commit crediting Jim + add a CHANGELOG note.
+
+Two rules: (a) **WIP safety** — act on a `report/*.md` edit only when Jim says
+it's ready; if you notice a dirty `report/*.md` he didn't mention, *ask before
+touching it* rather than auto-committing (an uncommitted edit isn't part of any
+build, so nothing is lost by waiting). (b) **Conflict flagging** — if a section
+is edited by Jim *and* also has a pending `from-claude-ai/` version, flag the
+divergence and reconcile before promoting/committing either.
+
 ## CHANGELOG protocol
 
 After any session in which you make substantive changes to shared files
