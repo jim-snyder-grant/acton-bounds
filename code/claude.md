@@ -313,6 +313,7 @@ python3 code/build_manifest.py     # step 1: build/update photo manifest
 python3 code/bounds2pdf.py         # step 2: generate code/monument_listings.pdf
 python3 code/intro2pdf.py report/<Section>.md --out report/<Section>.pdf  # step 2b: render intro sections
 python3 code/assemble_report.py    # step 3: merge all sections -> ../Acton Bounds Report 2025-2026.pdf
+python3 code/verify_report.py      # step 4: check every overview-map link resolves (PASS/FAIL, exit 0/1)
 ```
 
 Where outputs land: `bounds2pdf.py` and `overview_map.py` write their section
@@ -437,6 +438,20 @@ because only the photo pipeline talks to Google APIs.
   count doesn't match the box count 1:1 — so if a monument page ever spills
   to two pages, the links are dropped with a warning instead of pointing at
   the wrong pages.
+- **`verify_report.py`** (added Jul 12 2026) — post-assembly QA check: opens
+  the assembled report and confirms every clickable overview-map callout box
+  links to the correct monument page. It's the standalone version of the
+  inline link check that used to be pasted as a `python3 - <<heredoc` after
+  each run (now that ad-hoc Python prompts under the curated allowlist, this
+  committed script is allowlisted instead). Everything is derived from the PDF
+  + `overview_map_links.json` (nothing hardcoded, so it stays correct as page
+  counts shift): finds the one page carrying internal GoTo links, matches each
+  link's rectangle back to its sidecar box to recover its `Order`, and checks
+  that all Orders 1..N are covered once and map slope-1 onto consecutive pages
+  (`Order k -> listings_start + k - 1`) — catching a scrambled or off-by-one
+  set, not just a non-contiguous one. Prints PASS/FAIL and exits 0/1, so it
+  doubles as a pre-commit gate. `python3 code/verify_report.py [--report PATH]`
+  (defaults to the canonical report at the Bounds root). Needs `pypdf`.
 
 ---
 

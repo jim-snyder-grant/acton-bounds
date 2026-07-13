@@ -6,6 +6,16 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-12 [Claude Code] Added code/verify_report.py -- the overview-map link
+  check as a committed, allowlisted script (replaces the inline python3
+  heredoc, which now prompts under the curated Tier-1 allowlist). Derives
+  everything from the assembled PDF + overview_map_links.json (no hardcoded
+  page numbers): finds the map page, matches each callout link's rect back to
+  its sidecar box to recover its Order, and verifies all Orders 1..N are linked
+  once and map slope-1 onto consecutive monument pages. Prints PASS/FAIL, exits
+  0/1 (usable as a pre-commit gate). Verified both paths (PASS on the report,
+  FAIL on a linkless section PDF). Added as pipeline step 4 in code/claude.md.
+
 2026-07-12 [Claude Code] Tier 1 dev-workflow cleanup: curated the Bash
   permission allowlist in code/.claude/settings.local.json (personal, not
   committed -- noted here so a future session keeps the policy). Pruned the
