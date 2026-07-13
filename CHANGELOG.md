@@ -6,6 +6,18 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-12 [Claude Code] Tier 1 dev-workflow cleanup: curated the Bash
+  permission allowlist in code/.claude/settings.local.json (personal, not
+  committed -- noted here so a future session keeps the policy). Pruned the
+  accumulated broad auto-approvals and now DELIBERATELY prompt for: git commit
+  (so Jim reviews every message), on-the-fly Python (python3 -c / `python3 -
+  <<heredoc`), rm/cp/mv, curl, gh, pip install. Auto-allowed (no review value):
+  cd, ls, find, grep, head, tail, mkdir; git status/diff/log/show/ls-files/
+  check-ignore/add/push; and the committed pipeline scripts by name
+  (bounds2pdf/assemble_report/intro2pdf/build_manifest/overview_map, bare and
+  code/-prefixed). Don't re-broaden this without Jim's say-so -- the prompts on
+  commit and ad-hoc code are intentional.
+
 2026-07-12 [Claude Code] Run the whole pipeline from the project root (no
   more `cd code/`). Every script now anchors its data paths to its own file
   location (HERE = code/, ROOT = Bounds/) instead of assuming the CWD is
