@@ -55,6 +55,18 @@ without Jim relaying it by hand. Remember to `git add`/`commit`/`push`
 after making changes to any tracked file — this doesn't happen
 automatically the way Drive/Insync sync does.
 
+**Run git in place — never `cd <dir> && git …`.** Git discovers the repo
+root by walking up, and every working directory here (`code/`, the project
+root, `Photos/`) is already inside the repo, so plain `git status` /
+`git diff` / `git add -A` / `git commit` / `git push` work as-is. Prepending
+a `cd` trips Claude Code's "changes directory before running git, which can
+execute untrusted hooks from the target directory" safety prompt — a
+legitimate warning (doubly apt here since the repo lives in a cloud-synced
+Insync/Drive folder, so `.git/hooks/` is marginally more exposed than a
+purely-local repo). Don't suppress it by allowlisting the `cd … && git`
+combo; just don't `cd` before git. To stage a file outside the current dir,
+use `git add -A` or a relative path (`git add ../CHANGELOG.md`), not a `cd`.
+
 **Before adding any new file to the allowlist, grep it for secrets first**
 (Google Sheet/Doc/Drive IDs, API keys, hardcoded absolute paths with a
 username/email in them, etc.) — this bit us once already (Jul 2 2026):

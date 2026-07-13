@@ -6,6 +6,13 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-12 [Claude Code] code/claude.md (Source control): recorded the
+  convention to run git in place, never `cd <dir> && git …` — git discovers
+  the repo root, and the `cd`-then-git prefix trips Claude Code's
+  untrusted-hook-execution safety prompt (extra apt since this repo sits in a
+  cloud-synced Insync/Drive folder). Stage out-of-dir files with `git add -A`
+  or a relative path instead.
+
 2026-07-12 [Claude Code] Added code/verify_report.py -- the overview-map link
   check as a committed, allowlisted script (replaces the inline python3
   heredoc, which now prompts under the curated Tier-1 allowlist). Derives
