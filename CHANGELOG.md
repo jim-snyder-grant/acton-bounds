@@ -6,6 +6,22 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-14 [Claude Code] Processed a Jim direct-edit + 7 new photos.
+  (1) report/History.md: Jim rewrote the "Why some roads carry different names
+  today" section (reordered paragraphs, added Annual-Reports / telephone /
+  emergency-services material, Parmenter "Ave" correction + Parker-St
+  hypothesis); scanned clean, re-rendered (still 3 pages). (2) 7 hand-named
+  photos in Monument Photos/ (a Jul 14 Westford/Littleton visit) all had the
+  comma-before-datetime with NO space -- which build_manifest's `", "` split
+  rejects as PARSE_ERROR -- so renamed all 7 to the ", " convention, then ran
+  build_manifest: all 7 matched real monuments (Littleton Nashoba Rd &
+  Great Rd, Westford Westford Lane, Westford Bay Drive East & West, and the
+  Acton/Westford corner x2), no UNMATCHED/PARSE_ERROR. New rows default
+  include=yes/section=monument (captions blank except the 2 corner shots).
+  Re-ran bounds2pdf + assemble + verify: 64 pages, no photo spillover, all 51
+  overview-map links PASS. Only report/History.md is a tracked change (manifest
+  + photos are gitignored).
+
 2026-07-13 [Claude Code] Added a root Makefile wrapping the build pipeline
   (tracked; allowlisted in .gitignore). `make report` renders the intro
   sections + monument listings and assembles; `make all` also verifies;
