@@ -34,7 +34,7 @@ Each monument page — and each box on the overview map — carries a number (1 
 
 ## Corners and street crossings
 
-Only 12 of the 51 monuments are true corners — spots where the town line bends, or a new town starts. The other 39 are just places where an ordinary road crosses the boundary. You can tell which is which by the name: a corner is named for the towns that meet there, like "Acton/Carlisle/Concord." A street crossing adds the street name too, like "Acton/Concord Powder Mill Road." On the map, corners are circles and street crossings are squares.
+Only 11 of the 51 monuments are true corners — spots where the town line bends, or a new town starts. Another 38 are places where an ordinary road crosses the boundary, and the last 2 are witness markers (see below). The name tells you which: a corner is named for the towns that meet there, like "Acton/Carlisle/Westford"; a street crossing adds the street, like "Acton/Concord Powder Mill Road"; and a witness marker says so in its own name. On the map, corners are circles, street crossings are squares, and witness markers are triangles.
 
 ## Where the coordinates come from
 
@@ -44,7 +44,7 @@ Only 12 of the 51 monuments are true corners — spots where the town line bends
 
 ## Witness markers
 
-A few monuments aren't at the true corner. They're "witness markers" — placed nearby because the real spot can't be marked (say, it's inside a house). On the map they're the triangle icons. If a witness marker's coordinates look a little off the boundary line, that's expected, not a mistake.
+A few monuments aren't at the true corner. They're "witness markers" — placed nearby because the real spot can't be marked (say, it's inside a house). On the map they're the triangle icons.
 
 ## Numbered pairs
 

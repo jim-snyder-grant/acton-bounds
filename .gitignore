@@ -70,4 +70,7 @@
 !/Photos/CLAUDE.md
 !/Photos/requirements.txt
 !/Photos/.python-version
-!/Photos/Acton Bounds - SiteNames.csv
+# "Acton Bounds - SiteNames.csv" was here; deleted Jul 15 2026. A one-off Google
+# Sheets export of the SiteNames sheet, read by nothing, untouched since the
+# initial commit, and silently stale (it still carried a "Bay  Drive" double
+# space long since fixed in the xlsx). The same names live in Acton Bounds.xlsx.

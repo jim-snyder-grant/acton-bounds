@@ -6,6 +6,53 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-15 [Claude Code] Jim's witness-monument name fix (xlsx) + the fallout.
+  Jim fixed a Google Sheet formula error that had mis-named the 2 witness
+  monuments, and re-downloaded Acton Bounds.xlsx.
+  - **What actually changed in the xlsx** (56 cells, but only 2 real edits):
+    the Name formula in A2:A52 gained `or(B="Street Crossing",B="Witness")` so
+    Witness rows append their column-K descriptor, and K13 `Pope Road` ->
+    `Pope Road Witness Marker`. Everything else (For Mapping K12, For Measuring
+    I9, SiteNames A13/A36) is cached-value propagation, not independent edits.
+    Net: Order 12 `Acton/Carlisle/Concord` -> `...Pope Road Witness Marker`,
+    Order 31 `Acton/Littleton` -> `Acton/Littleton W B Marker on Fort Pond
+    Road`. All 51 names unique before and after; the other 49 untouched.
+  - **3 photos would have silently vanished.** bounds2pdf matches photos to
+    monuments by exact name; 3 included photos still carried the old
+    `Acton/Carlisle/Concord`, which now matches nothing -- the page would just
+    render without them, no error. build_manifest can't fix it ("existing rows
+    are never overwritten"), so their monument_name was hand-updated. The same
+    fix *repaired* Order 31: its 2 photos were already named
+    `Acton-Littleton W B Marker on Fort Pond Road` and now match for the first
+    time. Every manifest name once again resolves to a real monument.
+  - **Deleted `Photos/Acton Bounds - SiteNames.csv`** (Jim's call): a one-off
+    Google Sheets export, read by no script, untouched since the initial commit,
+    and already silently stale -- it still carried a `Bay  Drive` double space
+    long since fixed in the xlsx. Its names live in Acton Bounds.xlsx. Allowlist
+    line removed with a note.
+  - **The rename broke the "Corners and street crossings" prose**, which used
+    "Acton/Carlisle/Concord" as its example of a pure corner name -- a monument
+    that is actually a *witness marker*, and whose name now carries a descriptor,
+    contradicting the very rule the sentence teaches. Counts were wrong too (it
+    said 12/39; the sheet says 11 Corner / 38 Street Crossing / 2 Witness).
+    Rewritten with correct counts and a real corner as the example. NOTE the
+    rest of the section already documented witness markers and their triangle
+    icons (the "## Witness markers" section, and the overview-map paragraph) --
+    an earlier claim here that the prose never mentioned triangles was wrong.
+  - **Page-count guard:** the first rewrite pushed the section to 3 pages,
+    orphaning "A few more details" onto a near-empty p11 (intro2pdf keeps an H2
+    with the text beneath it, so the whole block moved). Tightened, and Jim cut
+    the now-redundant "if a witness marker's coordinates look a little off the
+    boundary line" sentence. Back to 64 pages, intro back to p9-10, verify PASS.
+  - **OSM thumbnails need nothing.** They're keyed by post-sort row index and
+    invalidated by the OpenStreetMap-link column, which Jim's edit didn't touch;
+    build reports "All OSM screenshots cached". (Checking this the naive way --
+    raw read_excel order -- falsely flags 47 of 51 as stale: bounds2pdf sorts by
+    `Order` and resets the index first. Replicate the sort before comparing.)
+  - `overview_map.py:62` already hardcoded the true A/C/C corner coordinate,
+    noting the recorded row was the witness ~35m away -- the code had been
+    working around exactly the data error Jim just fixed.
+
 2026-07-15 [Claude Code] code/photo_manifest.csv is now TRACKED (allowlisted).
   Jim's call after weighing git vs DocuShare. It was ignored by the default-deny
   `/code/*` rule, never by a decision that it was unsafe. Scanned clean Jul 15
@@ -15,9 +62,10 @@ Format: YYYY-MM-DD [who] file changed: description
     `cover_candidate` are hand-authored editorial judgment (62 captions, 7
     exclusion notes) that `build_manifest.py` cannot regenerate from the photos.
     They had no durable home — the report itself says Drive isn't an archive.
-    Precedent: Acton Bounds.xlsx, Photos/Acton Bounds - SiteNames.csv and
-    report_sections.csv are all tracked curated data, each allowlisted after the
-    same scan.
+    Precedent: Acton Bounds.xlsx and report_sections.csv are tracked curated
+    data, each allowlisted after the same scan. (Photos/Acton Bounds -
+    SiteNames.csv was also cited here; it was deleted later the same day as dead
+    — see the entry above.)
   - **`exclude_reason` is published deliberately** (Jim's call): it explains why
     a photo was left out so a future Acton group can revisit the decision. Don't
     "clean it up".
