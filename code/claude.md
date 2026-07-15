@@ -285,6 +285,16 @@ Claude Code does not need to touch the cover page. If it needs
 regeneration, run `acton_cover.py` from within Inkscape's Simple Inkscape
 Scripting extension dialog.
 
+**The draft stamp is an overlay, not a cover edit — keep it that way.**
+`make draft` marks the cover "DRAFT FOR REVIEW · <timestamp>", but that is
+drawn at assembly time by `assemble_report.py` (see COVER_STAMP_*), not built
+into FrontPage.pdf. Two reasons it must stay an overlay: FrontPage.pdf is one
+static file shared by the draft and final builds, so a baked-in DRAFT would
+ship in the *final* report; and the stamp carries a per-build timestamp, so
+baking it in would mean an Inkscape round-trip for every draft. If a future
+task is "put X on the cover", ask whether X differs between draft and final or
+changes per build — if either, it belongs in the assembly overlay.
+
 Key technical notes for reference:
 - Photos are pre-downscaled via PIL (max 800px) before Inkscape sees them;
   embed=True is used. This keeps the exported PDF small (~5MB vs 145MB raw).

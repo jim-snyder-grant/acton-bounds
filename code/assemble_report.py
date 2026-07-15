@@ -22,11 +22,21 @@ Pages may be mixed sizes (letter sections + the legal-size overview map); the
 footer is stamped per page at the same 1in-from-left, 26pt-up position
 regardless, so it lines up across sizes.
 
+--draft marks a build for circulation to reviewers: every running footer gets
+the assembly date/time, the cover gets a centered "DRAFT FOR REVIEW — <stamp>",
+and the file is named by that stamp instead of overwriting the real report. The
+stamp is the assembly time, NOT a git commit -- photo_manifest.csv is gitignored,
+so two builds at the same SHA can legitimately differ. Corollary: an old draft
+cannot be reconstructed from the repo, so keep every PDF you actually send out;
+the timestamped filename is what makes that pile of files an archive.
+
 Usage:
   python3 assemble_report.py [--manifest report_sections.csv] [--out PATH]
+  python3 assemble_report.py --draft
 """
 import argparse
 import csv
+import datetime
 import json
 import os
 import sys
@@ -34,6 +44,7 @@ from io import BytesIO
 
 from reportlab.pdfgen import canvas as pdfcanvas
 from reportlab.lib.colors import HexColor
+from reportlab.pdfbase.pdfmetrics import stringWidth
 from pypdf import PdfReader, PdfWriter
 from pypdf.generic import (ArrayObject, DictionaryObject, FloatObject,
                            NameObject, NumberObject)
@@ -51,9 +62,35 @@ LISTINGS_BASENAME = "monument_listings.pdf"
 LINKS_JSON = os.path.join(HERE, "overview_map_links.json")
 
 REPORT_TITLE = "Acton Bounds Report 2025-2026"
+# --draft trims the title in the left footer. The full title plus a timestamp
+# does NOT fit: the left footer shares its baseline with each section's
+# right-justified "<Section>, page X of M", and on the "Monument Listings —
+# Introduction" pages the full title + stamp overruns it by ~27pt. "Acton
+# Bounds" leaves ~59pt of clearance. See footer_clearance() below.
+DRAFT_TITLE = "Acton Bounds"
 MARGIN = 72               # 1 inch from the left edge
 FOOTER_Y = 0.5 * 72 - 10  # 26 pt up from the bottom edge (matches sections)
 GRAY = HexColor("#555555")
+FOOTER_FONT = ("Helvetica", 9)      # must match intro2pdf.py / bounds2pdf.py
+MIN_FOOTER_GAP = 18                 # pt of white the two footers must keep
+
+# --draft cover stamp. It is overlaid here at assembly time rather than built
+# into the cover, on purpose: FrontPage.pdf is a hand-made Inkscape artifact
+# (acton_cover.py is a SimpInkScr script, not part of `make`) and is shared by
+# the draft and final builds. Baking DRAFT into it would leak into the final
+# report, and the timestamp changes every build, so it would mean an Inkscape
+# round-trip per draft. As an overlay it costs nothing and cannot reach `make
+# report`.
+#
+# Geometry/typography: the cover is a full-bleed collage around a cream panel.
+# The footer baseline (y=26) lands on the photos and is unreadable, so the stamp
+# sits in the clear cream just under the "PERAMBULATION OF TOWN BOUNDS" line,
+# grouping with the title block. Times-Roman approximates the cover's Georgia
+# (not installed here, and not worth a font dependency); #8a7a5a is exactly the
+# cover's rule_color, so the line reads as part of the title block.
+COVER_STAMP_Y = 280
+COVER_STAMP_FONT = ("Times-Roman", 11)
+COVER_STAMP_COLOR = HexColor("#8a7a5a")
 
 
 def read_manifest(path):
@@ -74,12 +111,39 @@ def footer_overlay(width, height, text):
     """A single-page PDF (page-sized) carrying just the left footer text."""
     buf = BytesIO()
     c = pdfcanvas.Canvas(buf, pagesize=(width, height))
-    c.setFont("Helvetica", 9)
+    c.setFont(*FOOTER_FONT)
     c.setFillColor(GRAY)
     c.drawString(MARGIN, FOOTER_Y, text)
     c.save()
     buf.seek(0)
     return PdfReader(buf).pages[0]
+
+
+def cover_stamp_overlay(width, height, text):
+    """A single-page PDF carrying just the centered draft line for the cover."""
+    buf = BytesIO()
+    c = pdfcanvas.Canvas(buf, pagesize=(width, height))
+    c.setFont(*COVER_STAMP_FONT)
+    c.setFillColor(COVER_STAMP_COLOR)
+    c.drawCentredString(width / 2.0, COVER_STAMP_Y, text)
+    c.save()
+    buf.seek(0)
+    return PdfReader(buf).pages[0]
+
+
+def footer_clearance(left_text, section, page_w, sec_pg, sec_total):
+    """White space (pt) between the left whole-report footer and the section's
+    own right-justified footer, which share a baseline.
+
+    The right-hand text isn't ours -- intro2pdf.py / bounds2pdf.py bake it into
+    each section PDF -- but its format is fixed, so we can reconstruct it from
+    the manifest and measure. Guards against a long title/stamp/section name
+    silently overprinting the other footer.
+    """
+    right_text = f"{section}, page {sec_pg} of {sec_total}"
+    used = (stringWidth(left_text, *FOOTER_FONT)
+            + stringWidth(right_text, *FOOTER_FONT))
+    return (page_w - 2 * MARGIN) - used
 
 
 def add_overview_map_links(writer, map_start, listings_start, listings_count):
@@ -129,9 +193,22 @@ def main():
     ap = argparse.ArgumentParser(description="Assemble the final report PDF.")
     ap.add_argument("--manifest", default=DEFAULT_MANIFEST,
                     help="section-order CSV (default: report_sections.csv)")
-    ap.add_argument("--out", default=DEFAULT_OUT,
+    ap.add_argument("--out", default=None,
                     help="output PDF path")
+    ap.add_argument("--draft", action="store_true",
+                    help="stamp every page with the assembly date/time and mark "
+                         "the cover DRAFT FOR REVIEW; names the file by timestamp")
     args = ap.parse_args()
+
+    # A draft is identified by when it was assembled, deliberately not by a git
+    # commit: photo_manifest.csv is gitignored, so which photos/captions/links
+    # are in a build is NOT captured by any commit -- two builds at the same SHA
+    # can differ. The assembly time is the only honest identifier.
+    stamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M") if args.draft else None
+    if args.out is None:
+        args.out = (os.path.join(BOUNDS, "Acton Bounds Report — DRAFT %s.pdf"
+                                 % stamp.replace(":", "-"))
+                    if args.draft else DEFAULT_OUT)
 
     rows = read_manifest(args.manifest)
 
@@ -154,9 +231,10 @@ def main():
             map_start = start_idx
         elif base == LISTINGS_BASENAME:
             listings_start, listings_count = start_idx, len(reader.pages)
-        for pg in reader.pages:
-            pages.append((pg, row["footer"]))
-        plan.append((row["section"], row["file"], len(reader.pages), True))
+        n_sec = len(reader.pages)
+        for sec_pg, pg in enumerate(reader.pages, start=1):
+            pages.append((pg, row["footer"], row["section"], sec_pg, n_sec))
+        plan.append((row["section"], row["file"], n_sec, True))
 
     if not pages:
         sys.exit("No section PDFs found -- nothing to assemble.")
@@ -165,12 +243,31 @@ def main():
 
     # Second pass: stamp the whole-report footer and write out.
     writer = PdfWriter()
-    for gi, (pg, flag) in enumerate(pages, start=1):
+    title = f"{DRAFT_TITLE} DRAFT {stamp}" if args.draft else REPORT_TITLE
+    tightest = None
+    for gi, (pg, flag, section, sec_pg, sec_total) in enumerate(pages, start=1):
+        w, h = float(pg.mediabox.width), float(pg.mediabox.height)
         if flag:
-            w, h = float(pg.mediabox.width), float(pg.mediabox.height)
-            text = f"{REPORT_TITLE}, page {gi} of {total}"
+            text = f"{title}, page {gi} of {total}"
+            gap = footer_clearance(text, section, w, sec_pg, sec_total)
+            if tightest is None or gap < tightest[0]:
+                tightest = (gap, gi, section)
             pg.merge_page(footer_overlay(w, h, text))
+        elif args.draft:
+            # The cover carries no running footer (footer=no), so a draft would
+            # otherwise go out with an unmarked front page -- the one page most
+            # likely to be forwarded on its own.
+            pg.merge_page(cover_stamp_overlay(w, h, f"DRAFT FOR REVIEW · {stamp}"))
         writer.add_page(pg)
+
+    if tightest is not None:
+        gap, gi, section = tightest
+        if gap < MIN_FOOTER_GAP:
+            print(f"  WARNING: footers nearly collide on page {gi} ({section}): "
+                  f"{gap:.1f}pt of white, want >={MIN_FOOTER_GAP}pt. Shorten the "
+                  f"title/stamp or that section name.")
+        else:
+            print(f"  footer clearance OK (tightest: {gap:.1f}pt on page {gi})")
 
     add_overview_map_links(writer, map_start, listings_start, listings_count)
 

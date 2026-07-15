@@ -6,6 +6,42 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-15 [Claude Code] assemble_report.py + Makefile: `make draft` — reviewer
+  drafts stamped with the assembly date/time. Jim is sending the report to early
+  reviewers and needs to know which version a comment refers to.
+  - **`make draft`** stamps every running footer with the assembly time, marks
+    the cover "DRAFT FOR REVIEW · <stamp>", and writes to its own timestamped
+    filename ("Acton Bounds Report — DRAFT 2026-07-15 15-11.pdf", gitignored)
+    so it never overwrites the real report. `make report` is untouched and
+    verified to contain zero "DRAFT" occurrences.
+  - **Timestamp, deliberately NOT a git SHA.** photo_manifest.csv is gitignored,
+    so which photos/captions/links are in a build isn't captured by any commit —
+    two builds at the same SHA can differ. Assembly time is the only honest ID.
+    **Corollary Jim should know: an old draft cannot be reconstructed.** Keep
+    every PDF actually sent; the timestamped filename makes that pile an archive.
+  - **The full title does NOT fit beside a timestamp.** The left whole-report
+    footer shares a baseline with each section's right-justified "<Section>,
+    page X of M". Baseline slack is 90.3pt (tightest: p10, "Monument Listings —
+    Introduction"); a " — DRAFT <ISO datetime>" suffix costs ~118pt, overrunning
+    by 27pt. Even date-only overran by 2.3pt. Draft mode therefore trims the
+    footer title to "Acton Bounds" (59.3pt clearance). A two-line footer was
+    rejected: a second baseline would sit ~0.2in from the paper edge, inside
+    most printers' unprintable margin, and reviewers print these.
+  - **New guard `footer_clearance()`** reconstructs each section's right footer
+    from the manifest and warns if the two footers come within MIN_FOOTER_GAP
+    (18pt). Cross-checked against text extracted from the built PDF: agrees
+    exactly (90.3pt final / 59.3pt draft). This is what would catch a future
+    section rename silently overprinting the footer.
+  - **Cover stamp is an assembly-time overlay, never a cover edit** — see the
+    new note in claude.md "Cover page" section. FrontPage.pdf is a hand-made
+    Inkscape artifact shared by both builds, so baking DRAFT in would ship it in
+    the final report, and the per-build timestamp would force an Inkscape
+    round-trip per draft. Placed in the cream panel under "PERAMBULATION OF TOWN
+    BOUNDS" (the footer baseline lands on the collage photos and is illegible),
+    in Times-Roman at the cover's exact rule_color #8a7a5a, so it reads as part
+    of the title block. Georgia isn't installed here (fc-list "georgia" hits are
+    Noto Serif *Georgian* — a different script — not the typeface).
+
 2026-07-15 [Claude Code] intro2pdf.py: inline link support; + Jim's edits to 3
   report sections, rebuilt. Jim edited report/History.md, report/Next Steps.md
   (new "Who does the work next time" section on Sudbury's staff-based process)

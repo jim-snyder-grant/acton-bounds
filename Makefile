@@ -15,13 +15,21 @@
 PY := python3
 
 .DEFAULT_GOAL := all
-.PHONY: all report sections listings assemble verify overview-map manifest clean help
+.PHONY: all report draft sections listings assemble verify overview-map manifest clean help
 
 ## all:          build the report (sections + listings + assemble) then verify
 all: report verify
 
 ## report:       render sections + monument listings, then assemble the final PDF
 report: sections listings assemble
+
+## draft:        build a reviewer draft: every page stamped with the assembly
+##               date/time, cover marked DRAFT FOR REVIEW, written to its own
+##               timestamped filename so it never overwrites the real report.
+##               Keep the PDFs you send -- an old draft can't be rebuilt (the
+##               photo manifest is gitignored, so a commit doesn't pin a build).
+draft: sections listings
+	$(PY) code/assemble_report.py --draft
 
 ## sections:     render every report/*.md intro section to report/*.pdf
 sections:
