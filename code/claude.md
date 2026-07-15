@@ -379,13 +379,15 @@ writes into `report/`; `assemble_report.py` writes the merged report to the
 Bounds root. All are gitignored except the `report/*.md` sources.
 
 **`drafts/` — do not prune, and do not treat as regenerable output.** Every
-other build product here can be rebuilt at will; a draft cannot. The report
-depends on `photo_manifest.csv`, which is gitignored, so no commit pins a
-build and there is nothing to rebuild an old draft *from*. Each `make draft`
-drops one timestamped PDF in `drafts/`, matching the stamp in its own footers,
-and that file is the only record of what a reviewer actually saw when their
-comments come back. It's gitignored (the root `/*` rule) but sits inside the
-Insync/Drive tree, so it syncs off-machine without being committed.
+other build product here can be rebuilt at will; a draft cannot. Tracking
+`photo_manifest.csv` (Jul 15 2026) pins the captions, inclusion decisions and
+DocuShare links, but the **photo files themselves are not in git** (`/Photos/*`
+is ignored; zero `.jpg` tracked), so a commit still doesn't pin a build and an
+old draft can't be faithfully reconstructed. Each `make draft` drops one
+timestamped PDF in `drafts/`, matching the stamp in its own footers, and that
+file is the only record of what a reviewer actually saw when their comments come
+back. It's gitignored (the root `/*` rule) but sits inside the Insync/Drive
+tree, so it syncs off-machine without being committed.
 
 Dependencies: `pandas`, `openpyxl` (pandas' `.xlsx` engine, not imported
 directly but required), `Pillow`, `reportlab`, `playwright`, `pypdf`,
@@ -594,6 +596,19 @@ Examples:
 This CSV is the bridge between the photo files and `bounds2pdf.py`.
 It is created and updated by `build_manifest.py` and **hand-edited by the user**
 to curate which photos appear in the report and with what captions.
+
+**TRACKED as of Jul 15 2026** (allowlisted in `.gitignore`) — it was previously
+ignored by the default-deny `/code/*` rule, not by a decision that it was
+unsafe. It's tracked because `caption` / `include` / `exclude_reason` /
+`section` / `cover_candidate` are hand-authored editorial judgment that
+`build_manifest.py` cannot regenerate, and they had no durable home (Drive is
+explicitly not an archive). Two consequences: **(1)** treat Jim's hand edits as
+committable work, not disposable local state — commit them rather than leaving
+them dirty; **(2)** it's a public repo, so re-scan for secrets/PII before
+committing new captions, the same gate as `report/*.md`. `exclude_reason` is
+published deliberately (Jim's call, Jul 15 2026): it explains why a photo was
+left out, so a future Acton group can revisit the decision. Note the photo
+*files* remain untracked, so a commit still doesn't pin a build.
 
 ### Columns
 

@@ -6,6 +6,39 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-15 [Claude Code] code/photo_manifest.csv is now TRACKED (allowlisted).
+  Jim's call after weighing git vs DocuShare. It was ignored by the default-deny
+  `/code/*` rule, never by a decision that it was unsafe. Scanned clean Jul 15
+  2026: no emails, local paths or secrets; the only caption "hits" were false
+  positives ("Ben's Woods" = a place; "their painting" = the Town of Carlisle).
+  - **Why:** `caption` / `include` / `exclude_reason` / `section` /
+    `cover_candidate` are hand-authored editorial judgment (62 captions, 7
+    exclusion notes) that `build_manifest.py` cannot regenerate from the photos.
+    They had no durable home — the report itself says Drive isn't an archive.
+    Precedent: Acton Bounds.xlsx, Photos/Acton Bounds - SiteNames.csv and
+    report_sections.csv are all tracked curated data, each allowlisted after the
+    same scan.
+  - **`exclude_reason` is published deliberately** (Jim's call): it explains why
+    a photo was left out so a future Acton group can revisit the decision. Don't
+    "clean it up".
+  - **DocuShare was considered and rejected as the manifest's home** — no diff,
+    no history, no blame, manual upload, goes stale on the first caption edit,
+    and it can't be a build input (it was down for days this week). The right
+    split is git for the small thing that changes constantly, DocuShare for the
+    big binaries that never do. A final snapshot into DocuShare alongside the
+    finished report is still worth doing as permanent public record.
+  - **What this does and does not change.** A commit now pins captions,
+    inclusion decisions and all 182 DocuShare links. It does NOT pin a build:
+    the photo files themselves are still untracked (`/Photos/*` ignored, zero
+    .jpg in git). So `make draft` still stamps by assembly time not SHA, and
+    `drafts/` is still do-not-prune. Claims to the contrary in the two entries
+    below were true when written and are now marked SUPERSEDED in place; the
+    same rationale in Makefile / assemble_report.py / claude.md has been
+    corrected to blame the photos rather than the manifest.
+  - Also corrected a *pre-existing* wrong claim found while auditing: a stored
+    note called report_sections.csv a "gitignored working file" — it has been
+    tracked since Jul 12 2026.
+
 2026-07-15 [Claude Code] `make draft` now writes to a new `drafts/` folder.
   Jim's call, so sent drafts accumulate as an archive instead of piling up in
   the Bounds root. `assemble_report.py` creates `drafts/` on demand (DRAFTS_DIR,
@@ -29,6 +62,9 @@ Format: YYYY-MM-DD [who] file changed: description
   - **Timestamp, deliberately NOT a git SHA.** photo_manifest.csv is gitignored,
     so which photos/captions/links are in a build isn't captured by any commit —
     two builds at the same SHA can differ. Assembly time is the only honest ID.
+    [SUPERSEDED same day — the manifest is now tracked; see the entry above. The
+    conclusion still holds, but because the *photo files* aren't in git, not the
+    manifest.]
     **Corollary Jim should know: an old draft cannot be reconstructed.** Keep
     every PDF actually sent; the timestamped filename makes that pile an archive.
   - **The full title does NOT fit beside a timestamp.** The left whole-report
@@ -112,6 +148,8 @@ Format: YYYY-MM-DD [who] file changed: description
   - Nothing here is tracked: the report PDF, photo_manifest.csv and
     docushare_urls.csv are all gitignored build outputs, so the manifest's hand
     edits still live only locally (synced to Drive). Only this entry is tracked.
+    [SUPERSEDED same day — photo_manifest.csv is now tracked, and those hand
+    edits are committed. The report PDF and docushare_urls.csv remain ignored.]
 
 2026-07-14 [Claude Code] >>> RESOLVED 2026-07-15, see entry above <<< Session ended
   with DocuShare failing -- Jim's uploads of the new photos "never got in" and

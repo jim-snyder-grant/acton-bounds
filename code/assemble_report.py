@@ -26,9 +26,10 @@ regardless, so it lines up across sizes.
 the assembly date/time, the cover gets a centered "DRAFT FOR REVIEW · <stamp>",
 and the file is written to drafts/ named by that stamp, so it never overwrites
 the real report or a previous draft. The stamp is the assembly time, NOT a git
-commit -- photo_manifest.csv is gitignored, so two builds at the same SHA can
-legitimately differ. Corollary: an old draft cannot be reconstructed from the
-repo, so drafts/ is the only archive of what reviewers actually saw.
+commit: the photos themselves are not in git (only photo_manifest.csv, tracked
+Jul 15 2026, pins their captions/inclusion/links), so two builds at the same SHA
+can still differ. Corollary: an old draft cannot be faithfully reconstructed, so
+drafts/ is the only archive of what reviewers actually saw.
 
 Usage:
   python3 assemble_report.py [--manifest report_sections.csv] [--out PATH]
@@ -55,9 +56,9 @@ DEFAULT_MANIFEST = os.path.join(HERE, "report_sections.csv")
 DEFAULT_OUT = os.path.join(BOUNDS, "Acton Bounds Report 2025-2026.pdf")
 # --draft builds land here, one timestamped file each, never overwriting the
 # real report. This folder IS the archive of what went to reviewers: a draft
-# can't be rebuilt later (photo_manifest.csv is gitignored, so no commit pins a
-# build), so the copy you sent is the only copy. Gitignored, but it lives inside
-# the Insync/Drive tree, so it syncs off-machine on its own.
+# can't be faithfully rebuilt later (the photo files aren't in git, so no commit
+# pins a build), so the copy you sent is the only copy. Gitignored, but it lives
+# inside the Insync/Drive tree, so it syncs off-machine on its own.
 DRAFTS_DIR = os.path.join(BOUNDS, "drafts")
 
 # For the clickable overview-map callout boxes: which section is the map and
@@ -207,9 +208,9 @@ def main():
     args = ap.parse_args()
 
     # A draft is identified by when it was assembled, deliberately not by a git
-    # commit: photo_manifest.csv is gitignored, so which photos/captions/links
-    # are in a build is NOT captured by any commit -- two builds at the same SHA
-    # can differ. The assembly time is the only honest identifier.
+    # commit. Tracking photo_manifest.csv (Jul 15 2026) pins captions/inclusion/
+    # links, but the photo files themselves still aren't in git, so two builds at
+    # the same SHA can differ. The assembly time is the only honest identifier.
     stamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M") if args.draft else None
     if args.out is None:
         if args.draft:

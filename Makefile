@@ -27,8 +27,8 @@ report: sections listings assemble
 ##               the assembly date/time, cover marked DRAFT FOR REVIEW, filename
 ##               carrying the same stamp -- never overwrites the real report or
 ##               an earlier draft. drafts/ is the archive of what reviewers saw:
-##               an old draft can't be rebuilt (the photo manifest is gitignored,
-##               so a commit doesn't pin a build), so don't prune it.
+##               an old draft can't be faithfully rebuilt (the photo files aren't
+##               in git, so a commit doesn't pin a build), so don't prune it.
 draft: sections listings
 	$(PY) code/assemble_report.py --draft
 

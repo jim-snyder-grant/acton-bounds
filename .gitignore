@@ -45,6 +45,16 @@
 # Assembly manifest (build config, like a Makefile): scanned clean of
 # IDs/PII Jul 12 2026 -- only relative paths + section names.
 !/code/report_sections.csv
+# Photo curation sheet (tracked Jul 15 2026). Mostly machine-derived from the
+# photo filenames, but caption / include / exclude_reason / section /
+# cover_candidate are Jim's hand-authored editorial decisions and are
+# regenerable from nothing -- they had no durable home while this was ignored
+# (Drive is explicitly not an archive). Scanned clean Jul 15 2026: no emails,
+# local paths, or secrets; captions and exclude_reason are about the photos
+# themselves. exclude_reason is published deliberately -- Jim's call, so a
+# future Acton group can see why a photo was left out and revisit it.
+# Re-scan before committing new captions, same gate as report/*.md.
+!/code/photo_manifest.csv
 
 # --- report/ ---
 # Canonical report-section sources (Markdown), maintained by Claude Code and
