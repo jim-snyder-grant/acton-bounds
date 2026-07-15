@@ -6,7 +6,36 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
-2026-07-14 [Claude Code] >>> PENDING HANDOFF (DocuShare down) <<< Session ended
+2026-07-15 [Claude Code] DocuShare back; all 9 photos linked; report rebuilt.
+  Resolves the Jul-14 PENDING HANDOFF below. Jim re-uploaded; a first scrape
+  returned 181 (= old 173 + 8), one short: `Acton-Carlisle-Westford, 2026-07-06
+  16-13, ...` had been left out of the batch (file was fine, sat in Photos/
+  Monument Photos/). Jim uploaded it, re-scrape returned 182 and all 9 pending
+  photos matched. merge_docushare.py: 177 of 182 matched, touching ONLY the
+  docushare_url column (verified by diff against a pre-merge copy); Jim's 6
+  include=no hand edits survived intact.
+  - **Fixed a pre-existing broken link:** the manifest held Document-98997 for
+    `Acton-Boxborough Summer Street, 2025-09-16 09-49.jpg`, but both the new and
+    the pre-outage scrapes say 98996 -- so this was a stale manifest value, not
+    an upload artifact. Fetched both: 98996 returns the real image/jpeg (9.9MB),
+    98997 returns a text/html error page. The merge corrected it; that link was
+    dead in the previously built report.
+  - **Rebuild + verify PASS:** `make all` -> 64 pages, no photo spillover, all 51
+    overview-map links resolve to the correct monument pages. Confirmed in the
+    built PDF: all 9 new photos are linked (Documents 99292-99300), all 6
+    include=no photos absent, 98997 gone / 98996 present.
+  - **Pagination warning is a false alarm at this size:** scrape_docushare.py
+    warns on any collection over 100, but 182 docs still render on one page with
+    nothing clipped (count matched expectation exactly). Still a latent risk;
+    treat the warning as noise until a scrape count actually comes up short.
+  - The 5 scrape rows that don't match the manifest (3 leading-space fragments
+    like ` Marker is up the embankment.jpg`, plus 2 others) are pre-existing --
+    present in the pre-outage scrape too, unrelated to this work.
+  - Nothing here is tracked: the report PDF, photo_manifest.csv and
+    docushare_urls.csv are all gitignored build outputs, so the manifest's hand
+    edits still live only locally (synced to Drive). Only this entry is tracked.
+
+2026-07-14 [Claude Code] >>> RESOLVED 2026-07-15, see entry above <<< Session ended
   with DocuShare failing -- Jim's uploads of the new photos "never got in" and
   additions were erroring; he contacted tech support and will resume in a fresh
   instance once it's fixed. State to pick up:
