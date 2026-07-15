@@ -24,6 +24,9 @@ Supported Markdown (what the current intro drafts use):
                     resolve relative to the script dir / cwd / the .md's own
                     dir. If the filename matches a photo_manifest.csv row with
                     a docushare_url, the image links to it.
+  [text](url)     -> inline link; clickable, drawn in a darkened gold. The
+                    visible text is whatever `text` says, so spell the URL out
+                    there when a print reader needs to be able to type it.
   **bold**  *italic*  -> inline emphasis
 
 Usage:
@@ -54,6 +57,9 @@ from reportlab.pdfgen import canvas as pdfcanvas
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 IMG_RE = re.compile(r"!\[(.*?)\]\((.*?)\)\s*$")
+# Inline [text](url) link. The (?<!!) keeps this from eating an ![img](path)
+# line, which is handled separately by IMG_RE.
+LINK_RE = re.compile(r"(?<!!)\[([^\]]+)\]\(([^)\s]+)\)")
 MAX_PHOTO_H = 220   # hard upper limit on an intro photo's display height (pt)
 
 # --- page geometry: identical to bounds2pdf.py ---
@@ -65,6 +71,11 @@ TEXT_W = AVAIL_W - 2 * FRAME_PAD # 456 pt
 
 GOLD = colors.HexColor("#C9A227")
 GRAY = colors.HexColor("#555555")
+# A darkened GOLD for link text. GOLD itself is only ever used for rules and
+# other non-text accents, where contrast doesn't matter; at 11pt body size it
+# scores 2.42:1 on white, well under the 4.5:1 WCAG AA needs. This reads as the
+# same accent but passes at 4.91:1.
+LINK = colors.HexColor("#8A6D0F")
 
 # --- paragraph styles ---
 H1 = ParagraphStyle("H1", fontName="Helvetica-Bold", fontSize=18, leading=22,
@@ -201,8 +212,13 @@ def build_image_group(group, md_dir, ds_map):
 
 
 def inline(text):
-    """Escape XML, then convert **bold** and *italic* to ReportLab markup."""
+    """Escape XML, then convert [text](url), **bold** and *italic* to ReportLab markup."""
     text = html.escape(text, quote=False)          # & < >
+    # Links first, so link text can still carry emphasis: [**x**](u) -> <a><b>x</b></a>.
+    text = LINK_RE.sub(
+        lambda m: '<a href="%s" color="#%s">%s</a>' % (
+            html.escape(m.group(2), quote=True), LINK.hexval()[2:], m.group(1)),
+        text)
     text = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", text)
     text = re.sub(r"\*(.+?)\*", r"<i>\1</i>", text)
     return text

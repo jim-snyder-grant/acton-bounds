@@ -6,6 +6,36 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-15 [Claude Code] intro2pdf.py: inline link support; + Jim's edits to 3
+  report sections, rebuilt. Jim edited report/History.md, report/Next Steps.md
+  (new "Who does the work next time" section on Sudbury's staff-based process)
+  and report/The Work Behind This Report.md (added a DocuShare collection link +
+  a GitHub repo link), and asked for an anomaly check before rebuilding.
+  - **The links couldn't have worked as written — renderer gap, not Jim's error.**
+    intro2pdf.py's `inline()` only ever handled `**bold**`/`*italic*`; `[text](url)`
+    was XML-escaped and passed through, so both links rendered as literal
+    `[https://...](https://...)` with zero clickable annotations (confirmed by
+    rendering before touching anything). Markdown link syntax had never appeared
+    in report/*.md before, so nothing had exercised this. Jim's URLs were both
+    correct and resolve (Collection-19415 = "Perambulation", the report archive;
+    distinct from Collection-20474 = "Perambulation Images", the photos).
+  - **Fix:** added LINK_RE + link handling to `inline()`, rendering `[text](url)`
+    as a clickable `<a href>`. Links are converted *before* bold/italic so link
+    text can still carry emphasis. LINK_RE uses a `(?<!!)` lookbehind so it can't
+    eat an `![img](path)` line. Docstring's supported-Markdown list updated.
+  - **New LINK color #8A6D0F, deliberately not GOLD.** GOLD #C9A227 is used only
+    for rules/non-text accents; at 11pt on white it scores 2.42:1, well under the
+    4.5:1 WCAG AA wants for body text. #8A6D0F reads as the same accent at 4.91:1.
+    Worth preserving if these colors are ever revisited.
+  - Also fixed, in Jim's new sentence: a stray space before a period, and a
+    dropped comma before "so" (the pre-edit text had it). Whitespace tidy:
+    restored Next Steps.md's final newline, stripped its trailing space, and
+    collapsed a triple space in History.md (render-neutral -- ReportLab collapses
+    runs anyway).
+  - Rebuilt + verified: 64 pages, verify PASS, all 51 overview-map links resolve.
+    Link annotations 223 -> 225 (the 2 new text links); no raw `[..](..)` left in
+    the rendered text; secrets/PII gate on the diff clean.
+
 2026-07-15 [Claude Code] DocuShare back; all 9 photos linked; report rebuilt.
   Resolves the Jul-14 PENDING HANDOFF below. Jim re-uploaded; a first scrape
   returned 181 (= old 173 + 8), one short: `Acton-Carlisle-Westford, 2026-07-06

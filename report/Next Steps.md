@@ -31,3 +31,7 @@ Two more crossings, Acton/Westford Bay Drive (East) and (West), raise a narrower
 ## Dating future work, and what comes next for the data
 
 The Select Board has already discussed alternatives to painting a year onto each monument — a stick or a QR code, for instance — as a way to mark future perambulation dates without repainting. Separately, Acton's GIS Department plans to fold the coordinates and findings from this project into a new GIS layer, which should make future perambulations easier to plan and track. Between the two, the next crew to walk this line — in five years, or whenever Acton next takes it up — should have a considerably easier time of it than this one did.
+
+## Who does the work next time
+
+The neighboring Town with the most consistent record of doing perambulations in the 21st century is Sudbury. One thing they do differently than other Towns is that they vote every 5 years to give this work to Town staff, who have a very well worked-out process for doing the work. On the other hand, keeping this in the hands of the Select Board may make it easier to emphasize the community involvement aspects of the work.
