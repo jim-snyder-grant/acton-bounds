@@ -6,6 +6,37 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-15 [Claude Code] assemble_report.py: tell readers the map boxes are
+  clickable. Jim asked for a clue that the numbered callout boxes link to the
+  monument pages — either by editing the map's existing bottom caption or adding
+  a line at the top. Added at the top; wording:
+  "Click any numbered box to jump to that monument's page."
+  - **Why it's an assembly-time overlay, not an overview_map.py edit** — the
+    decisive reason: `overview_map.pdf` standalone has **0 link annotations**.
+    All 51 are stamped by assemble_report's add_overview_map_links(). Text in the
+    map generator would leave the standalone map promising an affordance it
+    doesn't have, and could drift from the code that makes it true. It's drawn
+    *inside* add_overview_map_links() after the links are added, so every early
+    return (missing sidecar, page/box count mismatch) leaves the page unstamped
+    rather than lying. Verified by removing the sidecar: 0 links AND no hint.
+    Secondary reason: geopandas isn't installed here, so overview_map.py can't be
+    run at all — editing its caption would have changed nothing.
+  - **Why the top, not the bottom.** The page is legal portrait (612x1008). The
+    clear band between the rule under the title (y=938.2) and the top row of
+    boxes (y=882.0) is ~56pt; the hint sits at y=905 with ~23pt/~22pt clearance.
+    The bottom has only 13.6pt between the existing caption baseline (39.6) and
+    the footer (26) — a second line there would collide. The existing "Numbered
+    boxes correspond to the Monument Listings section" caption is untouched and
+    still states the correspondence; the new line states the interaction. (For
+    the record, rewording the bottom caption in place *would* fit — e.g.
+    "Numbered boxes match the Monument Listings — click one to jump to its page"
+    is 488pt of ~554pt usable — but only via overview_map.py, i.e. geopandas.)
+  - **Wording** parallels the report's existing click idiom ("Click any picture
+    to see full size"). Style Helvetica-Oblique 11pt #555555, matching
+    bounds2pdf's CLICK_NOTE affordance idiom, sized up for a legal page and kept
+    subordinate to the 20pt title. 284pt wide, fits easily.
+  - Rebuilt: 64 pages, 51 links, verify PASS.
+
 2026-07-15 [Claude Code] bounds2pdf.py: reject blank OSM captures instead of
   caching them. Jim spotted a missing map on the Order-30 page (Acton/Littleton
   Fort Pond Road) in a draft — the click-through link was there but no picture.

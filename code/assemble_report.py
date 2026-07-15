@@ -99,6 +99,25 @@ COVER_STAMP_Y = 280
 COVER_STAMP_FONT = ("Times-Roman", 11)
 COVER_STAMP_COLOR = HexColor("#8a7a5a")
 
+# "these boxes are clickable" hint on the overview-map page. It lives here, not
+# in overview_map.py, because overview_map.pdf standalone has NO links -- all 51
+# are stamped by add_overview_map_links() below. Printing the promise in the map
+# generator would leave the standalone map claiming an affordance it doesn't
+# have, and would let the text drift from the code that makes it true. It is
+# drawn only after the links are actually added, so the two can't disagree.
+#
+# Geometry: the map page is legal portrait (612x1008). The clear band between the
+# rule under the "Overview Map" title (y=938.2) and the top row of callout boxes
+# (y=882.0) is ~56pt, so 905 centers a line in it. The page bottom has only
+# 13.6pt between the existing caption and the footer -- no room there.
+# Style follows the report's existing click-affordance idiom (bounds2pdf.py's
+# CLICK_NOTE: Helvetica-Oblique, gray), sized up for a legal page and kept well
+# below the 20pt title above it.
+MAP_HINT_TEXT = "Click any numbered box to jump to that monument's page."
+MAP_HINT_Y = 905
+MAP_HINT_FONT = ("Helvetica-Oblique", 11)
+MAP_HINT_COLOR = HexColor("#555555")
+
 
 def read_manifest(path):
     rows = []
@@ -121,6 +140,18 @@ def footer_overlay(width, height, text):
     c.setFont(*FOOTER_FONT)
     c.setFillColor(GRAY)
     c.drawString(MARGIN, FOOTER_Y, text)
+    c.save()
+    buf.seek(0)
+    return PdfReader(buf).pages[0]
+
+
+def map_hint_overlay(width, height, text):
+    """A single-page PDF carrying just the centered 'boxes are clickable' hint."""
+    buf = BytesIO()
+    c = pdfcanvas.Canvas(buf, pagesize=(width, height))
+    c.setFont(*MAP_HINT_FONT)
+    c.setFillColor(MAP_HINT_COLOR)
+    c.drawCentredString(width / 2.0, MAP_HINT_Y, text)
     c.save()
     buf.seek(0)
     return PdfReader(buf).pages[0]
@@ -192,6 +223,11 @@ def add_overview_map_links(writer, map_start, listings_start, listings_count):
             NameObject("/P"): map_page.indirect_reference,
         })
         annots.append(writer._add_object(annot))
+    # Only now that the links exist is the hint true -- every early return above
+    # leaves the page unstamped rather than advertising links that aren't there.
+    map_page.merge_page(map_hint_overlay(
+        float(map_page.mediabox.width), float(map_page.mediabox.height),
+        MAP_HINT_TEXT))
     print(f"  added {len(boxes)} clickable callout-box links on the overview map "
           f"(page {map_start + 1})")
 
