@@ -389,6 +389,12 @@ file is the only record of what a reviewer actually saw when their comments come
 back. It's gitignored (the root `/*` rule) but sits inside the Insync/Drive
 tree, so it syncs off-machine without being committed.
 
+**Jim prunes `drafts/`, not Claude Code** (his call, Jul 15 2026). He deletes the
+versions that were never sent for review. Claude Code adds drafts via `make
+draft` and never deletes from the folder — only Jim knows which builds actually
+went out, and a sent draft is unrebuildable. If a draft in there is stale or was
+built before a fix, say so and let Jim decide.
+
 Dependencies: `pandas`, `openpyxl` (pandas' `.xlsx` engine, not imported
 directly but required), `Pillow`, `reportlab`, `playwright`, `pypdf`,
 `geopandas`, `matplotlib` — see `requirements.txt`. Two separate pyenv
