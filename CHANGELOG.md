@@ -6,6 +6,18 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-15 [Claude Code] `make draft` now writes to a new `drafts/` folder.
+  Jim's call, so sent drafts accumulate as an archive instead of piling up in
+  the Bounds root. `assemble_report.py` creates `drafts/` on demand (DRAFTS_DIR,
+  makedirs exist_ok) and writes "drafts/Acton Bounds Report — DRAFT <stamp>.pdf".
+  Note the filenames already carried the stamp, so overwrite protection was
+  mostly already there; the folder is about keeping the root clean and making
+  the archive explicit. `make report` and the Bounds-root final PDF are
+  unchanged. drafts/ is gitignored by the existing root `/*` rule (verified: it
+  doesn't show in `git status`), but lives in the Insync/Drive tree so it syncs
+  off-machine on its own. Documented in claude.md ("do not prune" — it's the
+  only record of what reviewers saw, and a draft can't be rebuilt).
+
 2026-07-15 [Claude Code] assemble_report.py + Makefile: `make draft` — reviewer
   drafts stamped with the assembly date/time. Jim is sending the report to early
   reviewers and needs to know which version a comment refers to.

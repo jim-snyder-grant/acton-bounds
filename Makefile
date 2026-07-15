@@ -23,11 +23,12 @@ all: report verify
 ## report:       render sections + monument listings, then assemble the final PDF
 report: sections listings assemble
 
-## draft:        build a reviewer draft: every page stamped with the assembly
-##               date/time, cover marked DRAFT FOR REVIEW, written to its own
-##               timestamped filename so it never overwrites the real report.
-##               Keep the PDFs you send -- an old draft can't be rebuilt (the
-##               photo manifest is gitignored, so a commit doesn't pin a build).
+## draft:        build a reviewer draft into drafts/: every page stamped with
+##               the assembly date/time, cover marked DRAFT FOR REVIEW, filename
+##               carrying the same stamp -- never overwrites the real report or
+##               an earlier draft. drafts/ is the archive of what reviewers saw:
+##               an old draft can't be rebuilt (the photo manifest is gitignored,
+##               so a commit doesn't pin a build), so don't prune it.
 draft: sections listings
 	$(PY) code/assemble_report.py --draft
 

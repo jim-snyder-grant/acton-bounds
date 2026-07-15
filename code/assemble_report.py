@@ -23,12 +23,12 @@ footer is stamped per page at the same 1in-from-left, 26pt-up position
 regardless, so it lines up across sizes.
 
 --draft marks a build for circulation to reviewers: every running footer gets
-the assembly date/time, the cover gets a centered "DRAFT FOR REVIEW — <stamp>",
-and the file is named by that stamp instead of overwriting the real report. The
-stamp is the assembly time, NOT a git commit -- photo_manifest.csv is gitignored,
-so two builds at the same SHA can legitimately differ. Corollary: an old draft
-cannot be reconstructed from the repo, so keep every PDF you actually send out;
-the timestamped filename is what makes that pile of files an archive.
+the assembly date/time, the cover gets a centered "DRAFT FOR REVIEW · <stamp>",
+and the file is written to drafts/ named by that stamp, so it never overwrites
+the real report or a previous draft. The stamp is the assembly time, NOT a git
+commit -- photo_manifest.csv is gitignored, so two builds at the same SHA can
+legitimately differ. Corollary: an old draft cannot be reconstructed from the
+repo, so drafts/ is the only archive of what reviewers actually saw.
 
 Usage:
   python3 assemble_report.py [--manifest report_sections.csv] [--out PATH]
@@ -53,6 +53,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 BOUNDS = os.path.join(HERE, "..")              # section files resolve from here
 DEFAULT_MANIFEST = os.path.join(HERE, "report_sections.csv")
 DEFAULT_OUT = os.path.join(BOUNDS, "Acton Bounds Report 2025-2026.pdf")
+# --draft builds land here, one timestamped file each, never overwriting the
+# real report. This folder IS the archive of what went to reviewers: a draft
+# can't be rebuilt later (photo_manifest.csv is gitignored, so no commit pins a
+# build), so the copy you sent is the only copy. Gitignored, but it lives inside
+# the Insync/Drive tree, so it syncs off-machine on its own.
+DRAFTS_DIR = os.path.join(BOUNDS, "drafts")
 
 # For the clickable overview-map callout boxes: which section is the map and
 # which is the monument listings (matched by file basename), plus the sidecar
@@ -206,9 +212,12 @@ def main():
     # can differ. The assembly time is the only honest identifier.
     stamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M") if args.draft else None
     if args.out is None:
-        args.out = (os.path.join(BOUNDS, "Acton Bounds Report — DRAFT %s.pdf"
-                                 % stamp.replace(":", "-"))
-                    if args.draft else DEFAULT_OUT)
+        if args.draft:
+            os.makedirs(DRAFTS_DIR, exist_ok=True)
+            args.out = os.path.join(DRAFTS_DIR, "Acton Bounds Report — DRAFT %s.pdf"
+                                    % stamp.replace(":", "-"))
+        else:
+            args.out = DEFAULT_OUT
 
     rows = read_manifest(args.manifest)
 

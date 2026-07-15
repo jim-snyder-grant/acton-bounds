@@ -362,6 +362,7 @@ python3 code/verify_report.py      # step 4: check every overview-map link resol
 
 **Or just use the Makefile** (added Jul 13 2026, at the project root):
 `make report` runs steps 2b+2 and assembles; `make all` also verifies;
+`make draft` builds a stamped reviewer copy into `drafts/` (see below);
 `make help` lists every target; `make verify` / `make clean` /
 `make overview-map` (needs geopandas) / `make manifest` (photo rescan) are
 separate. It's a **task runner, not an incremental build** — because nearly
@@ -376,6 +377,15 @@ Where outputs land: `bounds2pdf.py` and `overview_map.py` write their section
 PDFs into `code/` (`monument_listings.pdf`, `overview_map.pdf`); `intro2pdf.py`
 writes into `report/`; `assemble_report.py` writes the merged report to the
 Bounds root. All are gitignored except the `report/*.md` sources.
+
+**`drafts/` — do not prune, and do not treat as regenerable output.** Every
+other build product here can be rebuilt at will; a draft cannot. The report
+depends on `photo_manifest.csv`, which is gitignored, so no commit pins a
+build and there is nothing to rebuild an old draft *from*. Each `make draft`
+drops one timestamped PDF in `drafts/`, matching the stamp in its own footers,
+and that file is the only record of what a reviewer actually saw when their
+comments come back. It's gitignored (the root `/*` rule) but sits inside the
+Insync/Drive tree, so it syncs off-machine without being committed.
 
 Dependencies: `pandas`, `openpyxl` (pandas' `.xlsx` engine, not imported
 directly but required), `Pillow`, `reportlab`, `playwright`, `pypdf`,
