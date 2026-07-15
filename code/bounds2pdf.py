@@ -55,6 +55,9 @@ MANIFEST_PATH = HERE / "photo_manifest.csv"
 LISTINGS_OUT = HERE / "monument_listings.pdf"
 OSM_DIR = HERE / "osm_screenshots"
 OSM_CACHE = OSM_DIR / "osm_url_cache.json"
+# A real map always has dark pixels (roads, labels). If the darkest pixel is
+# still near-white, OSM never painted and we caught a blank square.
+BLANK_LUMA_MIN = 250
 MAP_SIZE = 150      # OSM map display size in points
 MAP_GAP = 12        # gap between left text column and map column
 MAX_PHOTO_H = 200   # hard upper limit on photo height; actual cap computed dynamically
@@ -176,6 +179,39 @@ def load_osm_cache():
 def save_osm_cache(cache):
     with open(OSM_CACHE, 'w') as f:
         json.dump(cache, f, indent=2)
+
+
+def osm_capture_is_blank(path):
+    """True if a captured map is an all-white square, i.e. OSM never painted.
+
+    'networkidle' sometimes fires before OSM's tiles render, and the screenshot
+    comes out blank. Caught late: one such capture (row 29) sat cached from
+    Jul 9 to Jul 15 2026 and shipped a blank map into the report, because
+    needs_capture() only asks whether the file exists and the link matches --
+    a failed capture satisfies both and is never retried.
+    """
+    with PILImage.open(path) as im:
+        darkest, _ = im.convert('L').getextrema()
+    return darkest >= BLANK_LUMA_MIN
+
+
+async def capture_osm(pw_page, url, path):
+    """Screenshot one OSM map. Returns True if the result looks usable.
+
+    Retries once, waiting for tiles, since the failure is transient. The caller
+    must not cache a False result, or the blank freezes in permanently.
+    """
+    for attempt in (1, 2):
+        await pw_page.goto(url, wait_until='networkidle', timeout=30000)
+        if attempt == 2:
+            await pw_page.wait_for_timeout(3000)   # let slow tiles paint
+        await pw_page.screenshot(
+            path=path, full_page=False, type='jpeg', quality=100,
+            clip={'x': 352, 'y': 100, 'width': 574, 'height': 574},
+        )
+        if not osm_capture_is_blank(path):
+            return True
+    return False
 
 
 def load_manifest(path):
@@ -452,6 +488,7 @@ async def main():
     else:
         print('All OSM screenshots cached.')
 
+    blank_captures = []      # rows whose map came out blank; never cached
     story = []
 
     async with async_playwright() as pwright:
@@ -577,14 +614,16 @@ async def main():
             local_path = OSM_DIR / f'osm_screenshot_{i}.jpg'
             if not pd.isna(osm_link):
                 if i in rows_needing_capture:
-                    await pw_page.goto(
-                        str(osm_link), wait_until='networkidle', timeout=30000)
-                    await pw_page.screenshot(
-                        path=local_path, full_page=False, type='jpeg', quality=100,
-                        clip={'x': 352, 'y': 100, 'width': 574, 'height': 574},
-                    )
-                    osm_cache[str(i)] = str(osm_link)
-                    save_osm_cache(osm_cache)
+                    if await capture_osm(pw_page, str(osm_link), local_path):
+                        osm_cache[str(i)] = str(osm_link)
+                        save_osm_cache(osm_cache)
+                    else:
+                        # Leave the blank file so the page still lays out, but
+                        # don't cache it -- the next run retries this row.
+                        blank_captures.append(i)
+                        print(f'  WARNING: OSM map for row {i} '
+                              f'({df.at[i, "Name"]}) came out blank after 2 '
+                              f'tries -- not cached, will retry next run.')
                 osm_img = LinkableImage(
                     io.BytesIO(to_jpeg_bytes(local_path, MAP_SIZE, MAP_SIZE)),
                     width=MAP_SIZE, height=MAP_SIZE, link_url=str(osm_link))
@@ -640,6 +679,10 @@ async def main():
         topMargin=MARGIN, bottomMargin=MARGIN,
     )
     doc.build(story, canvasmaker=NumberedCanvas)
+    if blank_captures:
+        print(f'\nWARNING: {len(blank_captures)} OSM map(s) came out blank and '
+              f'are BLANK in this PDF: rows {sorted(blank_captures)}. They were '
+              f'not cached -- just re-run to retry.')
     print('Done — monument_listings.pdf written.')
 
 

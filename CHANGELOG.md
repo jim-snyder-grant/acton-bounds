@@ -6,6 +6,33 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-15 [Claude Code] bounds2pdf.py: reject blank OSM captures instead of
+  caching them. Jim spotted a missing map on the Order-30 page (Acton/Littleton
+  Fort Pond Road) in a draft — the click-through link was there but no picture.
+  - **Cause:** `osm_screenshot_29.jpg` was 2,702 bytes of pure white (every other
+    map is 89KB+), captured Jul 9. OSM's `networkidle` fired before its tiles
+    painted, so Playwright shot an empty page. The link rect is drawn separately
+    from the image, which is why it survived.
+  - **Why it never healed:** `needs_capture()` asks only "file exists AND cached
+    link matches?" A blank capture satisfies both, so it was cached as a success
+    and every build since said "All OSM screenshots cached." It shipped blank for
+    6 days. Fixed by deleting the file (forcing one recapture — now 133KB and
+    correct). Scanned all 51 by size AND pixel content: row 29 was the only one.
+  - **The guard:** `capture_osm()` now retries once (waiting 3s for tiles) and
+    returns whether the result is usable; `osm_capture_is_blank()` calls it blank
+    when the darkest pixel is >= BLANK_LUMA_MIN (250) — a real map always has
+    dark roads/labels. A blank is left on disk (so the page still lays out) but
+    NOT cached, so the next run retries. Warns per-row and again in a summary.
+  - **Tested both branches, not just the happy path.** Detector: True on the
+    archived blank, 0 false positives across all 51 real maps. Failure branch:
+    forced by temporarily setting BLANK_LUMA_MIN=0 — confirmed it warns, does not
+    write a cache entry, and that a re-run then retries and self-heals. (First
+    attempt patched it to 999, which does nothing: the test is `darkest >=
+    BLANK_LUMA_MIN`, so 0 forces always-blank and 999 forces never-blank.)
+  - Rebuilt: 64 pages, verify PASS. osm_screenshots/ is gitignored, so only the
+    script change is tracked. Jim's 18-06 draft has the blank baked in and should
+    be re-made before it goes to anyone.
+
 2026-07-15 [Claude Code] Jim's witness-monument name fix (xlsx) + the fallout.
   Jim fixed a Google Sheet formula error that had mis-named the 2 witness
   monuments, and re-downloaded Acton Bounds.xlsx.
