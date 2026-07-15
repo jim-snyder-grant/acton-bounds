@@ -6,6 +6,33 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-14 [Claude Code] >>> PENDING HANDOFF (DocuShare down) <<< Session ended
+  with DocuShare failing -- Jim's uploads of the new photos "never got in" and
+  additions were erroring; he contacted tech support and will resume in a fresh
+  instance once it's fixed. State to pick up:
+  - **9 new photos still need DocuShare links** (blank `docushare_url` in
+    photo_manifest.csv): the 7 renamed Jul-14 Westford/Littleton photos + `Acton/
+    Boxborough Mass Ave (Rte 111)` (2026-07-13 12-54) + `Acton/Carlisle/Westford`
+    (2026-07-06 16-13). They are in the manifest, matched, include=yes; just no
+    DocuShare URL yet.
+  - **Corrected diagnosis:** a scrape returned only 173 docs (= the existing
+    post-dedup set) with none of the 9 new ones. This was NOT the scraper's
+    pagination gap -- the uploads simply never landed (DocuShare was broken).
+    `code/docushare_urls.csv` currently holds that stale 173-only scrape; re-run
+    scrape fresh, don't merge from it as-is. (The single-page pagination limit in
+    scrape_docushare.py is still a latent risk once the collection genuinely
+    exceeds one page -- watch for it, but it wasn't the cause here.)
+  - **When DocuShare is back:** Jim re-uploads the 9 (renamed versions, so titles
+    match manifest filenames) -> `scrape_docushare.py` (or the saved-HTML path if
+    the collection paginates) -> `merge_docushare.py` -> rebuild + `verify_report.py`.
+  - **Report rebuild is pending regardless of DocuShare:** photo_manifest.csv has
+    un-built-in hand edits (Jim marked 2 photos include=no + one other change) and
+    the 2 newest photos aren't in a built report yet. The on-disk assembled PDF is
+    from the last rebuild at commit 8ecf27e (before those edits). Jim chose to wait
+    and do the rebuild together with the DocuShare merge. photo_manifest.csv is
+    gitignored, so those edits live only locally (synced to Drive) -- they persist
+    for the next local instance but aren't in git.
+
 2026-07-14 [Claude Code] Processed a Jim direct-edit + 7 new photos.
   (1) report/History.md: Jim rewrote the "Why some roads carry different names
   today" section (reordered paragraphs, added Annual-Reports / telephone /
