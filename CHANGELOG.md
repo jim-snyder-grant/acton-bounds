@@ -6,6 +6,12 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-16 [Both] photo_manifest.csv: Jim's caption copy-edit pass (trailing
+  periods removed from 13 captions) plus one photo marked out of the report
+  (Acton-Littleton W B Marker on Fort Pond Road, 2026-03-14 10-02.png ->
+  include=no, "redundant and bad quality screen capture"). Editorial only, no
+  new PII. Rebuilt: 64 pages, 51 links, verify PASS.
+
 2026-07-16 [Both] Acton Bounds.xlsx: incorporated Jim's copy-edit pass on the
   Monuments sheet's seven text columns and rebuilt the report (64 pages, 51
   links, verify PASS). All edits editorial — terminal-period/capitalization
