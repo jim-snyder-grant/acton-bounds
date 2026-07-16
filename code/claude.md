@@ -538,7 +538,7 @@ Key columns used by `bounds2pdf.py`:
 | Column | Notes |
 |---|---|
 | `Name` | Monument identifier, e.g. `Acton/Boxborough/Stow` |
-| `Type` | `Corner` or `Street Crossing` |
+| `Type` | `Corner` (11), `Street Crossing` (38), or `Witness` (2) — three values, totalling the report's 51. Not displayed on the monument pages since Jul 6 2026 (the headline dropped it), but `overview_map.py` still keys each monument's icon shape off it (circle/square/triangle), and the report's prose names all three |
 | `Status` | `Painted`, `Not Found`, `Documented`, `Found`, `Couldn't paint` |
 | `Nearest Acton street name` | Always present |
 | `Nearest other town street name` | Optional |

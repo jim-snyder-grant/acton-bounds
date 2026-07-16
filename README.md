@@ -44,10 +44,20 @@ README.md              # This file
 ```
 
 Not in the repo (in Google Drive only):
-- `Photos/Monument Photos/` — 173 monument photos
-- `photo_manifest.csv` — photo curation sheet (may contain personal info)
+- `Photos/Monument Photos/` — 173 monument photos (the photo *files*; note
+  `code/photo_manifest.csv`, which indexes them, IS tracked — see below)
 - `FrontPage.svg` / `FrontPage.pdf` — finished cover page
-- `INBOX.md` — pending tasks from claude.ai for Claude Code to apply
+- `from-claude-ai/` — staging folder where claude.ai drops handoffs:
+  `INBOX*.md` instruction files and report-section drafts, which Claude Code
+  applies and then deletes (see `code/claude.md`'s INBOX protocol)
+
+Tracked, but worth knowing why:
+- `code/photo_manifest.csv` — the photo curation sheet. Tracked as of Jul 15
+  2026: its `caption` / `include` / `exclude_reason` / `section` /
+  `cover_candidate` columns are hand-authored editorial judgment that
+  `build_manifest.py` can't regenerate. It's scanned for PII before each
+  commit like any public file; `exclude_reason` is published deliberately so
+  a future Acton group can revisit a photo decision.
 
 ## AI collaboration model
 
@@ -78,6 +88,51 @@ read these files in order:
 3. `code/claude.md` — technical spec and code status (Claude Code)
 4. `Project Notes.md` — findings, decisions, and comparative analysis
 5. `Photos/CLAUDE.md` — photo pipeline details (if relevant)
+
+### Editorial conventions and settled facts
+
+For whoever is next writing or reviewing report prose. Folded in from a
+claude.ai handoff note (2026-07-16) after a full read-through of the five
+`report/*.md` sections and the Monuments sheet's text columns.
+
+**Voice: third person, always.** The narrative sections (Introduction,
+History, The Work Behind This Report, Monument Listings — Introduction,
+Next Steps) are third person throughout — "Jim and Dean," never "I." This
+is also the standard for the Monuments-sheet text columns that render onto
+each monument's page: three rows there had slipped into first person or
+named Jim directly, and Jim approved neutral rewrites for all three. Hold
+new text in either place to the same standard by default.
+
+**Settled — verified against `Acton Bounds.xlsx` on 2026-07-16, no need to
+re-derive:**
+
+- **Monument counts: 11 Corner + 38 Street Crossing + 2 Witness = 51.**
+  Note `Type` has *three* values, not two — a witness marker is its own
+  type, and the report's 51-monument sentence names all three.
+- **Example monument names are real** and safe to keep using:
+  `Acton/Carlisle/Westford` (a Corner) and `Acton/Concord Powder Mill Road
+  (Rte 62)` (a Street Crossing).
+- **"Riviage" is deliberate — don't "correct" it to "Rivage."** It's the
+  development near the missing Acton/Maynard Powder Mill Road crossing. Be
+  aware the basis is thinner than it may look: it occurs exactly *once* in
+  the whole sheet (Order 50, Possible Next Steps), so the sheet doesn't
+  corroborate its own spelling. It's unflagged by Jim rather than
+  cross-checked. If it ever matters editorially, confirm against the
+  development's own signage rather than the sheet.
+- **Monument numbering and the overview map's callout boxes both run
+  counter-clockwise.** The report text said "clockwise" until 2026-07-16.
+  See `code/claude.md`'s page-order section for the geometric test that
+  settles it — and for why the tie-break-number argument doesn't.
+- **`report/Introduction.md` is what `Acton Bounds TODO.md` calls "Legal
+  background"** in its section-4 scope notes. The section was retitled and
+  the TODO wasn't updated. A naming mismatch, not a missing section.
+
+**Known and deliberately not fixed:** terminal punctuation (trailing
+periods, or their absence) is inconsistent across the Monuments sheet's
+Notes on location / Notes on Monument / Possible Next Steps cells — some
+are full sentences, many are fragments. Cosmetic, but it touches all 51
+rows, so it's out of scope for a targeted edit pass. Worth doing only if a
+full copyedit of the sheet is ever on the table.
 
 ### How to access project files
 
@@ -146,5 +201,5 @@ or in Google Drive only. When in doubt, ask Jim before committing.
 - Coordinate precision: report displays 5 decimal places (~1m); the XLSX
   keeps whatever precision each coordinate already has, untouched
 - Neighboring towns' perambulation reports: Boxborough (2007), Concord
-  (2017), Stow (2007), and Sudbury confirmed — all cross-referenced.
+  (2017), Stow (2007), and Sudbury (2020) confirmed — all cross-referenced.
   Carlisle, Littleton, Westford, Maynard reports not yet obtained.

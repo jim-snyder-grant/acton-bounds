@@ -6,6 +6,34 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-16 [Claude Code] README.md: folded in claude.ai's handoff note, which is
+  now deleted (NOTES-for-future-claude-ai-sessions.md — claude.ai can create
+  files but not edit README itself, so it left the content staged for someone
+  with write access; Jim said fold it in). New "Editorial conventions and
+  settled facts" subsection under "Orientation for a new Claude instance":
+  third-person voice convention (narrative sections *and* the Monuments-sheet
+  text columns), the verified monument counts, the safe example names, the
+  Introduction-vs-"Legal background" TODO naming mismatch, and the deliberately-
+  unfixed terminal-punctuation inconsistency. Dropped its counter-clockwise note
+  as redundant with code/claude.md, which now covers it properly.
+  - Re-verified the "settled" facts against the xlsx rather than copying the
+    claims: 11 Corner + 38 Street Crossing + 2 Witness = 51 ✓; both example
+    names real and of the stated type ✓. **One claim was overstated:** "Riviage"
+    is described as spelled that way "consistently in the sheet's own notes" —
+    it occurs exactly *once* (Order 50, Possible Next Steps), so the sheet can't
+    corroborate itself. Recorded as "deliberate, don't autocorrect, but n=1 and
+    unflagged rather than cross-checked."
+  - Fixed three README lines that contradicted code/claude.md: photo_manifest.csv
+    was still listed as "not in the repo... may contain personal info" (tracked
+    since Jul 15 2026 — the actively misleading one, since it understates what's
+    public); INBOX.md still described as a Bounds-root file (moved to
+    from-claude-ai/ Jul 12 2026); Sudbury's report now carries its (2020) year,
+    matching the report edit above.
+  - code/claude.md: the Data Source table documented `Type` as "`Corner` or
+    `Street Crossing`" — it has a third value, `Witness` (2 rows). Stale since
+    before the witness markers existed, and newly relevant now that the report's
+    prose names all three.
+
 2026-07-16 [Claude Code] report/*.md: applied claude.ai's 8 approved copy edits
   (INBOX-report-text-edits.md). History.md x4 (Nashobah/Praying Indian village
   rewrite, "1735-36" -> "1735" x2, stray first-person "I" removed, comma into
