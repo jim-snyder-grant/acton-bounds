@@ -112,13 +112,20 @@ re-derive:**
 - **Example monument names are real** and safe to keep using:
   `Acton/Carlisle/Westford` (a Corner) and `Acton/Concord Powder Mill Road
   (Rte 62)` (a Street Crossing).
-- **"Riviage" is deliberate — don't "correct" it to "Rivage."** It's the
-  development near the missing Acton/Maynard Powder Mill Road crossing. Be
-  aware the basis is thinner than it may look: it occurs exactly *once* in
-  the whole sheet (Order 50, Possible Next Steps), so the sheet doesn't
-  corroborate its own spelling. It's unflagged by Jim rather than
-  cross-checked. If it ever matters editorially, confirm against the
-  development's own signage rather than the sheet.
+- **The development near the missing Acton/Maynard Powder Mill Road crossing
+  is "Rivage"** — one `i`, per the developer's own site (rivageacton.com).
+  Corrected 2026-07-16 after Jim checked it against the web; it had been
+  "Riviage" in both the sheet (Order 50, Possible Next Steps) and
+  `report/Next Steps.md`.
+
+  Worth keeping as a cautionary tale, because a prior review pass recorded
+  "Riviage" as *verified* on the grounds that the project's own files spelled
+  it consistently. They did — but not independently: the Next Steps prose was
+  written *from* the sheet note, so it was one typo copied once, and agreement
+  between a source and its own derivative is not corroboration. **A proper
+  noun can only be confirmed against something outside this project**
+  (developer's site, town records, signage). Internal consistency can't
+  distinguish a correct name from a propagated typo.
 - **Monument numbering and the overview map's callout boxes both run
   counter-clockwise.** The report text said "clockwise" until 2026-07-16.
   See `code/claude.md`'s page-order section for the geometric test that

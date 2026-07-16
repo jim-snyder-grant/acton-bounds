@@ -12,7 +12,7 @@ A few monuments were found but are in poor shape: one lying flat on the ground (
 
 ## Monuments that may be documented elsewhere
 
-Several monuments Acton couldn't find have a specific lead worth chasing: MassDOT may have records for the missing crossings at Acton/Boxborough Mass Ave (Rte 111), Acton/Boxborough/Littleton, Acton/Concord Rte 2, and Acton/Maynard Powder Mill Road (Rte 62). Two more have a private-party angle: the developers of the Avalon apartments (near the missing Acton/Westford corner) and of the Riviage development (near the missing Acton/Maynard Powder Mill Road crossing) may have pre-development site plans showing a monument that's since been buried or removed.
+Several monuments Acton couldn't find have a specific lead worth chasing: MassDOT may have records for the missing crossings at Acton/Boxborough Mass Ave (Rte 111), Acton/Boxborough/Littleton, Acton/Concord Rte 2, and Acton/Maynard Powder Mill Road (Rte 62). Two more have a private-party angle: the developers of the Avalon apartments (near the missing Acton/Westford corner) and of the Rivage development (near the missing Acton/Maynard Powder Mill Road crossing) may have pre-development site plans showing a monument that's since been buried or removed.
 
 ## Questions for neighboring towns
 

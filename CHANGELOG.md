@@ -6,6 +6,28 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-16 [Both] "Riviage" -> "Rivage": it was a typo after all, in the report
+  text and the Sheet. **Supersedes the Riviage note in the README entry below.**
+  Jim checked it on the web against the developer's own site (rivageacton.com)
+  after that entry flagged the evidence as thin. One `i`. It's the development
+  near the missing Acton/Maynard Powder Mill Road crossing (Order 50, Not Found).
+  - Fixed by Claude Code in `report/Next Steps.md` (rendered into the Next Steps
+    section) and in README.md's settled-facts list, which until now told future
+    Claude instances *not* to autocorrect it — i.e. it was actively propagating
+    the typo. Rebuilt: 64 pages, 51 links, verify PASS.
+  - **Still open for Jim:** the Sheet's Order 50 `Possible Next Steps` cell
+    ("Ask Developer of Riviage...") still has it, and renders onto that
+    monument's page. Added to the `Proposed edits - Monuments sheet text.md`
+    checklist in from-claude-ai/ so it lands in the same Sheet pass as the other
+    12 fixes. Until then the report shows the typo on p61 but not in Next Steps.
+  - **Why the original "verified" call was wrong, worth remembering:** it was
+    recorded as verified because the project's files spelled it consistently.
+    They did — but `Next Steps.md`'s prose was written *from* the sheet note, so
+    the two aren't independent witnesses; it was one typo copied once. Agreement
+    between a source and its own derivative is not corroboration. A proper noun
+    can only be confirmed against something *outside* this project. README's
+    settled-facts list now says so.
+
 2026-07-16 [Claude Code] README.md: folded in claude.ai's handoff note, which is
   now deleted (NOTES-for-future-claude-ai-sessions.md — claude.ai can create
   files but not edit README itself, so it left the content staged for someone
