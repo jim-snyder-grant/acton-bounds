@@ -216,6 +216,36 @@ its own possible item) are folded into section 3, History.
       output "Acton Bounds Report 2025-2026.pdf". (Once History /
       How-created / Next-steps sections exist, just add/enable their rows
       in the manifest and re-run.)
+- [ ] [Both] Install the map dependencies so `overview_map.py` can run again.
+  `geopandas`, `matplotlib`, `shapely` and `pyproj` are listed in
+  `code/requirements.txt` but are NOT actually installed in the `bounds` pyenv
+  (confirmed Jul 15 2026) — so `make overview-map` fails, and the requirements
+  file makes the map look rebuildable when it isn't. Everything else (pandas,
+  reportlab, pypdf, playwright, Pillow) is installed, so the normal build is
+  fine; only the map generator is dead.
+  **Why this is worth doing, beyond convenience:** `code/overview_map.pdf` is
+  gitignored and `code/gis_data/` (60MB: MassDOT RoadInventory roads, MassGIS
+  hydro25k) is untracked — only `overview_map.py` itself is committed. So the
+  report's whole map page currently exists as one un-backed-up local file that
+  nothing on this machine can regenerate. Insync/Drive is the only thing behind
+  it, and the report itself says Drive isn't a durable archive. Installing the
+  deps turns a frozen artifact back into a reproducible output.
+  **Deferred Jul 15 2026** — Jim was mid early-reviewer send, and geopandas may
+  bump numpy/pandas in an env that currently builds the report perfectly; a bad
+  day to break it.
+  **Plan when picked up:** `pip freeze > snapshot.txt` first so the working env
+  is exactly restorable → install → re-run `make all` and confirm 64 pages with
+  verify PASS (proves nothing collateral broke) → then `make overview-map` and
+  compare the regenerated map against the current one. Treat that last step as a
+  real experiment, not a formality: `overview_map.py` hasn't been run since
+  Jul 9 2026, and a newer matplotlib could shift fonts or box positions, which
+  would move the callout rectangles in `overview_map_links.json` and therefore
+  the 51 clickable links. `verify_report.py` catches links pointing at the wrong
+  page, but NOT visual drift — eyeball the map before keeping it.
+  Ties into the "Categorize every file/folder" item below: decide whether
+  `gis_data/` should be tracked (60MB — large but not absurd) or whether its
+  provenance is documented well enough to re-download.
+
 - [ ] [Both] Design Google Drive archiving folder structure
 - [ ] [Jim] Manually move Google Drive folder into DocuShare
 - [ ] [Both] Categorize every file/folder in the Bounds Drive folder as one
