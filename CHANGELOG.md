@@ -6,6 +6,18 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-16 [Both] Acton Bounds.xlsx: incorporated Jim's copy-edit pass on the
+  Monuments sheet's seven text columns and rebuilt the report (64 pages, 51
+  links, verify PASS). All edits editorial — terminal-period/capitalization
+  normalization, first-person->third-person voice ("Jim looked"->"Searched",
+  "Thought I found it"->neutral), broken-quote/whitespace fixes on the Stow
+  reports (rows 43/45), "11/2925"->"11/29/25", the Row 25 Sudbury/Maynard
+  rewrite. **Closes the "Still open for Jim" item in the entry below:** the
+  Order 50 `Possible Next Steps` cell now reads "Rivage" (was "Riviage"), so
+  the typo no longer renders on that monument's page. Committed by Claude Code
+  from the tracked XLSX (cell-diffed against HEAD, scanned clean of new
+  PII/secrets first — landowner names/coordinates present were already public).
+
 2026-07-16 [Both] "Riviage" -> "Rivage": it was a typo after all, in the report
   text and the Sheet. **Supersedes the Riviage note in the README entry below.**
   Jim checked it on the web against the developer's own site (rivageacton.com)
