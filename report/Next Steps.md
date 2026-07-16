@@ -30,7 +30,7 @@ Two more crossings, Acton/Westford Bay Drive (East) and (West), raise a narrower
 
 ## Dating future work, and what comes next for the data
 
-The Select Board has already discussed alternatives to painting a year onto each monument — a stick or a QR code, for instance — as a way to mark future perambulation dates without repainting. Separately, Acton's GIS Department plans to fold the coordinates and findings from this project into a new GIS layer, which should make future perambulations easier to plan and track. Between the two, the next crew to walk this line — in five years, or whenever Acton next takes it up — should have a considerably easier time of it than this one did.
+The Select Board has already discussed alternatives to painting a year onto each monument — a sticker or a QR code, for instance — as a way to mark future perambulation dates without repainting. Separately, Acton's GIS Department plans to fold the coordinates and findings from this project into a new GIS layer, which should make future perambulations easier to plan and track. Between the two, the next crew to walk this line — in five years, or whenever Acton next takes it up — should have a considerably easier time of it than this one did.
 
 ## Who does the work next time
 

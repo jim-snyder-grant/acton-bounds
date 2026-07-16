@@ -446,7 +446,7 @@ async def main():
 
     df = pd.read_excel(XLSX_PATH, sheet_name='Monuments')
 
-    # Page order is driven by the 'Order' column (Jim's clockwise walk
+    # Page order is driven by the 'Order' column (Jim's counter-clockwise walk
     # starting at the Acton/Concord/Maynard/Sudbury corner -- see
     # code/claude.md), not by however the sheet happens to be sorted. Sort
     # explicitly here so a future accidental re-sort/insert in the sheet

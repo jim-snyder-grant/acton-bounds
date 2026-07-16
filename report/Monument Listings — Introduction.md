@@ -56,4 +56,4 @@ A few corners share a name with a number after it, like "Acton/Carlisle 1" and "
 
 ## A few more details
 
-Coordinates are rounded to about a meter of precision. Most photos link to a full-size version you can click through to. Monuments appear in clockwise order around Acton, starting near the Senior Center at the Acton/Concord/Maynard/Sudbury corner.
+Coordinates are rounded to about a meter of precision. Most photos link to a full-size version you can click through to. Monuments appear in counter-clockwise order around Acton, starting near the Senior Center at the Acton/Concord/Maynard/Sudbury corner.

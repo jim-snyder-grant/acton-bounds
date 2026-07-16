@@ -1,6 +1,6 @@
 # History of Acton's Bounds
 
-Acton was incorporated in 1735, carved out of Concord's "New Grants" — land Concord had been given in 1665-7 — along with the separate "Wheeler farms." Its northern edge originally bordered Indian lands known as Nashoba, which later became the town of Littleton. In 1780, a slice of Acton's northern portion was annexed to Carlisle. Aside from that change, Acton's boundaries have stayed essentially the same as shown on official maps from 1794 and 1830 — nearly two centuries with almost no change to the line itself, even as the monuments marking it have needed regular attention.
+Acton was incorporated in 1735, carved out of Concord's "New Grants" — land Concord had been given in 1665-7 — along with the separate "Wheeler farms." Its northwestern edge originally bordered Indian lands known as Nashobah, a portion of which later became the Nashoba Praying Indian village, and later the town of Littleton. In 1780, a slice of Acton's northern portion was annexed to Carlisle. Aside from that change, Acton's boundaries have stayed essentially the same as shown on official maps from 1794 and 1830 — nearly two centuries with almost no change to the line itself, even as the monuments marking it have needed regular attention.
 
 ## The 1904 Atlas itself
 
@@ -16,10 +16,10 @@ Acton shares a boundary with seven towns, and each line has its own origin story
 
 - **Concord** — the oldest of Acton's boundaries, part of the "Six Mile Square" Concord was laid out to in 1635, three miles in every direction from a center point near Nashawtuck Hill.
 - **Carlisle** — defined in 1779-80, when Carlisle was incorporated as a district out of parts of Concord, Acton, Chelmsford, and Billerica.
-- **Boxborough** — laid out as Acton's original westerly boundary when Acton itself was incorporated in 1735-36, and confirmed again in 1782 when Boxborough was carved out of Stow, Harvard, and Littleton.
+- **Boxborough** — laid out as Acton's original westerly boundary when Acton itself was incorporated in 1735, and confirmed again in 1782 when Boxborough was carved out of Stow, Harvard, and Littleton.
 - **Littleton** — the one line with no formal statute defining it at all. It's referred to in Concord's 1665 and 1667 land grants as the edge of the Nashoba lands, but nobody seems to have ever written down exactly where it ran; by the time Nashoba became Littleton in 1715, custom and long practice — confirmed by repeated perambulations and early maps — had settled the question.
 - **Maynard** — the newest of Acton's neighbors, incorporated only in 1871 out of parts of Stow and Sudbury, at which point its entire boundary, including the stretch bordering Acton, was clearly spelled out for the first time.
-- **Stow** — set in general terms back in 1735-36 when Acton itself was incorporated, as part of Stow's older northern line.
+- **Stow** — set in general terms back in 1735 when Acton itself was incorporated, as part of Stow's older northern line.
 - **Westford** — part of a 9,800-acre tract granted to Concord in 1667, later described as the Concord line when Westford was incorporated in 1729-30.
 
 Acton and Sudbury, notably, don't share a line at all — only a single point, the four-town corner where Acton, Concord, Maynard, and Sudbury all meet.
@@ -30,7 +30,7 @@ Not every stretch of the line was uncontroversial. The Acton-Concord boundary wa
 
 ## Why some roads carry different names today
 
-Massachusetts had no requirement to name roads at all in 1904, which is why the 1904 survey behind this report describes monuments by informal directions instead — "on the road leading to Boxborough," or "about 680 feet southeast of the West Acton road." Looking through the Acton Annual Reports, all but a few streets were described this way through the teens, and even in the 1920s, roads were often referred to by a name, followed by the phrase "so-called". I didn't find a Town Meeting or Select Board decision that drove formal naming, but there was a gradual trend in that direction throughout the 1920s and 1930s.
+Massachusetts had no requirement to name roads at all in 1904, which is why the 1904 survey behind this report describes monuments by informal directions instead — "on the road leading to Boxborough," or "about 680 feet southeast of the West Acton road." Looking through the Acton Annual Reports, all but a few streets were described this way through the teens, and even in the 1920s, roads were often referred to by a name followed by the phrase "so-called." No Town Meeting or Select Board decision was found that drove formal naming, but there was a gradual trend in that direction throughout the 1920s and 1930s.
 
 Two factors might have been part of the shift: the rise of the automobile, and the telephone. Cars brought a demand for road maps and directions that meant something to a stranger rather than just a neighbor. Along with the phone system came the rise of emergency services. In the 1920s, Acton Annual Reports mentioned that if you called for help, you could be connected with the State Police emergency services, and that you should be ready to tell them where you lived. 
 

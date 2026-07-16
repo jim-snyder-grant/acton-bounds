@@ -563,13 +563,34 @@ in — `bounds2pdf.py` sorts by it explicitly (see "bounds2pdf.py — Current
 State" below). This was added specifically so the intended order survives
 future accidental re-sorting/row-insertion in the Google Sheet; before
 this column existed, the report's order was just implicit spreadsheet row
-order. `Order` walks clockwise around Acton's boundary starting at the
-Acton/Concord/Maynard/Sudbury corner (a well-known landmark near the
+order. `Order` walks **counter-clockwise** around Acton's boundary starting
+at the Acton/Concord/Maynard/Sudbury corner (a well-known landmark near the
 Acton Senior Center), which also happens to put the existing `Tie-break
 number` values (e.g. the two Carlisle and two Littleton monuments) in
 ascending order — confirmed against the live data. A few monuments known
 only from the 1904 report's unrecognized street names are placed at
 Jim's best-guess position in the sequence.
+
+**The direction is counter-clockwise, and it has flipped twice — don't
+re-derive it from the `Tie-break number` check.** This said "clockwise"
+from Jul 5 2026 until Jul 16 2026, on the strength of the ascending-
+`Tie-break number` observation in the sentence above. That check is real
+but it does *not* test handedness: it only confirms the traversal visits
+the tie-broken pairs in the intended sequence, which is equally true of a
+walk and the same walk reversed. It was nonetheless cited as the
+confirmation, and a day later (Jul 6 2026) it was used to "fix" a
+`counter-clockwise` comment in `bounds2pdf.py` that had been right all
+along. `overview_map.py` never agreed with either.
+
+The test that actually settles it is the shoelace signed area over the
+Corner rows in `Order` sequence, with `x=Longitude, y=Latitude`
+(east-positive, north-positive): positive area = counter-clockwise. Run
+against the live sheet it is **+0.00548**, i.e. counter-clockwise. This
+matches the shape of the route by inspection — Order 1 is the southeast
+corner, then north up the Carlisle side, west across the top, south down
+the Boxborough side, and east along the bottom; travelling *up* the
+right-hand side is counter-clockwise. Re-run the shoelace if it's ever in
+doubt again; don't reason from the tie-break numbers.
 
 ---
 

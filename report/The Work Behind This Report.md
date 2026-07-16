@@ -2,9 +2,9 @@
 
 ## Locating the monuments
 
-The work identified 51 monuments: the corners and street crossings listed in Acton's 1904 boundary survey, plus a handful of additional points where a public road crosses the town line. Jim and Dean located and assessed each one, and, where it could be found, painted it with the year to continue a marking tradition that goes back generations (older monuments often carry a stack of past painted years). Most monuments were found and painted; a smaller number were located but needed repair before painting, and a few couldn't be found at all despite a search.
+The work identified 51 monuments: the corners, street crossings, and witness markers listed in Acton's 1904 boundary survey, plus a handful of additional points where a public road crosses the town line. Jim and Dean located and assessed each one, and, where it could be found, painted it with the year to continue a marking tradition that goes back generations (older monuments often carry a stack of past painted years). Most monuments were found and painted; a smaller number were located but needed repair before painting, and a few couldn't be found at all despite a search.
 
-Where a neighboring town had its own recent perambulation report on file, Acton compared notes: Boxborough (2007), Concord (2017), Stow (2007), and Sudbury. The comparison surfaced a few genuine discrepancies worth flagging to those towns — two monuments Concord's 2017 crew couldn't locate, for instance, were found and painted by Acton in 2025 — and confirmed agreement on most others. Carlisle, Littleton, Westford, and Maynard's reports weren't available for comparison; Acton requested them once, without a response.
+Where a neighboring town had its own recent perambulation report on file, Acton compared notes: Boxborough (2007), Concord (2017), Stow (2007), and Sudbury (2020). The comparison surfaced a few genuine discrepancies worth flagging to those towns — two monuments Concord's 2017 crew couldn't locate, for instance, were found and painted by Acton in 2025 — and confirmed agreement on most others. Carlisle, Littleton, Westford, and Maynard's reports weren't available for comparison; Acton requested them once, without a response.
 
 ## Reaching out for additional witnesses
 

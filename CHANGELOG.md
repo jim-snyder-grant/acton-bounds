@@ -6,6 +6,37 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-16 [Claude Code] report/*.md: applied claude.ai's 8 approved copy edits
+  (INBOX-report-text-edits.md). History.md x4 (Nashobah/Praying Indian village
+  rewrite, "1735-36" -> "1735" x2, stray first-person "I" removed, comma into
+  the quote), The Work Behind This Report.md x2 (Sudbury (2020); witness markers
+  added to the 51-monument sentence), Monument Listings — Introduction.md x1
+  ("clockwise" -> "counter-clockwise"), Next Steps.md x1 ("a stick" -> "a
+  sticker"). Rebuilt: 64 pages (unchanged), 51 links, verify PASS. No PII/secret
+  hits in the diff.
+  - **The direction edit is a real correction, and it also fixed two stale
+    references outside report/.** Applying it was flagged by the fact that
+    code/claude.md documented the opposite ("`Order` walks clockwise"), so the
+    handedness was checked against the sheet rather than taken on faith:
+    shoelace signed area over the 11 Corner rows in `Order` sequence
+    (x=Longitude, y=Latitude) is **+0.00548 -> counter-clockwise**. By
+    inspection too — Order 1 is the southeast corner, then north up the Carlisle
+    side, west across the top, south down the Boxborough side, east along the
+    bottom; going *up* the right-hand side is counter-clockwise.
+  - **Why it was ever "clockwise": a non-sequitur that got recorded as
+    confirmed.** The 2026-07-05 entry below says "Confirmed clockwise is correct
+    by checking that it puts the existing `Tie-break number` values in ascending
+    order." That check is real but doesn't test handedness — a walk and the same
+    walk reversed can't both put the pairs ascending, but *which* of the two is
+    "clockwise" is not what the check answers. On 2026-07-06 that same reasoning
+    was used to "fix" a `counter-clockwise` comment in bounds2pdf.py that had
+    been correct all along. overview_map.py's counter-clockwise callout order
+    never agreed with either, which is the tell nobody followed up.
+  - Fixed accordingly: bounds2pdf.py's sort comment (back to counter-clockwise)
+    and code/claude.md's page-order section, which now records the shoelace as
+    the test that settles it and warns off the tie-break argument, since this
+    has now flipped twice.
+
 2026-07-15 [Claude Code] assemble_report.py: tell readers the map boxes are
   clickable. Jim asked for a clue that the numbered callout boxes link to the
   monument pages — either by editing the map's existing bottom caption or adding
