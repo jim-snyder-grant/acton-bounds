@@ -2,9 +2,9 @@
 
 Acton was incorporated in 1735, carved out of Concord's "New Grants" — land Concord had been given in 1665-7 — along with the separate "Wheeler farms." Its northwestern edge originally bordered Indian lands known as Nashobah, a portion of which later became the Nashoba Praying Indian village, and later the town of Littleton. In 1780, a slice of Acton's northern portion was annexed to Carlisle. Aside from that change, Acton's boundaries have stayed essentially the same as shown on official maps from 1794 and 1830 — nearly two centuries with almost no change to the line itself, even as the monuments marking it have needed regular attention.
 
-## The 1904 Atlas itself
+## The 1904 Atlas
 
-The volume this report leans on so heavily — *Boundary Lines of Acton, Bedford, Concord, Lincoln, Maynard, Sudbury, Wayland, Weston* (1904) — was one of 68 town-boundary atlases produced statewide between 1898 and 1915, first by Massachusetts's Topographical Survey Commission and then by its successor, the Board of Harbor and Land Commissioners. The fieldwork itself — triangulated surveys tying each town's boundary markers into higher-order state survey control, done jointly with the U.S. Coast and Geodetic Survey — was carried out in the 1890s; publication of the atlas volumes followed over the next two decades. Once complete, each volume was distributed free to every town, public library, and relevant state agency.
+The book *Boundary Lines of Acton, Bedford, Concord, Lincoln, Maynard, Sudbury, Wayland, Weston* (1904) was a key source for Acton's perambulation work. It was one of 68 town-boundary atlases produced statewide between 1898 and 1915, first by Massachusetts's Topographical Survey Commission and then by its successor, the Board of Harbor and Land Commissioners. The fieldwork itself — triangulated surveys tying each town's boundary markers into higher-order state survey control, done jointly with the U.S. Coast and Geodetic Survey — was carried out in the 1890s; publication of the atlas volumes followed over the next two decades. Once complete, each volume was distributed free to every town, public library, and relevant state agency.
 
 The Harbor and Land Commissioners were an unlikely home for this work — their day-to-day business was licensing wharves, dams, and dredging in tidewaters, not surveying inland town lines. They inherited the boundary project in 1901 when the Topographical Survey Commission that started it was dissolved, and carried it through to completion in 1914.
 
@@ -22,7 +22,7 @@ Acton shares a boundary with seven towns, and each line has its own origin story
 - **Stow** — set in general terms back in 1735 when Acton itself was incorporated, as part of Stow's older northern line.
 - **Westford** — part of a 9,800-acre tract granted to Concord in 1667, later described as the Concord line when Westford was incorporated in 1729-30.
 
-Acton and Sudbury, notably, don't share a line at all — only a single point, the four-town corner where Acton, Concord, Maynard, and Sudbury all meet.
+**Sudbury** and Acton don't share a line at all — only a single point, the four-town corner where Acton, Concord, Maynard, and Sudbury all meet.
 
 ## A boundary dispute, settled by committee
 
