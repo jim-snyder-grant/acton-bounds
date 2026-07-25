@@ -6,6 +6,29 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-25 [Both] code/photo_manifest.csv: integrated 8 new photos from Jim's
+  2026-07-18 monument visit, across 5 monuments (Acton/Concord Knox Trail x2,
+  Acton/Concord Powder Mill Road (Rte 62), Acton/Maynard Main Street (Rte 27)
+  x2, Acton/Maynard Powder Mill Road (Rte 62), Acton/Maynard Sudbury Road x2).
+  - **3 filenames normalized to the ", <YYYY-MM-DD HH-MM>" convention** before
+    scanning, or build_manifest would have PARSE_ERROR'd them: Knox Trail
+    "11_23" -> "11-23" (underscore in the time); Sudbury Road "Road,2026" ->
+    "Road, 2026" (missing space after the comma splits the datetime off wrong);
+    and "Acton-Maynard Powder Mill Road (Rte 62).jpg" had NO datetime at all --
+    named "11-08" from its EXIF DateTimeOriginal (2026:07:18 11:08:25), which
+    fits the rest of the 11:15-11:43 visit. The other 5 parsed clean as-is.
+  - All 8 matched real monuments (checked against the xlsx first), include=yes,
+    section=monument; 3 carry hand-authored captions from the filenames, 5 blank.
+  - **No DocuShare URLs yet** -- same state the Jul-14 batch was in before its
+    merge. They render on their monument pages without a full-size link until
+    Jim uploads them and the scrape/merge step runs.
+  - Rebuilt: 64 pages, 51 links, verify PASS, no pagination shift (Order 1->p12
+    ... 51->p62, no spillover). OSM screenshots all cached -- these monuments
+    already had maps. Manifest diff churn (191/183) is build_manifest re-sorting;
+    net +8 rows, existing rows preserved. Scanned clean of PII/secrets.
+    Committed + pushed by Claude Code (d15425b). Photos and the report PDF stay
+    gitignored; only the manifest is tracked.
+
 2026-07-25 [Both] report/History.md: Jim's copy-edit pass on the "1904 Atlas"
   subsection and the Sudbury line. Renamed the heading "The 1904 Atlas itself"
   -> "The 1904 Atlas"; rewrote that section's opening sentence to a plainer
