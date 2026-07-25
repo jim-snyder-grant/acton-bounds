@@ -6,6 +6,16 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-25 [Both] report/History.md: Jim's copy-edit pass on the "1904 Atlas"
+  subsection and the Sudbury line. Renamed the heading "The 1904 Atlas itself"
+  -> "The 1904 Atlas"; rewrote that section's opening sentence to a plainer
+  "The book ... was a key source for Acton's perambulation work" (was "The
+  volume this report leans on so heavily —"); reformatted the Sudbury sentence
+  to lead with bold **Sudbury**, matching the bulleted town-origin list just
+  above it. Editorial only, no new PII. Rebuilt: 64 pages, 51 links, verify
+  PASS; History still p3-5, no pagination shift. Committed + pushed by Claude
+  Code (7638738).
+
 2026-07-16 [Both] photo_manifest.csv: Jim's caption copy-edit pass (trailing
   periods removed from 13 captions) plus one photo marked out of the report
   (Acton-Littleton W B Marker on Fort Pond Road, 2026-03-14 10-02.png ->
