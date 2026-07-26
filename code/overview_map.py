@@ -20,6 +20,12 @@ Data sources (both free, public domain, no API key):
   Water: https://s3.us-east-1.amazonaws.com/download.massgis.digital.mass.gov/
          shapefiles/state/hydro25k.zip  (downloaded once to gis_data/)
 
+The gis_data/ cache (hydro25k.zip ~60MB + roads_acton.geojson) is gitignored,
+so a fresh clone has no base map until it is restored. Rather than re-fetch
+from the sources above, a durable copy of both files is archived on the town's
+DocuShare, in the "gis_data" collection (Collection-20546) under Perambulation
+(Collection-19415): download them into code/gis_data/ and this runs offline.
+
 Usage:
   python3 overview_map.py [--refresh-roads]
 """

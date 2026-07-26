@@ -251,7 +251,11 @@ its own possible item) are folded into section 3, History.
   status change: renders offline from `gis_data/`, and the visual-drift worry
   didn't materialize — a pixel diff old-vs-new showed only the one recolored box
   changed and the sidecar's 51 box rects were byte-identical (links still align).
-  Still open below: whether `gis_data/` should be tracked for durability.
+  Durability of `gis_data/` is now handled: Jim uploaded both cache files to
+  DocuShare (2026-07-26) — the "gis_data" collection (Collection-20546) under
+  Perambulation (Collection-19415). So the 60MB does NOT need to go in git; a
+  fresh clone restores the cache from DocuShare (documented in
+  overview_map.py's data-source header).
 
 - [ ] [Both] Design Google Drive archiving folder structure
 - [ ] [Jim] Manually move Google Drive folder into DocuShare
