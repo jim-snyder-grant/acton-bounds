@@ -216,7 +216,7 @@ its own possible item) are folded into section 3, History.
       output "Acton Bounds Report 2025-2026.pdf". (Once History /
       How-created / Next-steps sections exist, just add/enable their rows
       in the manifest and re-run.)
-- [ ] [Both] Install the map dependencies so `overview_map.py` can run again.
+- [x] [Both] Install the map dependencies so `overview_map.py` can run again.
   `geopandas`, `matplotlib`, `shapely` and `pyproj` are listed in
   `code/requirements.txt` but are NOT actually installed in the `bounds` pyenv
   (confirmed Jul 15 2026) — so `make overview-map` fails, and the requirements
@@ -245,6 +245,13 @@ its own possible item) are folded into section 3, History.
   Ties into the "Categorize every file/folder" item below: decide whether
   `gis_data/` should be tracked (60MB — large but not absurd) or whether its
   provenance is documented well enough to re-download.
+  **DONE 2026-07-26** — `python3 -m pip install geopandas matplotlib` into the
+  bounds env (pulled shapely/pyproj/pyogrio too; pyogrio reads the cached zipped
+  shapefile, no system GDAL needed). Ran `overview_map.py` for the Sudbury-Road
+  status change: renders offline from `gis_data/`, and the visual-drift worry
+  didn't materialize — a pixel diff old-vs-new showed only the one recolored box
+  changed and the sidecar's 51 box rects were byte-identical (links still align).
+  Still open below: whether `gis_data/` should be tracked for durability.
 
 - [ ] [Both] Design Google Drive archiving folder structure
 - [ ] [Jim] Manually move Google Drive folder into DocuShare
