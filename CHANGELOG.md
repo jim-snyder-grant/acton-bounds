@@ -6,6 +6,37 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-26 [Both] Acton/Maynard Sudbury Road (Order 51): Not Found -> Found, and
+  its ripples. Jim's Jul 18 2026 visit found a probable monument. Rebuilt: 64
+  pages, 51 links, verify PASS.
+  - **Data (Acton Bounds.xlsx, Monuments row 42):** Status Not Found -> Found;
+    date -> 2026-07-18; Notes on Location -> "on the East side of the road";
+    Notes on Monument -> "almost entirely buried, so it may not be the monument,
+    but it is in the right location"; Possible Next Steps -> "Work with Maynard
+    to verify... May need digging and re-placing." New Jul 18 visit + attendance
+    on the Contacts tab (feeds the page's witness line -- bounds2pdf reads
+    Contacts). Incidental For Mapping / For Measuring edits ride along; the
+    Summary / OpenStreetMap "changes" in a cell diff are ArrayFormula
+    object-identity noise, not real edits.
+  - **Overview map regenerated.** Box 51 recolored red->blue. This is the first
+    time the map has been rebuilt here: geopandas + matplotlib were installed
+    into the bounds env (`python3 -m pip install geopandas matplotlib`; they were
+    in requirements.txt but never installed). overview_map.py runs offline from
+    the cached MassGIS data in code/gis_data/ and reads the Monuments sheet's
+    Status column. Verified faithful: pixel diff old-vs-new shows ONLY the one
+    93x93px box changed, and the sidecar's 51 box rects are byte-identical, so
+    the clickable callouts still align. Map artifacts stay gitignored (local/
+    Drive only). NOTE `make all` does not rebuild the map -- run overview_map.py
+    first, then make all.
+  - **report/Next Steps.md:** added Sudbury Road to the repair list; removed the
+    "Questions for neighboring towns" subsection (its Sudbury-Road question is
+    now answered); moved "Who does the work next time" above the renamed "What
+    else might change next time" (was "Dating future work, and what comes next
+    for the data"); fixed a double-space typo in that heading.
+  - Monument page (p62) now renders Found (blue) with the new narratives, the
+    witness line, and the two Jul 18 photos. Committed + pushed by Claude Code
+    (3cbbc1d); map/report PDFs untracked as always.
+
 2026-07-26 [Both] intro2pdf.py: text-wrap image floats, applied to the painting
   page and the Parmenter section. Rebuilt: 64 pages, 51 links, verify PASS
   (History still p3-5, Work still p6-8). Assembled pages spot-checked visually.
