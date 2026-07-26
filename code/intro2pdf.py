@@ -24,6 +24,12 @@ Supported Markdown (what the current intro drafts use):
                     resolve relative to the script dir / cwd / the .md's own
                     dir. If the filename matches a photo_manifest.csv row with
                     a docushare_url, the image links to it.
+  ![cap](path){float=left|right width=N}
+                  -> floated photo at N pt wide: the text after it (up to the
+                    next heading) wraps beside and then below. Consecutive
+                    floated lines on the same side stack in a side column with
+                    the prose in the other column (they share width N, so the
+                    stack lines up). Omit the braces for the normal centered row.
   [text](url)     -> inline link; clickable, drawn in a darkened gold. The
                     visible text is whatever `text` says, so spell the URL out
                     there when a print reader needs to be able to type it.
@@ -53,10 +59,12 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.platypus import (SimpleDocTemplate, Paragraph, Spacer, Table,
                                 TableStyle, HRFlowable, KeepTogether,
                                 Image as RLImage)
+from reportlab.platypus.flowables import ImageAndFlowables
+from reportlab.lib.utils import ImageReader
 from reportlab.pdfgen import canvas as pdfcanvas
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-IMG_RE = re.compile(r"!\[(.*?)\]\((.*?)\)\s*$")
+IMG_RE = re.compile(r"!\[(.*?)\]\((.*?)\)(?:\s*\{([^}]*)\})?\s*$")
 # Inline [text](url) link. The (?<!!) keeps this from eating an ![img](path)
 # line, which is handled separately by IMG_RE.
 LINK_RE = re.compile(r"(?<!!)\[([^\]]+)\]\(([^)\s]+)\)")
@@ -114,6 +122,68 @@ class LinkableImage(RLImage):
                 self.link_url, (0, 0, self.drawWidth, self.drawHeight), relative=1)
 
 
+class CaptionedImage(RLImage):
+    """An image that reserves and draws a wrapped caption directly beneath
+    itself, so the image-plus-caption reads as one unit that can be handed to
+    ImageAndFlowables as its single "image" for a text-wrap float. (Plain
+    photo rows keep the image and its caption as separate flowables; only the
+    wrap case needs them fused, because ImageAndFlowables reserves a rectangle
+    sized to one Image.) Also draws a click-through link over the image, like
+    LinkableImage. The caption band sits below the image within drawHeight.
+    """
+    def __init__(self, jpeg_bytes, width, height, caption="", link_url=None):
+        super().__init__(io.BytesIO(jpeg_bytes), width=width, height=height)
+        self._reader = ImageReader(io.BytesIO(jpeg_bytes))
+        self.link_url = link_url
+        self._imgW, self._imgH = width, height
+        self._cap_lines = self._wrap_caption(caption, width) if caption else []
+        cap_h = len(self._cap_lines) * CAPTION.leading + (2 if self._cap_lines else 0)
+        self.drawWidth, self.drawHeight = width, height + cap_h
+
+    @staticmethod
+    def _wrap_caption(text, width):
+        from reportlab.pdfbase.pdfmetrics import stringWidth
+        lines, cur = [], ""
+        for word in text.split():
+            trial = (cur + " " + word).strip()
+            if not cur or stringWidth(trial, CAPTION.fontName, CAPTION.fontSize) <= width:
+                cur = trial
+            else:
+                lines.append(cur)
+                cur = word
+        if cur:
+            lines.append(cur)
+        return lines
+
+    # ImageAndFlowables drives sizing through these; keep our fixed size (the
+    # extended drawHeight that includes the caption band) and skip the
+    # aspect-ratio restriction logic, which doesn't know about the caption.
+    def wrap(self, availWidth, availHeight):
+        return self.drawWidth, self.drawHeight
+
+    def _restrictSize(self, availWidth, availHeight):
+        self._oldDrawSize = None
+        return self.drawWidth, self.drawHeight
+
+    def _unRestrictSize(self):
+        pass
+
+    def draw(self):
+        c = self.canv
+        cap_h = self.drawHeight - self._imgH
+        c.drawImage(self._reader, 0, cap_h, self._imgW, self._imgH, mask="auto")
+        if self.link_url:
+            c.linkURL(self.link_url,
+                      (0, cap_h, self._imgW, cap_h + self._imgH), relative=1)
+        if self._cap_lines:
+            c.setFont(CAPTION.fontName, CAPTION.fontSize)
+            c.setFillColor(GRAY)
+            y = cap_h - CAPTION.fontSize
+            for line in self._cap_lines:
+                c.drawCentredString(self._imgW / 2.0, y, line)
+                y -= CAPTION.leading
+
+
 def load_docushare_map():
     """filename -> docushare_url from photo_manifest.csv (best-effort, may be empty)."""
     path = os.path.join(SCRIPT_DIR, "photo_manifest.csv")
@@ -153,6 +223,42 @@ def photo_dims(path, col_width, max_h):
     if natural_h > max_h:
         return int(max_h * nat_w / nat_h), int(max_h)
     return int(col_width), int(natural_h)
+
+
+def fixed_width_dims(path, width):
+    """Return (width, proportional_height) at exactly `width` pt, no height cap.
+
+    Floated photos are placed at an author-chosen width (so a stack shares one
+    edge), and their height just follows the aspect ratio -- unlike photo_dims,
+    which fills a column and caps the height.
+    """
+    with PILImage.open(path) as img:
+        nat_w, nat_h = img.size
+    return int(width), int(round(width * nat_h / nat_w))
+
+
+FLOAT_DEFAULT_WIDTH = 160
+
+def parse_img_attrs(attr_str):
+    """Parse an image line's `{float=left width=160}` suffix.
+
+    Returns {'float': 'left'|'right'|None, 'width': int|None}. Unknown keys and
+    malformed values are ignored, so a stray attribute never breaks a build.
+    """
+    out = {"float": None, "width": None}
+    for tok in (attr_str or "").split():
+        if "=" not in tok:
+            continue
+        key, val = tok.split("=", 1)
+        key, val = key.strip().lower(), val.strip()
+        if key == "float" and val.lower() in ("left", "right"):
+            out["float"] = val.lower()
+        elif key == "width":
+            try:
+                out["width"] = int(val)
+            except ValueError:
+                pass
+    return out
 
 
 def to_jpeg_bytes(path, display_width, display_height, dpi_scale=2):
@@ -209,6 +315,76 @@ def build_image_group(group, md_dir, ds_map):
             flowables.append(Spacer(1, 6))
         flowables.append(t)
     return flowables
+
+
+def build_float_group(group, beside, side, width, md_dir, ds_map):
+    """Lay out a run of floated images with prose flowing beside (and below).
+
+    `group` is a list of (caption, raw_path); `beside` is the already-built list
+    of flowables (paragraphs, bullets, ...) that should wrap around / sit next
+    to the images; `side` is 'left' or 'right'; `width` is the image display
+    width in pt (all images in the run share it, so a stack lines up).
+
+    One image -> ImageAndFlowables, so the prose flows down the image's side and
+    then reclaims full width beneath it. Several images -> a two-column table
+    (images stacked on `side`, prose in the other column) -- true wrap only
+    reserves one image's rectangle, and stacking preserves each photo's caption.
+    Falls back to returning `beside` unchanged if no image resolves.
+    """
+    resolved = []
+    for cap, raw in group:
+        p = resolve_image_path(raw, md_dir)
+        if p is None:
+            print(f"  WARNING: intro image not found, skipping: {raw}", file=sys.stderr)
+            continue
+        resolved.append((p, cap, ds_map.get(os.path.basename(p))))
+    if not resolved:
+        return list(beside)
+    width = width or FLOAT_DEFAULT_WIDTH
+    beside = list(beside)
+
+    if len(resolved) == 1:
+        p, cap, url = resolved[0]
+        dw, dh = fixed_width_dims(p, width)
+        img = CaptionedImage(to_jpeg_bytes(p, dw, dh), dw, dh,
+                             caption=cap, link_url=url)
+        gap = 8
+        return [ImageAndFlowables(
+            img, beside, imageSide=side,
+            imageLeftPadding=(gap if side == "right" else 0),
+            imageRightPadding=(gap if side == "left" else 0),
+            imageBottomPadding=6)]
+
+    # Several images: stack them in one column, prose in the other.
+    col = []
+    for idx, (p, cap, url) in enumerate(resolved):
+        dw, dh = fixed_width_dims(p, width)
+        col.append(LinkableImage(io.BytesIO(to_jpeg_bytes(p, dw, dh)),
+                                 width=dw, height=dh, hAlign="CENTER",
+                                 link_url=url or None))
+        if cap:
+            col.append(Paragraph(inline(cap), CAPTION))
+        if idx < len(resolved) - 1:
+            col.append(Spacer(1, 10))
+    img_col_w = width + 10
+    text_col_w = TEXT_W - img_col_w
+    if side == "left":
+        cells, widths = [col, beside], [img_col_w, text_col_w]
+        inner = [("RIGHTPADDING", (0, 0), (0, 0), 12),
+                 ("LEFTPADDING", (1, 0), (1, 0), 6)]
+    else:
+        cells, widths = [beside, col], [text_col_w, img_col_w]
+        inner = [("RIGHTPADDING", (0, 0), (0, 0), 6),
+                 ("LEFTPADDING", (1, 0), (1, 0), 12)]
+    t = Table([cells], colWidths=widths)
+    t.setStyle(TableStyle([
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+        ("LEFTPADDING", (0, 0), (0, 0), 0),
+        ("RIGHTPADDING", (-1, 0), (-1, 0), 0),
+        ("TOPPADDING", (0, 0), (-1, -1), 0),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 0),
+    ] + inner))
+    return [t]
 
 
 def inline(text):
@@ -300,18 +476,44 @@ def parse_markdown(text, md_dir=".", ds_map=None):
 
         if IMG_RE.match(line):
             flush_para()
+            # Gather a run of consecutive image lines. A run is homogeneous in
+            # float-ness: a floated image ends the run when the next image has a
+            # different float side (or none), so a centered row and a float
+            # block never merge.
             group = []
+            float_side = float_width = None
+            first = True
             while i < n:
                 m = IMG_RE.match(lines[i].strip())
                 if not m:
                     break
+                attrs = parse_img_attrs(m.group(3))
+                if first:
+                    float_side, float_width = attrs["float"], attrs["width"]
+                    first = False
+                elif bool(attrs["float"]) != bool(float_side) or (
+                        attrs["float"] and attrs["float"] != float_side):
+                    break
                 group.append((m.group(1), m.group(2)))
                 i += 1
-            imgs = build_image_group(group, md_dir, ds_map)
-            if imgs:
+
+            if float_side:
+                # Everything up to the next heading wraps around the image(s).
+                beside_lines = []
+                while i < n and not lines[i].strip().startswith("#"):
+                    beside_lines.append(lines[i])
+                    i += 1
+                beside, _ = parse_markdown("\n".join(beside_lines), md_dir, ds_map)
                 flow.append(Spacer(1, 4))
-                flow.extend(imgs)
+                flow.extend(build_float_group(group, beside, float_side,
+                                              float_width, md_dir, ds_map))
                 flow.append(Spacer(1, 6))
+            else:
+                imgs = build_image_group(group, md_dir, ds_map)
+                if imgs:
+                    flow.append(Spacer(1, 4))
+                    flow.extend(imgs)
+                    flow.append(Spacer(1, 6))
             continue
 
         if re.match(r"[-*]\s+", line):

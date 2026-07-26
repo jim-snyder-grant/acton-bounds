@@ -42,4 +42,6 @@ Some roads, though, already had the names they carry today well before any of th
 
 ## A road that disappeared: Parmenter Road
 
+![Parmenter Ave in Maynard](../Photos/Monument Photos/Acton-Maynard Main Street (Rte 27), 2026-07-18 11-35, Parmenter Ave in Maynard.jpg){float=right width=140}
+
 One thread worth following: the 1904 survey refers to "the Parmenter road" at two separate points along Acton's boundary — once on the Concord line, near what's now Old Stow Road, and again on the Maynard line, near what's now Parker Street. A short Parmenter Ave still exists today, in Maynard, near the site of the old Parmenter farm. It's plausible that a single named road once ran between these points — roughly northeast to southwest, from Maynard through what's now South Acton toward Concord — and the name simply disappeared from maps sometime in the last century, leaving only its name behind on one short remaining stretch. The Parmenter Road in Acton might plausibly have been Parker Street, followed by Independence Road, followed by an abandoned stretch that crossed the Fitchburg line tracks to connect with the Old Stow Road in Concord. 
