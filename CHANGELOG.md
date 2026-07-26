@@ -6,6 +6,39 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-26 [Both] intro2pdf.py: text-wrap image floats, applied to the painting
+  page and the Parmenter section. Rebuilt: 64 pages, 51 links, verify PASS
+  (History still p3-5, Work still p6-8). Assembled pages spot-checked visually.
+  - **New feature:** a `{float=left|right width=N}` attribute on `![cap](path)`
+    lines. One floated image -> ImageAndFlowables (prose wraps down its side,
+    then full width below). A run of floated images on the same side -> a
+    two-column table (images stacked on that side, prose in the other) --
+    ImageAndFlowables only reserves one image's rectangle, and stacking keeps
+    each photo's caption. The wrapped prose is everything up to the next
+    heading. New `CaptionedImage` flowable fuses image + wrapped caption (so the
+    wrap case has one Image to size to); `parse_img_attrs` + `fixed_width_dims`
+    added. Plain `![cap](path)` is unchanged -- still the centered <=3-across
+    row. Prototyped and width-tuned before building (see below).
+  - **Painting page (The Work Behind This Report.md):** dropped the middle
+    equipment photo, floated the other two left at 160pt. The 3-stacked-left
+    idea was prototyped and rejected -- 3 mixed-orientation photos tower over
+    one short paragraph, leaving the right side empty; 2 photos + Jim's expanded
+    kit list balance well. Also applied Jim's copy-edits to the new kit list:
+    "on he stone"->"on the stone", "Rust-oleum"->"Rust-Oleum" + terminal
+    period, collapsed double/triple spaces, dropped a trailing space. (Jim's
+    other edits to this section -- Claude-role wording, the GitHub-snapshot
+    sentence -- came in the same pass.)
+  - **Parmenter (History.md):** floated the cropped Parmenter Ave photo right at
+    140pt -- solves the earlier 4-page spill with NO prose trim (the wrap
+    overlaps the image height with the text column). Supersedes the trim-budget
+    plan; the ~11-line cut is no longer needed.
+  - **Photos:** Jim cropped both the Rust-Oleum and Parmenter photos to
+    near-square (filenames unchanged, so no manifest edit). The cropped files
+    now differ from their DocuShare copies, so the click-through links show the
+    uncropped versions until re-uploaded -- minor, deferred. All three painting
+    photos (kept + dropped) are section=intro, so nothing changed on any
+    monument page. Committed + pushed by Claude Code (c878d36).
+
 2026-07-26 [Both] code/photo_manifest.csv: DocuShare links for the 8 new
   2026-07-18 photos + Jim's Parmenter edit. Rebuilt: 64 pages, 51 links, PASS.
   - **DocuShare scrape/merge:** merged URLs (Documents 99403-99410) for all 8
