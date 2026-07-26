@@ -193,6 +193,17 @@ its own possible item) are folded into section 3, History.
 
 ---
 
+## Report content updates
+
+- [ ] [Both] Update the Acton/Littleton 1 monument story with new data from
+  Littleton — edit the narrative fields in that Monuments-sheet row, then
+  re-render (same flow as the Jul-26 Sudbury Road update).
+- [ ] [Both] Update the street-name examples in History.md — the "Why some
+  roads carry different names today" section (Central St / Pope Rd / Main St,
+  and the "Laws Brook / Strawberry hill / Nagog hill" already-named list).
+
+---
+
 ## Additional research
 
 - [ ] [Jim] See if planning department has any info on missing Acton/Westford corner monument
