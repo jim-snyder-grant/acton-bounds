@@ -6,6 +6,36 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-26 [Both] code/photo_manifest.csv: DocuShare links for the 8 new
+  2026-07-18 photos + Jim's Parmenter edit. Rebuilt: 64 pages, 51 links, PASS.
+  - **DocuShare scrape/merge:** merged URLs (Documents 99403-99410) for all 8
+    photos from the Jul-18 visit. merge matched 185 of 190; the 5 unmatched are
+    the known pre-existing ones (3 leading-space fragments + the 2 Ben's Woods /
+    witness-marker variants), unrelated.
+  - **A new access block, now resolved:** doc.actonma.gov had gone behind an AWS
+    WAF "Human Verification" CAPTCHA -- both urllib and curl got the challenge
+    page back as HTTP 405, not the old guest-session License Error. The saved-
+    HTML fallback was attempted but Insync hadn't finished syncing the file, and
+    the first save also predated the uploads. actonma.gov IT then cleared it and
+    the direct scrape worked again (190 docs). scrape_docushare.py's docstring
+    still says "publicly viewable without login" -- left as-is per Jim since IT
+    fixed it; revisit if the CAPTCHA recurs.
+  - **Jim's manifest edit, one photo:** "Acton-Maynard Main Street (Rte 27),
+    2026-07-18 11-35, Parmenter Ave in Maynard.jpg" -> include=no,
+    exclude_reason="not for monuments", section=intro-history. Off the Maynard
+    Main Street monument page (bounds2pdf skips it on both include!=yes and
+    section!=monument) and tagged as a candidate for the History intro (Parmenter
+    road-name material). **It renders nowhere until referenced with a ![](path)
+    line in History.md** -- intro sections pull photos from the .md, not by
+    manifest section; the tag is advisory only. Parked as-is per Jim.
+  - **Normalization on the way in:** Jim's editor rewrote the file LF (it's CRLF
+    -- csv.writer's native terminator) and re-sorted it by datetime for his own
+    viewing, which made every line show as changed. Re-ran build_manifest to
+    restore CRLF + canonical (monument_name, datetime) order so the git diff is
+    just the 8 URLs + the one edit. Also lowercased Jim's "Intro-history" ->
+    "intro-history" to match VALID_SECTIONS and clear the unrecognized-section
+    warning. Committed + pushed by Claude Code (b08923c).
+
 2026-07-25 [Both] code/photo_manifest.csv: integrated 8 new photos from Jim's
   2026-07-18 monument visit, across 5 monuments (Acton/Concord Knox Trail x2,
   Acton/Concord Powder Mill Road (Rte 62), Acton/Maynard Main Street (Rte 27)
