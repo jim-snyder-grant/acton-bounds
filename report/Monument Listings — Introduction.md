@@ -18,7 +18,7 @@ Each of the 51 monuments gets its own page, numbered 1–51, starting at the Act
 - Nearby streets and landmarks.
 - Notes on where to find it, and what it looks like.
 - What the 1904 survey said about it, if anything.
-- Photos, if we have them, in the order they were taken.
+- Photos, when available, in the order they were taken.
 - Sometimes, a "Possible Next Steps" note — a tip for whoever picks this work up later, like which state agency to ask or where funding might come from. Most of these are on monuments that need follow-up, but a few Painted monuments have one too, if the monument itself needs repair.
 - A small map, showing where the monument is. Click it to open the live version online.
 
@@ -29,8 +29,8 @@ Each monument page — and each box on the overview map — carries a number (1 
 - **Green — Painted.** Found, and marked with "2025."
 - **Blue — Found.** Located, but not painted yet.
 - **Orange — Couldn't paint.** Located, but it needs repair first.
-- **Red — Not Found.** We looked, and didn't find it.
-- **Gray — Documented.** It's in the old records, but nobody's been out to check yet.
+- **Red — Not Found.** The team looked, and didn't find it.
+- **Gray — Documented.** It's in the old records, but the team hasn't been out to look for it yet.
 
 ## Corners and street crossings
 
@@ -42,18 +42,23 @@ Only 11 of the 51 monuments are true corners — spots where the town line bends
 - **GIS iPad** — measured in the field with the Town's GPS-equipped iPad.
 - **map estimate** — a best guess from a map or aerial photo, not a real measurement.
 
+The Town GIS department has standardized for now on WGS84, so the team gathered GPS points using that datum. This is sufficient for data that needs to be accurate within a meter or two. The problem with WGS84 is that accurate coordinates for a location will become incorrect as the North American plate moves, which it is doing at about 1-2 centimeters per year around here. If a future perambulation is done with more accurate equipment, a coordinate system tied to the North American plate would be better, such as the NAD83 family of datums.
+
 ## Witness markers
 
 A few monuments aren't at the true corner. They're "witness markers" — placed nearby because the real spot can't be marked (say, it's inside a house). On the map they're the triangle icons.
 
 ## Numbered pairs
 
-A few corners share a name with a number after it, like "Acton/Carlisle 1" and "Acton/Carlisle 2." That's because the Acton/Carlisle line bends more than once, so there's more than one corner to name. The 1904 survey numbered them this way, and we kept the same numbers.
+A few corners share a name with a number after it, like "Acton/Carlisle 1" and "Acton/Carlisle 2." That's because the Acton/Carlisle line bends more than once, so there's more than one corner to name. The 1904 survey numbered them this way, and this report kept the same numbers.
 
 ## Who's in the photos
 
-"Witnesses" are the people who showed up to help clean and paint. Unless we note otherwise, they're Acton residents — someone from a neighboring town is marked with that town's name in parentheses.
+"Witnesses" are the people who showed up to help clean and paint. Unless noted otherwise, they're Acton residents — someone from a neighboring town is marked with that town's name in parentheses.
 
 ## A few more details
 
 Coordinates are rounded to about a meter of precision. Most photos link to a full-size version you can click through to. Monuments appear in counter-clockwise order around Acton, starting near the Senior Center at the Acton/Concord/Maynard/Sudbury corner.
+
+![The Acton/Concord/Maynard/Sudbury corner, where the counter-clockwise tour begins](../Photos/Monument Photos/Acton-Concord-Maynard-Sudbury, 2025-07-24 09-21.jpg)
+![A witness marker: "W M" carved into a bound set near the corner rather than on it](../Photos/Monument Photos/Acton-Carlisle-Concord, 2025-06-30 13-38, "W M" means this is a witness marker, near but not at the actual corner..jpg)

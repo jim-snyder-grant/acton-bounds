@@ -19,15 +19,15 @@ Town staff weren't part of the fieldwork, but became essential once it came time
 ![Painting equipment bundled up for carrying](../Photos/Monument Photos/Acton-Boxborough Summer Street, 2025-09-16 09-41, A view of the equipment.jpg){float=left width=160}
 ![Satin Black Protective Enamel Rust-Oleum paint can detail](../Photos/Monument Photos/Acton-Concord-Maynard-Sudbury, 2025-07-24 09-16, Rust-oleum details.jpg){float=left width=160}
 
-The photos show the equipment that we carried to each site:
+The photos show the equipment that was carried to each site:
 - A wire brush was used to clean off the portions of the monument to be painted.
 - A screwdriver was used to open the paint can.
 - The paint was Rust-Oleum Satin Black Protective Enamel.
-- If the day turned damp, or if there was moisture leftover on the stone, we had a collection of rags to dry things off.
-- We used disposable paint brushes to minimize the time it took to set up before and cleanup after. We had a plastic bag to carry the brushes from site to site.
+- If the day turned damp, or if there was moisture leftover on the stone, there was a collection of rags to dry things off.
+- Disposable paint brushes were used to minimize the time it took to set up before and cleanup after. There was a plastic bag to carry the brushes from site to site.
 - The hammer was important in sealing up the paint can.
 
-A typical outing covered a handful of monuments and ran up to about three hours — though sessions often wrapped up sooner, either because the group finished early or because people were ready to head home. At each monument, the marker was cleaned up and, if conditions allowed, painted with the year with the Rust-Oleum paint; painting requires a dry surface and warm-enough weather, so some visits were for locating and assessing a monument only, with painting to follow on a later outing. Like any outdoor fieldwork in New England, the usual hazards — poison ivy, ticks, uneven terrain — came with the territory.
+A typical outing covered a handful of monuments and ran up to about three hours — though sessions often wrapped up sooner, either because the group finished early or because people were ready to head home. At each monument, the marker was cleaned up and, if conditions allowed, the year was painted with the Rust-Oleum paint; painting requires a dry surface and warm-enough weather, so some visits were for locating and assessing a monument only, with painting to follow on a later outing. Like any outdoor fieldwork in New England, the usual hazards — poison ivy, ticks, uneven terrain — came with the territory.
 
 ## A note on Claude's role
 
