@@ -6,6 +6,41 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-27 [Both] report/Monument Listings — Introduction.md + report/The Work
+  Behind This Report.md: a datum note, two illustrative photos, and a
+  third-person voice pass. Rebuilt: 65 pages (was 64), 51 links, verify PASS.
+  Committed + pushed by Claude Code (a2fa158).
+  - **Monument Listings — Introduction (now p9-11, was p9-10):** Jim added a
+    paragraph on the GIS department's WGS84 datum choice and the NAD83 /
+    North-American-plate-motion tradeoff (~1-2 cm/yr drift). Accuracy reviewed
+    and sound; copy-edited one typo, "plane" -> "plate". Also reworded the
+    Gray/Documented status gloss from "the team hasn't found it yet" to
+    "hasn't been out to look for it yet" so it no longer collides with
+    Red/Not Found -- checked the data: the 3 Documented rows (Acton/Carlisle
+    unknown road, Acton/Westford Bear Hill Road (in 1904), Acton/Westford
+    unknown road) all have NO visit date, i.e. never searched, which is exactly
+    the Gray-vs-Red distinction. First-person -> third-person here too:
+    "if we have them" -> "when available", "we kept" -> "this report kept",
+    "Unless we note" -> "Unless noted", "We looked" -> "The team looked".
+  - **NOTE on a clobber:** Jim's two approved fixes (plane->plate, the Gray
+    reword) vanished when his Markdown editor saved a stale buffer during his
+    first-person pass -- both re-applied. Classic concurrent-edit overwrite; the
+    tell was that BOTH edits disappeared together while only first-person lines
+    changed.
+  - **Two photos** added at the section's end to fill the now-3-page intro
+    rather than leave a short dangling page (Jim's call; prototype rendered and
+    approved first). A 2-across centered row that doubles as a visual recap of
+    the two monument types the section explains: the Acton/Concord/Maynard/
+    Sudbury four-town corner (the tour's starting point, stone shows the painted
+    "2025") and the Pope Road witness marker ("W M" carved). DocuShare
+    click-through links auto-resolved from the manifest. Page 3 now ~60% full.
+  - **The Work Behind This Report:** Jim's first-person-plural -> third-person
+    pass across the equipment list and the typical-outing paragraph ("we
+    carried" -> "was carried", "We used" -> "were used", "painted with the year"
+    -> "the year was painted", etc.). Editorial only; file is now clean of
+    first-person.
+  - Overview map NOT rebuilt (no status change); `make all` sufficient.
+
 2026-07-26 [Both] Acton/Maynard Sudbury Road (Order 51): Not Found -> Found, and
   its ripples. Jim's Jul 18 2026 visit found a probable monument. Rebuilt: 64
   pages, 51 links, verify PASS.
