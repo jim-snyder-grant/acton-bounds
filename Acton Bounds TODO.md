@@ -195,12 +195,14 @@ its own possible item) are folded into section 3, History.
 
 ## Report content updates
 
-- [ ] [Both] Update the Acton/Littleton 1 monument story with new data from
-  Littleton — edit the narrative fields in that Monuments-sheet row, then
-  re-render (same flow as the Jul-26 Sudbury Road update).
-- [ ] [Both] Update the street-name examples in History.md — the "Why some
-  roads carry different names today" section (Central St / Pope Rd / Main St,
-  and the "Laws Brook / Strawberry hill / Nagog hill" already-named list).
+- [x] [Both] Update the Acton/Littleton 1 monument story with new data from
+  Littleton — done Jul 27 2026. Monuments R26 (Notes on Monument) now carries
+  Andy Curran of Littleton's account of the lost granite marker (inscribed
+  "L"/"A", gone during 1970s roadwork); published by name, quote verbatim.
+  Rebuilt, fit on p38, no page shift. Commit 67ed8e3.
+- [x] [Both] Update the street-name examples in History.md — done Jul 27 2026.
+  Kept Central St; replaced Pope Rd / Main St with Littlefield Road (was
+  Blanchard Street) and Fort Pond Road (was "the Cash Road"). Commit 67ed8e3.
 
 ---
 

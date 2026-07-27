@@ -6,6 +6,39 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-07-27 [Both] Report content: Acton/Littleton 1 Littleton account (xlsx) +
+  History.md street-name examples. Closes the two open "Report content updates"
+  TODO items. Rebuilt: 65 pages (no shift), 51 links, verify PASS. Committed +
+  pushed by Claude Code (67ed8e3).
+  - **Acton Bounds.xlsx, Monuments R26 (Acton/Littleton 1, Order 26, Couldn't
+    paint):** Notes on Monument now carries Andy Curran of Littleton's account
+    of the lost granite marker — "used to have granite marker in it ... inscribed
+    with an L and an A ... disappeared during roadwork, probably sometime in the
+    1970s ... dumped it on the ditch, where you found it." Published by name
+    deliberately (Jim's call, so readers can follow up); direct quote left
+    verbatim (no copy-edits inside quoted speech). The note fit on the existing
+    p38 — no pagination shift. Cell-diffed against HEAD: R26 was the only real
+    edit (+ its For Mapping S25 cached copy).
+  - **Two accidental xlsx clobbers were caught in the cell-diff and fixed by Jim
+    in the Sheet before the commit** — this is why diffing the binary matters.
+    (1) K8 "Ethan Allen Drive" (Nearest Acton street name, Acton/Boxborough/Stow)
+    had been blanked; note that column K renders UNCONDITIONALLY in bounds2pdf
+    (unlike the guarded other-town-street / landmark lines), so a blank would
+    have left a dangling "Nearest Acton Street:" label. (2) P30 (Notes on
+    location, Acton/Littleton Great Road) had been overwritten with the literal
+    word "scratchpad"; restored to "maybe never installed because it would have
+    been so close to the Acton/Littleton monument?". Both clobbers had propagated
+    into the For Mapping helper sheet, confirming they were in the Google Sheet
+    (the source of truth), so the fix was made there and the xlsx re-downloaded —
+    not hand-patched with openpyxl (which would diverge and get overwritten on
+    the next export).
+  - **report/History.md ("Why some roads carry different names today"):** Jim
+    swapped the renamed-road examples — kept Central Street; replaced Pope Road /
+    Main Street with Littlefield Road (was Blanchard Street) and Fort Pond Road
+    (was "the Cash Road," the same 1904 name the Order-30 crossing notes already
+    use). Copy-edit: moved the period inside the closing quote ("the Cash
+    Road.") to match the American-style punctuation used elsewhere in the report.
+
 2026-07-27 [Both] report/Monument Listings — Introduction.md + report/The Work
   Behind This Report.md: a datum note, two illustrative photos, and a
   third-person voice pass. Rebuilt: 65 pages (was 64), 51 links, verify PASS.
