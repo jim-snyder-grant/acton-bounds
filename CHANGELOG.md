@@ -6,6 +6,18 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-09-08 [Claude Code] History.md copyedits from claude.ai's INBOX-copyedit-review
+  (from-claude-ai/). Three fixes: (1) standardized "Nashoba" -> "Nashobah"
+  throughout (the "Nashobah Praying Indian village" plus two references in the
+  Littleton line's origin note); (2) "1665-7" -> "1665-67" to match the
+  two-digit style used later ("1729-30", "1779-80"); (3) atlas "completion in
+  1914" -> "1915" (confirmed against Mass Archives; matches the "between 1898
+  and 1915" range stated earlier in the same section). Review's "no change
+  needed" items (road-renaming examples; Acton/Westford sign reference) left
+  as-is per the note; the two spreadsheet mechanical fixes are Jim's to make in
+  the Google Sheet, not through the INBOX. Rebuilt: 65 pages (no shift), 51
+  links, verify PASS.
+
 2026-07-27 [Both] Report content: Acton/Littleton 1 Littleton account (xlsx) +
   History.md street-name examples. Closes the two open "Report content updates"
   TODO items. Rebuilt: 65 pages (no shift), 51 links, verify PASS. Committed +
