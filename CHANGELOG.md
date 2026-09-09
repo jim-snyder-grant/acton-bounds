@@ -6,6 +6,17 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-09-08 [Both] Acton Bounds.xlsx: whitespace-only mechanical cleanups from
+  claude.ai's copyedit review, made by Jim in the Google Sheet and re-exported.
+  Cell-diffed against HEAD: 7 Monuments cells, all whitespace-only, no content
+  change. R11 (Acton/Carlisle Main Street, Rte 27) double space -> single in
+  Notes on Monument; trailing spaces trimmed on AE8 (Acton/Boxborough/Stow),
+  P29 (Acton/Littleton Fort Pond Road), P35 + AE35 (Acton/Littleton Sarah
+  Indian Way), P43 (Acton/Maynard/Stow), AE52 (Acton/Westford Westford Lane).
+  Four "For Mapping" cells (S11, Q28, Q34, Q42) are just the cached-value copies
+  propagating, not independent edits. Report unaffected (trailing spaces don't
+  render): 65 pages, verify PASS.
+
 2026-09-08 [Claude Code] History.md copyedits from claude.ai's INBOX-copyedit-review
   (from-claude-ai/). Three fixes: (1) standardized "Nashoba" -> "Nashobah"
   throughout (the "Nashobah Praying Indian village" plus two references in the
