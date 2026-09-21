@@ -6,6 +6,29 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-09-21 [Both] Witness lists + photo-caption attribution. Fills the witness
+  gap where painted/found monuments showed no witnesses: the report matches
+  witnesses to a monument by exact visit-date string against the Contacts sheet
+  "Dates" column, and the big painting days had no Contacts rows.
+  - **Acton Bounds.xlsx, Contacts sheet (Jim):** fixed the date formulas and
+    added the missing dated rows -- Jun 2, Jun 30, and Nov 6, 2025 (the Jun 2/30
+    sessions cover 16 monuments; Nov 6 is Order 39) -- and restored the Jul 18,
+    2026 row (Order 51) that an intermediate edit had dropped. Result: all
+    witness-eligible monuments (Painted / Couldn't paint / Found) now resolve.
+    Kept the two solo "Found" days (Nov 28 2025, Jul 18 2026) listing Jim as the
+    sole witness -- the field records who was present at the located bound, and
+    Jim is already listed on every group day.
+  - **code/photo_manifest.csv (Claude Code):** verified Jim's newly-added
+    attribution names against the Contacts directory (all spellings correct),
+    then normalized punctuation to the caption convention. Terminal periods
+    removed from all 11 captions that had them; the pre-name period changed to a
+    colon so each reads "Phrase: Names" (e.g. "After painting: Dean Charter").
+    Newtown Road caption lost its "Context:" prefix (-> "Nearby road marker:
+    ..."). Fixed double spaces in "Andy  Curran" (Littleton/Westford 10-09,
+    10-10), "Observers  and painters", "Carlisle side.  Carlisle", and the
+    unrelated Lillian Road "possible  marker location".
+  Rebuilt: 65 pages (no shift), 51 links, verify PASS.
+
 2026-09-08 [Both] Acton Bounds.xlsx: whitespace-only mechanical cleanups from
   claude.ai's copyedit review, made by Jim in the Google Sheet and re-exported.
   Cell-diffed against HEAD: 7 Monuments cells, all whitespace-only, no content
