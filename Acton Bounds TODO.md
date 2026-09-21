@@ -25,10 +25,11 @@ Owner tags: [Claude] [Claude Code] [Jim] [Both]
 
 ## Photo pipeline
 
-- [ ] [Jim] Decide if any additional photos are needed, and take them
-- [ ] [Jim] Edit photo_manifest.csv: captions, include/exclude decisions
-- [ ] [Jim] Check monument photos for neighbor paint years (Carlisle: possibly 1959; Littleton, Westford, Maynard pending)
-- [ ] [Jim] Upload monument photos to DocuShare "Perambulation Images" collection (manual via web UI)
+- [x] [Jim] Decide if any additional photos are needed, and take them — done 2026-09-21
+- [x] [Jim] Edit photo_manifest.csv: captions, include/exclude decisions — done
+  2026-09-21 (latest round: witness-attribution names added to captions,
+  normalized to the "Phrase: Names" convention; commit 48e2423)
+- [x] [Jim] Upload monument photos to DocuShare "Perambulation Images" collection (manual via web UI) — done 2026-09-21
 
 ---
 
@@ -104,9 +105,11 @@ note above — those four towns' reports were never obtained and are no
 longer being pursued). The three below stand because those towns' reports
 *were* obtained and cross-referenced.
 
-- [ ] [Claude] Draft cover note to Boxborough Select Board
-- [ ] [Claude] Draft cover note to Concord Select Board
-- [ ] [Claude] Draft cover note to Stow Select Board
+- [ ] [Both] Write cover notes for adjoining town boards and clerks
+  (Boxborough, Concord, Stow — the towns whose reports were obtained and
+  cross-referenced). Jim drafts; Claude Code edits. Consolidated 2026-09-21
+  from three separate Select-Board items; scope now includes town clerks as
+  well as Select Boards.
 
 ---
 
@@ -152,8 +155,9 @@ Order below reflects planned appearance in the final report (tentative):
         report (added at assembly from an `overview_map_links.json`
         sidecar; targets `listings_start + Order - 1`). Verified in the
         63-page assembled PDF (Order 1 → p11 … Order 51 → p61).
-7. - [ ] [Claude Code] Monument pages (bounds2pdf.py output) — COMPLETE
-        pending finalized data
+7. - [x] [Claude Code] Monument pages (bounds2pdf.py output) — COMPLETE;
+        data finalized (witness lists + caption attribution, 2026-09-21,
+        commit 48e2423)
 8. - [x] [Claude] Next steps — approved draft "Next Steps - draft.md"
         (Drive), rendered to "Next Steps.pdf" and in the assembled report
         (Jul 10 2026). Closing section; replaced "Policy recommendations".
@@ -203,20 +207,30 @@ its own possible item) are folded into section 3, History.
 - [x] [Both] Update the street-name examples in History.md — done Jul 27 2026.
   Kept Central St; replaced Pope Rd / Main St with Littlefield Road (was
   Blanchard Street) and Fort Pond Road (was "the Cash Road"). Commit 67ed8e3.
+- [ ] [Both] Integrate Dean Charter's comments on the recommendations into
+  `report/Next Steps.md`. Jim edits the file; Claude Code double-checks.
+  (added 2026-09-21)
+- [ ] [Jim] Rewatch the Select Board meeting to extract any additional
+  recommendations for the Next Steps section. (added 2026-09-21)
+- [ ] [Jim] Contact Alissa to work out changes to the History section
+  (`report/History.md`). (added 2026-09-21)
 
 ---
 
 ## Additional research
 
-- [ ] [Jim] See if planning department has any info on missing Acton/Westford corner monument
-- [ ] [Jim] See if planning department has any info on missing Maynard Rte 62 monument
+- [x] [Jim] Planning-department info on the missing Acton/Westford corner
+  monument and the missing Maynard Rte 62 monument — no longer tracked here
+  (2026-09-21); both are now covered in the report's Next Steps section.
 
 ---
 
 ## Final assembly
 
-- [ ] [Jim] Decide on format for intro sections (PDF vs ODT)
-- [ ] [Jim] Re-export XLSX from Google Sheet before final report run
+- [x] [Jim] Decide on format for intro sections (PDF vs ODT) — done 2026-09-21
+- [x] [Jim] Re-export XLSX from Google Sheet before final report run — no longer
+  a standalone task (2026-09-21): re-exporting the Sheet is now routine for any
+  edit round, not a one-time pre-final step.
 - [x] [Claude Code] Merge section PDFs and stamp the left-justified
       "Acton Bounds Report 2025-2026, page X of N" whole-report footer —
       DONE Jul 9 2026 (`code/assemble_report.py`, uses pypdf). Section
@@ -270,9 +284,12 @@ its own possible item) are folded into section 3, History.
   fresh clone restores the cache from DocuShare (documented in
   overview_map.py's data-source header).
 
-- [ ] [Both] Design Google Drive archiving folder structure
-- [ ] [Jim] Manually move Google Drive folder into DocuShare
-- [ ] [Both] Categorize every file/folder in the Bounds Drive folder as one
+These three form a dependency chain: 14 (categorize) must come first, then 13
+(design structure), then 12 (move into DocuShare).
+
+- [ ] [Jim] (12) Manually move Google Drive folder into DocuShare — gated by 13
+- [ ] [Both] (13) Design Google Drive archiving folder structure — gated by 14
+- [ ] [Both] (14) Categorize every file/folder in the Bounds Drive folder as one
   of: Keep & in git, Keep & in DocuShare, Both, Delete, or Keep until
   archive — the whole Drive folder structure will eventually go away once
   everything's archived, so nothing should end up with no destination.
