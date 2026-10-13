@@ -10,7 +10,7 @@ Where a neighboring town had its own recent perambulation report on file, Acton 
 
 Early in the project, Jim and Dean emailed the Select Boards (and in some cases Town Managers) of each neighboring town, explaining the plan to inspect and paint the shared boundary monuments and inviting them to take part. Some towns responded. Because painting depends on dry weather, the specific monuments to visit on any given outing were usually decided only a day or two ahead — and anyone who'd shown interest in the first round of emails was recontacted before each outing to see if they wanted to join.
 
-Representatives from Littleton, Sudbury, Stow, and Boxborough each joined at least one outing; Concord, Maynard, and Westford were invited but nobody from those towns ended up coming along. Within Acton, word of the project also spread informally, and a few residents asked to be included on future visits and joined in as well.
+Representatives from Littleton, Sudbury, Stow, Westford, and Boxborough each joined at least one outing; Concord and Maynard were invited but nobody from those towns ended up coming along. Within Acton, word of the project also spread informally, and a few residents asked to be included on future visits and joined in as well.
 
 Town staff weren't part of the fieldwork, but became essential once it came time to build this report. Acton's Planning Department helped track down information on a few monuments that couldn't be found. The GIS Department trained Jim to use a GPS-equipped iPad connected to the town's ArcGIS server, which produced much more accurate coordinates than earlier estimates — and the department plans to fold this project's findings into a new GIS layer of its own.
 

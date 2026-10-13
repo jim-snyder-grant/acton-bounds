@@ -8,6 +8,7 @@ import math
 import csv
 
 import pandas as pd
+import openpyxl
 from pathlib import Path
 from PIL import Image as PILImage
 import asyncio
@@ -136,25 +137,64 @@ def parse_visit_date(val):
         return val_str, val_str
 
 
-def load_person_towns(xlsx_path):
-    """Build {full_name: town} from the person directory in the Contacts sheet.
+# Attendance marks in the Contacts directory that count as "present at the
+# bound": both the people running the outing (host) and anyone who came along
+# (attended). Compared case-insensitively. The other marks -- invited,
+# accepted, declined -- mean someone was asked or planned to come but wasn't
+# actually there, so they don't belong on a witness line.
+PRESENT_MARKS = {'host', 'attended'}
 
-    The directory lives below the attendance table, starting at row 10 (header).
-    Only rows with a non-empty 'Only for Town' value are included.
+
+def load_contacts_directory(xlsx_path):
+    """Parse the Contacts sheet's person directory into witness data.
+
+    Returns (contacts, person_towns):
+      contacts[date_label]    -> "First Last, ..." for everyone marked
+                                 host/attended in that date's column
+      person_towns[full_name] -> town, for the non-Acton attendees
+
+    Reads the per-person attendance marks directly rather than the sheet's
+    summary "Present" formulas. Those are Google Sheets array formulas whose
+    cached values don't reliably survive the .xlsx export -- they came back
+    blank for two dates (Nov 6 and Sep 24 (2)), silently dropping witnesses --
+    and the directory marks are the ground truth behind them anyway. The
+    header row is found by its 'First Names' cell instead of a fixed offset,
+    so inserting rows above the directory can't silently break this: a 2-row
+    shift had already zeroed out the old hardcoded header (header=11).
     """
-    df = pd.read_excel(xlsx_path, sheet_name='Contacts', header=11)
-    towns = {}
-    for _, row in df.iterrows():
-        first = row.get('First Names')
-        last  = row.get('Last Names')
-        town  = row.get('Only for Town')
-        if pd.isna(first) or pd.isna(last) or pd.isna(town):
+    wb = openpyxl.load_workbook(xlsx_path, data_only=True)
+    ws = wb['Contacts']
+    rows = list(ws.iter_rows(values_only=True))
+    hdr = next((i for i, r in enumerate(rows)
+                if r and str(r[0]).strip() == 'First Names'), None)
+    if hdr is None:
+        raise ValueError(
+            "Contacts sheet: 'First Names' directory header not found")
+    header = rows[hdr]
+    TOWN = 3   # 'Only for Town' is the 4th directory column (A=First, B=Last,
+               # C=Affiliation, D=Only for Town); date columns follow from E.
+    date_cols = {c: str(header[c]).strip()
+                 for c in range(TOWN + 1, len(header)) if header[c]}
+    contacts = {label: [] for label in date_cols.values()}
+    person_towns = {}
+    for r in rows[hdr + 1:]:
+        if not r or not r[0]:
             continue
-        first, last, town = str(first).strip(), str(last).strip(), str(town).strip()
-        if not first or first.lower() == 'various' or not last or not town:
+        first = str(r[0]).strip()
+        last = str(r[1]).strip() if len(r) > 1 and r[1] else ''
+        if not first or first.lower() == 'various' or not last:
             continue
-        towns[f'{first} {last}'] = town
-    return towns
+        name = f'{first} {last}'
+        town = r[TOWN] if len(r) > TOWN else None
+        if town and str(town).strip():
+            person_towns[name] = str(town).strip()
+        for c, label in date_cols.items():
+            mark = r[c] if len(r) > c else None
+            if isinstance(mark, str) and mark.strip().lower() in PRESENT_MARKS:
+                contacts[label].append(name)
+    contacts = {label: ', '.join(names)
+                for label, names in contacts.items() if names}
+    return contacts, person_towns
 
 
 def annotate_witnesses(present_str, person_towns):
@@ -460,15 +500,8 @@ async def main():
         print("NOTE: Monuments sheet rows were not already in Order-column sequence -- re-sorted for this run.")
     df = df.sort_values('Order').reset_index(drop=True)
 
-    df_contacts = pd.read_excel(XLSX_PATH, sheet_name='Contacts')
     manifest = load_manifest(MANIFEST_PATH)
-    person_towns = load_person_towns(XLSX_PATH)
-
-    contacts = {}
-    for _, crow in df_contacts.iterrows():
-        date_val, present_val = crow['Dates'], crow['Present']
-        if not pd.isna(date_val) and not pd.isna(present_val):
-            contacts[str(date_val).strip()] = str(present_val).strip()
+    contacts, person_towns = load_contacts_directory(XLSX_PATH)
 
     osm_cache = load_osm_cache()
 

@@ -6,6 +6,43 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-10-13 [Both] Select Board recommendations + witness derivation made robust.
+  - **report/Next Steps.md (Jim + Claude Code):** Jim added a bolded
+    **Recommendation** under each of the seven sections (paint Keefe Rd before
+    winter; CPA-funded coordination with Littleton/Maynard on repairs, leave
+    Boxborough/Stow; chase MassDOT + the two developers; pursue historical
+    threads only if someone's interested; don't add monuments where none
+    existed; keep the work with the Select Board/volunteers; QR-code stickers +
+    public GIS layer), plus an intro line. Claude Code copyedited: standardized
+    the "Recommendation:" marker, Boxboro->Boxborough, "Monuments"->"monuments",
+    & ->and, curly->straight quotes, Docushare->DocuShare, minor grammar, and
+    stripped trailing whitespace. Section now runs 3 report pages (p64-66), so
+    the report is 66 pages (was 65).
+  - **report/The Work Behind This Report.md (Jim):** Westford moved from
+    "invited, didn't come" to joining an outing (tracks the Contacts change);
+    Oxford comma restored in the town list.
+  - **Acton Bounds.xlsx, Contacts (Jim):** added Paul Starrat (Westford Town
+    Engineer), split the Sep 24 2025 outing into (1) and (2), and various
+    attendance-mark edits.
+  - **code/photo_manifest.csv (Both):** Fort Pond witness attribution moved to
+    the Littleton-side photo; Sep 24 Littleton/Westford photos reshuffled
+    (include/exclude) with the Westford crew added; Claude Code fixed a missing
+    space, applied the "Phrase: Names" colon convention, and corrected the
+    surname to Starrat (matches the Contacts directory).
+  - **code/bounds2pdf.py (Claude Code):** witnesses and town annotations are now
+    derived directly from the Contacts directory's per-person host/attended
+    marks (new load_contacts_directory), replacing load_person_towns and the
+    reliance on the sheet's summary "Present" formulas. Those Google Sheets
+    array formulas don't reliably export a cached value -- they came back blank
+    for Nov 6 and Sep 24 (2), silently dropping witnesses -- and the hardcoded
+    header=11 in load_person_towns broke entirely when the directory shifted 2
+    rows (0 towns -> every "(Town)" annotation had vanished). The new parser
+    finds the 'First Names' header dynamically, counts host and attended as
+    present (case-insensitively, per Jim), and reproduces all 9 previously
+    correct attendee lists exactly while filling both gaps. Verified: Order 4
+    and Order 39 now show witnesses; Paul Starrat (Westford) renders.
+  Rebuilt: 66 pages, 51 links, verify PASS.
+
 2026-09-21 [Both] Witness lists + photo-caption attribution. Fills the witness
   gap where painted/found monuments showed no witnesses: the report matches
   witnesses to a monument by exact visit-date string against the Contacts sheet
