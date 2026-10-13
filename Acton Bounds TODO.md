@@ -217,13 +217,13 @@ its own possible item) are folded into section 3, History.
 - [x] [Both] Update the street-name examples in History.md — done Jul 27 2026.
   Kept Central St; replaced Pope Rd / Main St with Littlefield Road (was
   Blanchard Street) and Fort Pond Road (was "the Cash Road"). Commit 67ed8e3.
-- [ ] [Both] Integrate Dean Charter's comments on the recommendations into
+- [x] [Both] Integrate Dean Charter's comments on the recommendations into
   `report/Next Steps.md`. Jim edits the file; Claude Code double-checks.
-  (added 2026-09-21)
-- [ ] [Jim] Rewatch the Select Board meeting to extract any additional
-  recommendations for the Next Steps section. (added 2026-09-21)
-- [ ] [Jim] Contact Alissa to work out changes to the History section
-  (`report/History.md`). (added 2026-09-21)
+  (added 2026-09-21; done 2026-10-13)
+- [x] [Jim] Rewatch the Select Board meeting to extract any additional
+  recommendations for the Next Steps section. (added 2026-09-21; done 2026-10-13)
+- [x] [Jim] Contact Alissa to work out changes to the History section
+  (`report/History.md`). (added 2026-09-21; done 2026-10-13)
 
 ---
 
