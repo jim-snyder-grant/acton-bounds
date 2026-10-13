@@ -154,13 +154,15 @@ def load_contacts_directory(xlsx_path):
       person_towns[full_name] -> town, for the non-Acton attendees
 
     Reads the per-person attendance marks directly rather than the sheet's
-    summary "Present" formulas. Those are Google Sheets array formulas whose
-    cached values don't reliably survive the .xlsx export -- they came back
-    blank for two dates (Nov 6 and Sep 24 (2)), silently dropping witnesses --
-    and the directory marks are the ground truth behind them anyway. The
-    header row is found by its 'First Names' cell instead of a fixed offset,
-    so inserting rows above the directory can't silently break this: a 2-row
-    shift had already zeroed out the old hardcoded header (header=11).
+    summary "Present" formulas. Those summary formulas have to be copied down
+    by hand whenever a new date column is added, and when that step is missed
+    the cell is simply blank -- which silently dropped witnesses for two dates
+    (Nov 6 and Sep 24 (2)). The directory marks are the ground truth behind
+    those formulas anyway, so reading them directly removes the manual
+    fill-down as a failure point. The header row is found by its 'First Names'
+    cell instead of a fixed offset, so inserting rows above the directory
+    can't silently break this: a 2-row shift had already zeroed out the old
+    hardcoded header (header=11).
     """
     wb = openpyxl.load_workbook(xlsx_path, data_only=True)
     ws = wb['Contacts']

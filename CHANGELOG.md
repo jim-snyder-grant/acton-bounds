@@ -32,9 +32,10 @@ Format: YYYY-MM-DD [who] file changed: description
   - **code/bounds2pdf.py (Claude Code):** witnesses and town annotations are now
     derived directly from the Contacts directory's per-person host/attended
     marks (new load_contacts_directory), replacing load_person_towns and the
-    reliance on the sheet's summary "Present" formulas. Those Google Sheets
-    array formulas don't reliably export a cached value -- they came back blank
-    for Nov 6 and Sep 24 (2), silently dropping witnesses -- and the hardcoded
+    reliance on the sheet's summary "Present" formulas. Those summary formulas
+    must be copied down by hand when a new date column is added; that step was
+    missed for Nov 6 and Sep 24 (2), leaving the cells blank and silently
+    dropping their witnesses. Separately, the hardcoded
     header=11 in load_person_towns broke entirely when the directory shifted 2
     rows (0 towns -> every "(Town)" annotation had vanished). The new parser
     finds the 'First Names' header dynamically, counts host and attended as
