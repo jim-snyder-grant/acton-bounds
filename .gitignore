@@ -36,6 +36,15 @@
 # so it's reflected in the allowlist too.
 !/README.md
 
+# Cover build inputs (tracked 2026-10-13). FrontPage.pdf is the report cover --
+# a hand-made Inkscape artifact consumed directly by assemble_report.py;
+# FrontPage.svg is its editable source; acton_seal.png feeds acton_cover.py
+# (SEAL_PATH). They were the last un-backed-up build inputs, so a fresh clone
+# couldn't rebuild the cover. All three are public report artwork -- no PII.
+!/FrontPage.pdf
+!/FrontPage.svg
+!/acton_seal.png
+
 # --- code/ ---
 /code/*
 !/code/*.py
