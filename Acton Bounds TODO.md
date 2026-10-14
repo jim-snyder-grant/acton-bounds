@@ -320,3 +320,7 @@ These three form a dependency chain: 14 (categorize) must come first, then 13
   Following it once everything is in DocuShare doubles as the end-to-end test
   that the archive is complete — if a step can't be satisfied, something was
   missed. Gated by 12 (needs the DocuShare uploads done first). (added 2026-10-13)
+  Progress 2026-10-14: git copy drafted + committed as `BUILD.md`. Remaining:
+  (a) confirm the DocuShare collection paths (Images 20474, gis_data 20546) by
+  following the guide during the upload pass, and (b) put a copy of BUILD.md in
+  DocuShare too.

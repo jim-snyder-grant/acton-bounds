@@ -36,6 +36,10 @@
 # so it's reflected in the allowlist too.
 !/README.md
 
+# Build-from-scratch guide (tracked 2026-10-14). Kept redundantly in git and in
+# DocuShare; following it reproduces the report and tests archive completeness.
+!/BUILD.md
+
 # Cover build inputs (tracked 2026-10-13). FrontPage.pdf is the report cover --
 # a hand-made Inkscape artifact consumed directly by assemble_report.py;
 # FrontPage.svg is its editable source; acton_seal.png feeds acton_cover.py
