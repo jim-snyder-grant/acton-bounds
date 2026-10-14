@@ -14,7 +14,12 @@ Usage:
   5. Paste or load this script and click Apply
 
 After running, all objects are live Inkscape objects —
-move, resize, swap, or delete any of them by hand.
+move, resize, swap, or delete any of them by hand. Then save the document as
+FrontPage.svg and export FrontPage.pdf (which assemble_report.py uses directly
+as the report cover); both are tracked in the repo.
+
+The shipped cover was produced with Inkscape 1.4.4. Earlier or later versions
+will probably work, but that is the version actually used.
 """
 
 import os
