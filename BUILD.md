@@ -20,7 +20,7 @@ DocuShare**, so whoever rebuilds has it from whichever side they start on.
 |---|---|---|
 | Code, Makefile, report `*.md`, `Acton Bounds.xlsx`, cover (`FrontPage.pdf/.svg`, `acton_seal.png`), specs, `photo_manifest.csv` | **git** | everything needed except the two big inputs below |
 | Monument photos | **DocuShare** → "Perambulation Images" (Collection-20474) | ~190 `.jpg` files |
-| GIS base-map cache | **DocuShare** → "gis_data" (Collection-20546) | `Hydro25k.zip` + `Roads_acton.geojson` |
+| GIS base-map cache | **DocuShare** → "gis_data" (Collection-20546) | `hydro25k.zip` + `roads_acton.geojson` |
 | Overview map PDF (`code/overview_map.pdf`) | **regenerated** by `make overview-map` | needs the gis_data cache |
 | OSM per-monument map images (`code/osm_screenshots/`) | **regenerated** at build time | Playwright captures them from OpenStreetMap (needs a browser + network) |
 
@@ -78,15 +78,14 @@ python3 code/check_photo_names.py
 Expect `All good -- every filename parses and matches a monument.`
 
 **b. GIS base-map cache** — download the two files from DocuShare *gis_data*
-(Collection-20546) into `code/gis_data/`, renaming them to the **lowercase**
-names the code expects (DocuShare lists them capitalized):
+(Collection-20546) into `code/gis_data/`:
 
 ```
-code/gis_data/hydro25k.zip          (DocuShare: Hydro25k.zip)
-code/gis_data/roads_acton.geojson   (DocuShare: Roads_acton.geojson)
+code/gis_data/hydro25k.zip
+code/gis_data/roads_acton.geojson
 ```
 
-The names/case matter on Linux — `overview_map.py` looks for exactly those.
+`overview_map.py` looks for exactly those names.
 
 ### 4. Build the overview map
 
@@ -122,8 +121,8 @@ they're cached in `code/osm_screenshots/` and reused on later builds.
 
 - **`make all` says `overview_map.pdf` not found** → run `make overview-map`
   first (step 4); assembly consumes that file.
-- **Overview map fails / no base map** → the `code/gis_data/` files are missing
-  or misnamed; recheck step 3b (lowercase names).
+- **Overview map fails / no base map** → the `code/gis_data/` files are missing;
+  recheck step 3b.
 - **Photos blank or a monument has no photos** → run
   `python3 code/check_photo_names.py`; a name that won't parse or doesn't match a
   monument won't be placed.
