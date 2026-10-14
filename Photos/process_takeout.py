@@ -2,6 +2,16 @@
 """
 Extract and rename Google Photos Takeout photos for Acton Bounds monuments.
 
+HISTORICAL / BESPOKE — NOT a required step in the pipeline. This is how Acton
+2025-26 happened to get its photo files named: pulled from Google Photos via
+Takeout, labeled-in-Photos, then renamed here. It depends on Jim's Google
+account (OAuth `credentials.json`) and his Sheet, and is kept only as a record
+of how the files were produced. A future perambulation does NOT need to follow
+this route. The only thing the rest of the pipeline requires is photo files
+named to the convention below (see the "Photos" section in the repo README);
+produce them by any means. `code/check_photo_names.py` validates a folder
+against that convention.
+
 Usage:
     python3 process_takeout.py
 

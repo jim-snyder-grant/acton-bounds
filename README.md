@@ -58,6 +58,53 @@ Tracked, but worth knowing why:
   commit like any public file; `exclude_reason` is published deliberately so
   a future Acton group can revisit a photo decision.
 
+## Photos: the naming convention and the manifest's dual life
+
+Everything about photos in this project flows from **one contract — the
+filename** — not from how the files were originally gathered. (Acton 2025-26
+pulled them from Google Photos via Takeout and renamed them with
+`Photos/process_takeout.py`, but that route is bespoke and *not* required —
+see its header note.) A future perambulation, in Acton or any other town, only
+needs to land photo files whose names follow this pattern, by whatever means
+(a script, or just careful naming in the field):
+
+```
+Location, YYYY-MM-DD HH-MM[, N][, Caption].ext
+```
+
+- **Location** — town names joined with hyphens, plus any street/qualifier;
+  `build_manifest.py` turns the town hyphens into the slashes used in the
+  Monuments sheet. e.g. `Acton-Boxborough Central Street` →
+  `Acton/Boxborough Central Street`; `Acton-Carlisle 1` → `Acton/Carlisle 1`.
+- **YYYY-MM-DD HH-MM** — date and time of the photo (hour-minute, hyphen).
+- **N** *(optional)* — a plain integer disambiguator when several photos share
+  the same location and minute (`…, 2`). A purely-numeric third field is treated
+  as this counter, **not** a caption.
+- **Caption** *(optional)* — any non-numeric third field. Captions can also be
+  added or edited later in the manifest (below), so they needn't be in the
+  filename.
+- **ext** — `.jpg`, `.jpeg`, or `.png`.
+
+`code/build_manifest.py::parse_filename` is the reference implementation of this
+contract, and `code/check_photo_names.py` validates a folder against it.
+
+**`photo_manifest.csv` lives two lives:**
+
+1. **Descriptive (machine-written).** `build_manifest.py` scans the photo folder
+   and, for each file, splits the name into `monument_name` / `datetime` /
+   `caption`, matches `monument_name` to the Monuments sheet, and writes a row.
+   It is safe to re-run: it only *adds* rows for new photos and never overwrites
+   existing ones. Unmatched names land as `monument_name = UNMATCHED` for review.
+2. **Editorial (hand-edited).** The remaining columns are human judgment layered
+   on top and preserved across re-runs: `include` (yes/no), `exclude_reason`,
+   `section`, `orientation`, `cover_candidate`, and any refinement of `caption`.
+   `docushare_url` is filled by the DocuShare merge step. This editorial layer is
+   exactly why the manifest is tracked in git — `build_manifest.py` can't
+   regenerate it.
+
+So the workflow for a future project is: name photos to the convention →
+`build_manifest.py` to index them → hand-edit the editorial columns → build.
+
 ## AI collaboration model
 
 This project is built collaboratively by Jim Snyder-Grant (the project
