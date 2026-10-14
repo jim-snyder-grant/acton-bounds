@@ -306,3 +306,17 @@ These three form a dependency chain: 14 (categorize) must come first, then 13
   Surfaced while scoping the git repo (Jul 2 2026): several large root-level
   files (e.g. `ocm82856456-vol2.pdf`, `1904_Atlas...zip`) are candidates for
   DocuShare-only (not git) or deletion if superseded.
+  Progress 2026-10-13: categorization done in `Archiving Plan.md` (untracked
+  worksheet); cover assets + spec docs moved into git; drafts pruned;
+  `delete_archived_files.sh` built (dry-run default, 29 items) and on hold.
+  Remaining: ~9 Old-Maps/reference uploads to DocuShare, 3 leftover calls
+  (1648 laws, 1904 atlas zip, published report PDF location), then run the
+  delete script.
+
+- [ ] [Both] (15) Write a "build the report from scratch" guide — the steps to
+  reproduce the report given only the git repo + DocuShare (clone, fetch photos
+  into `Photos/Monument Photos/` and the `gis_data` cache from DocuShare, set up
+  the env, `make all`). Keep it **redundantly in git and in DocuShare**.
+  Following it once everything is in DocuShare doubles as the end-to-end test
+  that the archive is complete — if a step can't be satisfied, something was
+  missed. Gated by 12 (needs the DocuShare uploads done first). (added 2026-10-13)
