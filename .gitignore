@@ -45,6 +45,12 @@
 !/FrontPage.svg
 !/acton_seal.png
 
+# Methodology / spec docs (tracked 2026-10-13). Clean technical write-ups that
+# pair with the code: the distance-to-line check (code/check_distance_to_line.py)
+# and the overview-map spec (code/overview_map.py). Scanned clean of PII.
+!/Monument distance-to-line check.md
+!/Overview Map spec.md
+
 # --- code/ ---
 /code/*
 !/code/*.py
