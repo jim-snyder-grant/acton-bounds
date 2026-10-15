@@ -6,6 +6,21 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-10-14 [Jim] Acton Bounds.xlsx: pivot to LibreOffice-native. The .xlsx is
+  now the canonical spreadsheet, edited directly in LibreOffice; the Google
+  Sheet is retired as the editing surface (project is archiving to git +
+  DocuShare, keeping only the .xlsx). This checkpoint is the first LibreOffice
+  re-save, committed as a rollback point before cosmetic formatting + removal of
+  the QUERY-driven scratch tabs. Cell-diffed vs HEAD: changes are overwhelmingly
+  cosmetic re-encoding (LibreOffice uppercased function names on Monuments/
+  Summary; renormalized the Google DUMMYFUNCTION formulas on the QUERY tabs),
+  plus two real edits — the dead Contacts upper summary table was dropped, and
+  the Summary status list (SORT/UNIQUE) was re-pasted so it computes again.
+  **Build-verified identical:** load_contacts_directory output (contacts +
+  person_towns) unchanged, Monuments reads 51 rows with all values resolved.
+  Going forward the xlsx is LibreOffice-maintained; do not re-export from the
+  Google Sheet (it would clobber this).
+
 2026-10-13 [Both] Select Board recommendations + witness derivation made robust.
   - **report/Next Steps.md (Jim + Claude Code):** Jim added a bolded
     **Recommendation** under each of the seven sections (paint Keefe Rd before
