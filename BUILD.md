@@ -135,6 +135,18 @@ they're cached in `code/osm_screenshots/` and reused on later builds.
 
 ---
 
+## The spreadsheet (`Acton Bounds.xlsx`)
+
+Maintained directly in **LibreOffice (26.8)** — the Google Sheet it was exported
+from is retired, so edit the `.xlsx` itself. The build reads only the
+**`Monuments`** and **`Contacts`** tabs (and in Contacts, only the directory
+table found by its `First Names` header); the other tabs are human-facing. The
+old QUERY-driven helper tabs were removed because `QUERY` is a Google-Sheets-only
+function and doesn't evaluate in Excel/LibreOffice. If you edit coordinates or
+town flags, LibreOffice recomputes the Monuments formula columns (`Name`, the
+DMS coordinate columns, `OpenStreetMap link`) natively — they reference only
+same-sheet cells.
+
 ## Note on completeness (the archive self-test)
 
 This guide is the acceptance test for the DocuShare archive. The two DocuShare

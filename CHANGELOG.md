@@ -6,20 +6,22 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
-2026-10-14 [Jim] Acton Bounds.xlsx: pivot to LibreOffice-native. The .xlsx is
-  now the canonical spreadsheet, edited directly in LibreOffice; the Google
-  Sheet is retired as the editing surface (project is archiving to git +
-  DocuShare, keeping only the .xlsx). This checkpoint is the first LibreOffice
-  re-save, committed as a rollback point before cosmetic formatting + removal of
-  the QUERY-driven scratch tabs. Cell-diffed vs HEAD: changes are overwhelmingly
-  cosmetic re-encoding (LibreOffice uppercased function names on Monuments/
-  Summary; renormalized the Google DUMMYFUNCTION formulas on the QUERY tabs),
-  plus two real edits — the dead Contacts upper summary table was dropped, and
-  the Summary status list (SORT/UNIQUE) was re-pasted so it computes again.
-  **Build-verified identical:** load_contacts_directory output (contacts +
-  person_towns) unchanged, Monuments reads 51 rows with all values resolved.
-  Going forward the xlsx is LibreOffice-maintained; do not re-export from the
-  Google Sheet (it would clobber this).
+2026-10-14 [Jim] Acton Bounds.xlsx: pivoted to LibreOffice-native (LibreOffice
+  26.8). The .xlsx is now the canonical spreadsheet, edited directly in
+  LibreOffice; the Google Sheet is retired as the editing surface (project
+  archives to git + DocuShare, keeping only the .xlsx). Committed in 8764e52:
+  Jim deleted the QUERY-driven scratch tabs (State Data, For Mapping, For
+  Measuring, SiteNames, OpenStreetMap) -- the workbook is now just **Summary,
+  Monuments, Contacts, KML CornersFromState** -- plus cosmetic cleanup (wider
+  columns, wrapped text). LibreOffice also normalized the remaining formulas
+  (uppercased function names; dropped the dead Contacts upper summary table) and
+  the Summary status list (SORT/UNIQUE) computes again. **Build-verified:**
+  `make all` = 66 pages, verify PASS; the code reads only Monuments + Contacts
+  and their data is unchanged (load_contacts_directory output and the Monuments
+  51-row read identical to the prior Google-export version). Do not re-export
+  from the Google Sheet -- it would clobber this.
+  (Note: 8764e52's own message under-described this -- Insync had already synced
+  the tab deletions to disk before that commit was made.)
 
 2026-10-13 [Both] Select Board recommendations + witness derivation made robust.
   - **report/Next Steps.md (Jim + Claude Code):** Jim added a bolded
