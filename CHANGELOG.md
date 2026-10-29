@@ -6,6 +6,16 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-10-29 [Both] Corrected the Westford Town Engineer's surname to **Starratt**
+  (two t's) — the single-t "Starrat" was a transcription error, confirmed against
+  Westford's own Town Manager email. Jim fixed `Contacts!B29` in the xlsx
+  (LibreOffice; the witness line and Westford town-tag are computed from it);
+  Claude Code fixed the two photo captions in photo_manifest.csv. Rebuilt: 66
+  pages, verify PASS; witness line now reads "Paul Starratt (Westford)". (The
+  xlsx edit was done in LibreOffice, not via openpyxl, which would have dropped
+  the Monuments formula cache and broken the build -- verified 0/51 Name cells
+  survive an openpyxl round-trip.)
+
 2026-10-14 [Jim] Acton Bounds.xlsx: pivoted to LibreOffice-native (LibreOffice
   26.8). The .xlsx is now the canonical spreadsheet, edited directly in
   LibreOffice; the Google Sheet is retired as the editing surface (project
