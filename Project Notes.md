@@ -116,18 +116,32 @@ report is limited to Boxborough, Concord, Stow, and Sudbury.
 
 ## Town clerk contact info (gathered via web search)
 
-| Town | Email | Address |
-|---|---|---|
-| Carlisle | townclerk@carlislema.gov | 66 Westford St, Carlisle MA 01741 |
-| Littleton | dcrory@littletonma.org (Diane Crory, Town Clerk) | 37 Shattuck St, PO Box 1305, Littleton MA 01460 |
-| Westford | townclerk@westfordma.gov | 55 Main St, Westford MA 01886 |
-| Maynard | clerk@townofmaynard.net | 195 Main St, Maynard MA 01754 |
+All eight towns that share a boundary with Acton (for the Select Board
+cover-note effort). Clerk-office emails are public government-office info.
+Select Board emails are maintained separately by Jim.
 
-Draft inquiry letters were composed for all four (requesting copies of their
-most recent perambulation report) and shared with Jim via the message_compose
-tool — not yet saved to a file. Letters intentionally avoid citing MGL Ch. 42
-§2 as a requirement; they describe perambulation in plain language and
-acknowledge the report may have already been sent.
+| Town | Clerk email | Address |
+|---|---|---|
+| Boxborough | rharris@boxborough-ma.gov (Rebecca Harris, Town Clerk) | 29 Middle Rd, Boxborough MA 01719 |
+| Carlisle | townclerk@carlislema.gov | 66 Westford St, Carlisle MA 01741 |
+| Concord | townclerk@concordma.gov | 22 Monument Sq (PO Box 535), Concord MA 01742 |
+| Littleton | dcrory@littletonma.org (Diane Crory, Town Clerk) | 37 Shattuck St, PO Box 1305, Littleton MA 01460 |
+| Maynard | clerk@townofmaynard.net | 195 Main St, Maynard MA 01754 |
+| Stow | townclerk@stow-ma.gov | 380 Great Rd, Stow MA 01775 |
+| Sudbury | clerk@sudbury.ma.us | 322 Concord Rd, Sudbury MA 01776 |
+| Westford | townclerk@westfordma.gov | 55 Main St, Westford MA 01886 |
+
+Boxborough/Concord/Stow/Sudbury added 2026-10-14 for the cover notes; the other
+four were gathered earlier for perambulation-report inquiry letters. For
+Boxborough the result was the clerk's direct address — a generic
+townclerk@boxborough-ma.gov may also exist but wasn't confirmed.
+
+Draft inquiry letters were composed for Carlisle/Littleton/Westford/Maynard
+(requesting copies of their most recent perambulation report) and shared with
+Jim via the message_compose tool — not yet saved to a file. Letters
+intentionally avoid citing MGL Ch. 42 §2 as a requirement; they describe
+perambulation in plain language and acknowledge the report may have already
+been sent.
 
 ---
 
