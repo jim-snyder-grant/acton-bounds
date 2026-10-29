@@ -116,7 +116,8 @@ longer being pursued). The three below stand because those towns' reports
   **`cover-note-facts.md`** (Bounds root, UNTRACKED — contains private emails).
   Clerk-office emails also in the tracked `Project Notes.md` table. Carlisle,
   Concord, and Westford SB rosters all re-verified current (2026-10-14; each had
-  rotated since 2025). Only open item: confirm the Starratt/Starrat spelling.
+  rotated since 2025). Starratt spelling resolved 2026-10-29. Facts/contacts are
+  current; the task now is Jim drafting the notes + Claude editing.
 
 ---
 
