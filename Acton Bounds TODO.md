@@ -105,11 +105,18 @@ note above — those four towns' reports were never obtained and are no
 longer being pursued). The three below stand because those towns' reports
 *were* obtained and cross-referenced.
 
-- [ ] [Both] Write cover notes for adjoining town boards and clerks
-  (Boxborough, Concord, Stow — the towns whose reports were obtained and
-  cross-referenced). Jim drafts; Claude Code edits. Consolidated 2026-09-21
-  from three separate Select-Board items; scope now includes town clerks as
-  well as Select Boards.
+- [ ] [Both] Write cover notes for adjoining town boards and clerks. Jim drafts;
+  Claude Code edits. Consolidated 2026-09-21 from three separate Select-Board
+  items; scope now includes town clerks as well as Select Boards.
+  Scope broadened 2026-10-14 to **all eight adjacent towns** (Boxborough,
+  Carlisle, Concord, Littleton, Maynard, Stow, Sudbury, Westford), not just the
+  three with cross-referenced reports.
+  Facts assembled 2026-10-14: per-town attendance, shared-bounds state, report
+  year + differences, suggested hooks, and all SB/clerk contacts in
+  **`cover-note-facts.md`** (Bounds root, UNTRACKED — contains private emails).
+  Clerk-office emails also in the tracked `Project Notes.md` table. Carlisle SB
+  roster re-verified current (2026-10-14); Concord + Westford member rosters
+  still to re-verify before sending (likely rotated).
 
 ---
 
