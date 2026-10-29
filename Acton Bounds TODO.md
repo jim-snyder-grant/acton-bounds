@@ -114,9 +114,9 @@ longer being pursued). The three below stand because those towns' reports
   Facts assembled 2026-10-14: per-town attendance, shared-bounds state, report
   year + differences, suggested hooks, and all SB/clerk contacts in
   **`cover-note-facts.md`** (Bounds root, UNTRACKED — contains private emails).
-  Clerk-office emails also in the tracked `Project Notes.md` table. Carlisle SB
-  roster re-verified current (2026-10-14); Concord + Westford member rosters
-  still to re-verify before sending (likely rotated).
+  Clerk-office emails also in the tracked `Project Notes.md` table. Carlisle,
+  Concord, and Westford SB rosters all re-verified current (2026-10-14; each had
+  rotated since 2025). Only open item: confirm the Starratt/Starrat spelling.
 
 ---
 
