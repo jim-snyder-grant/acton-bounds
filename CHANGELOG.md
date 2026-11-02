@@ -6,6 +6,15 @@ Format: YYYY-MM-DD [who] file changed: description
 
 ---
 
+2026-11-01 [Jim] History.md: added a note that Acton's land was never formally
+  ceded by the Massachusett — a change a Select Board member had requested that
+  Jim had forgotten to include. Integrated as a sentence in the opening
+  paragraph ("Acton's land was never formally ceded by the Massachusett.") rather
+  than a standalone paragraph, and trimmed the paragraph's closing clause, to
+  keep History at 3 pages. Also reworded "given" -> "granted by the General
+  Court" in the 1665-67 land-grant clause. Rebuilt: 66 pages (no shift), verify
+  PASS. Trailing whitespace cleaned up.
+
 2026-10-29 [Both] Corrected the Westford Town Engineer's surname to **Starratt**
   (two t's) — the single-t "Starrat" was a transcription error, confirmed against
   Westford's own Town Manager email. Jim fixed `Contacts!B29` in the xlsx
