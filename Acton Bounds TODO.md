@@ -124,7 +124,9 @@ longer being pursued). The three below stand because those towns' reports
 ## Outreach & presentations
 
 - [ ] [Jim] Work out with the Acton Historical Alliance what sort of
-  presentation they'd like. (added 2026-10-13)
+  presentation they'd like. (added 2026-10-13) In talks for a **Spring 2027**
+  presentation as of 2026-11-02 — this keeps the project active past the
+  archiving end-game.
 - [ ] [Both] Consider creating a video for social media. (added 2026-10-13)
 - [ ] [Both] Consider integrating a Google Maps flyover of the monument
   locations. (added 2026-10-13)
