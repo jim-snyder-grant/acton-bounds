@@ -7,9 +7,9 @@ Massachusetts General Laws Chapter 42 §2 requires towns to locate,
 inspect, and renew the markings on their boundary monuments at least
 once every five years. This project documents Acton's perambulation —
 the first in many years — of all 51 monuments marking the boundaries
-between Acton and its six neighboring towns: Boxborough, Carlisle,
-Concord, Littleton, Maynard, and Stow (and Sudbury at a four-town
-corner). The work was authorized by a Select Board vote directing two
+between Acton and its seven neighboring towns: Boxborough, Carlisle,
+Concord, Littleton, Maynard, Stow, and Westford (and Sudbury at a
+four-town corner). The work was authorized by a Select Board vote directing two
 Select Board members, Jim Snyder-Grant and Dean Charter, to conduct
 the perambulation.
 
@@ -21,6 +21,11 @@ and policy recommendations).
 
 In the future, this code and approach might help other Massachusetts
 towns with similar work.
+
+**Rebuilding the report:** [`BUILD.md`](BUILD.md) is a step-by-step guide to
+reproducing the finished PDF from this repository plus Acton's DocuShare archive
+(which holds the photo files and GIS cache that are deliberately not in git).
+Following it also serves as the completeness test for that archive.
 
 ## Repo structure
 

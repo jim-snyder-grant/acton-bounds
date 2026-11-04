@@ -3,7 +3,7 @@
 This guide reproduces the finished report —
 `Acton Bounds Report 2025-2026.pdf` — starting from only two things:
 
-1. **This git repository** (code, report text, the spreadsheet, the cover, specs)
+1. **The git repository** (code, report text, the spreadsheet, the cover, specs): [https://github.com/jim-snyder-grant/acton-bounds](https://github.com/jim-snyder-grant/acton-bounds)
 2. **Acton's DocuShare** "Perambulation" archive (the photo files and the GIS
    base-map cache — the large, non-code inputs that are deliberately *not* in git)
 
