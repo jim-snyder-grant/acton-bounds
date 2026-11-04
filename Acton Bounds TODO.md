@@ -304,24 +304,35 @@ its own possible item) are folded into section 3, History.
   fresh clone restores the cache from DocuShare (documented in
   overview_map.py's data-source header).
 
-These three form a dependency chain: 14 (categorize) must come first, then 13
-(design structure), then 12 (move into DocuShare).
+These three form a dependency chain: 14 (categorize) came first, then 13
+(design structure), then 12 (retire the folder).
 
-- [ ] [Jim] (12) Manually move Google Drive folder into DocuShare — gated by 13
-- [ ] [Both] (13) Design Google Drive archiving folder structure — gated by 14
-- [ ] [Both] (14) Categorize every file/folder in the Bounds Drive folder as one
-  of: Keep & in git, Keep & in DocuShare, Both, Delete, or Keep until
-  archive — the whole Drive folder structure will eventually go away once
-  everything's archived, so nothing should end up with no destination.
-  Surfaced while scoping the git repo (Jul 2 2026): several large root-level
-  files (e.g. `ocm82856456-vol2.pdf`, `1904_Atlas...zip`) are candidates for
-  DocuShare-only (not git) or deletion if superseded.
-  Progress 2026-10-13: categorization done in `Archiving Plan.md` (untracked
-  worksheet); cover assets + spec docs moved into git; drafts pruned;
-  `delete_archived_files.sh` built (dry-run default, 29 items) and on hold.
-  Remaining: ~9 Old-Maps/reference uploads to DocuShare, 3 leftover calls
-  (1648 laws, 1904 atlas zip, published report PDF location), then run the
-  delete script.
+- [ ] [Jim] (12) Retire the Google Drive folder into DocuShare — gated by 13.
+  **Re-scoped 2026-11-04:** all redundant content is now cleared (see 13/14).
+  What remains in the Drive folder is the durable set — git-tracked files, the
+  working scaffolding (`Archiving Plan.md`, `cover-note-facts.md`,
+  `delete_archived_files.sh`), `Notes for SB presentation.odt`, `drafts/`, and
+  the `Photos/` working dir. The remaining teardown is retiring the folder itself
+  and handling `Photos/`: the ~1.8 GB Takeout zip, the processing scripts, and
+  the OAuth **secrets** (`credentials.json` / `token.json`) — the photos
+  themselves are already in DocuShare. Best done at true project end, after the
+  Spring 2027 Historical Alliance presentation.
+- [x] [Both] (13) Design Google Drive archiving folder structure — DONE
+  2026-11-04. The structure is the DocuShare Perambulation collection tree
+  (Images 20474, Other Towns 19416, Old Maps 19417, gis_data 20546, under
+  19415) plus the git repo; every file maps to git, DocuShare, a private store,
+  or deletion. Captured in `Archiving Plan.md`.
+- [x] [Both] (14) Categorize every file/folder in the Bounds Drive folder as one
+  of: Keep & in git, Keep & in DocuShare, Both, Delete, or Keep until archive —
+  DONE 2026-11-04. Categorization lived in `Archiving Plan.md`; cover assets +
+  spec docs moved into git; drafts pruned. All reference uploads done and
+  verified in DocuShare; the 3 leftover calls resolved (1648 laws uploaded as
+  PDF; 1904 atlas zip deleted as redundant; report PDF confirmed in the
+  top-level collection). `delete_archived_files.sh` run in two passes — 34
+  scratch/superseded files, then 9 DocuShare-redundant reference files — plus 2
+  stale LibreOffice `.~lock` files removed and `BUILD.pdf` (upload-only copy)
+  cleaned up. PII files moved by Jim to a private folder. Every remaining local
+  file now has a durable home or a current purpose.
 
 - [ ] [Both] (15) Write a "build the report from scratch" guide — the steps to
   reproduce the report given only the git repo + DocuShare (clone, fetch photos
