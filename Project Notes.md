@@ -53,7 +53,7 @@ completion. Durable archives: DocuShare and the public GitHub repo
 | Monument | Boxborough 2007 | Acton 2025 | Notes |
 |---|---|---|---|
 | Acton/Boxborough/Stow (Flagg Hill) | Found but tipped badly (2002) | Painted | Acton cleared an encroaching dead tree during 2025 visit |
-| Acton/Boxborough Central Street | Not located or marked (1980) | Painted | **Key finding** — 45-year gap resolved by Acton |
+| Acton/Boxborough Central Street | Found (1980) | Painted | Agreement (corrected 2026-11-08: Boxborough DID find this in 1980 — earlier "not located" note was an error) |
 | Acton/Boxborough Littlefield Road | Found (1980) | Painted | Agreement |
 | Acton/Boxborough Summer Street | Found (1980) | Painted | Agreement |
 | Acton/Boxborough Mass Ave (Rte 111) | Not located or marked (1980) | Not Found | Persistent gap, 45+ years, both towns. Possibly never placed. |
