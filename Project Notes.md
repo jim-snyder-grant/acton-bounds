@@ -57,7 +57,7 @@ completion. Durable archives: DocuShare and the public GitHub repo
 | Acton/Boxborough Littlefield Road | Found (1980) | Painted | Agreement |
 | Acton/Boxborough Summer Street | Found (1980) | Painted | Agreement |
 | Acton/Boxborough Mass Ave (Rte 111) | Not located or marked (1980) | Not Found | Persistent gap, 45+ years, both towns. Possibly never placed. |
-| Acton/Boxborough/Littleton corner | Destroyed (1994 letter) | Documented (not found) | Full agreement — confirmed gone |
+| Acton/Boxborough/Littleton corner | Destroyed — Boxborough's 2007 report quotes "This stone monument has been destroyed," footnoted to a map & letter from Acton's Engineering Administrator David Abbt, 4/5/1994 (verified 2026-11-09) | Documented (not found) | Full agreement — confirmed gone |
 | Acton/Boxborough Rte 2 | Not mentioned in Boxboro report | Not Found | No comparison data; may never have been placed |
 
 ### Concord (2017 report vs. Acton 2025)
